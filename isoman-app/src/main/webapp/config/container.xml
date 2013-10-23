@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<container>
+
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.OsobaDao"
+               class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.OsobaDaoBean"/>
+
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory"
+               class="pl.edu.pw.elka.mtoporow.isoman.domain.session.impl.SessionFactoryImpl"/>
+
+    <!-- // hibernate ///////////////////////////////////////////////////////////////// -->
+
+    <container key="hibernateContainer"/>
+    <component class="org.objectledge.hibernate.NonCachingPicoObjectInstantiator">
+        <parameter key="hibernateContainer"/>
+    </component>
+
+    <component class-key="org.objectledge.hibernate.InterceptorFactory"
+               class="org.objectledge.hibernate.EmptyInterceptorFactory"/>
+    <!-- when you need extra initialization of persistent objects-->
+    <!--  <component class-key="org.objectledge.hibernate.InterceptorFactory"-->
+    <!--             class="org.objectledge.hibernate.PicofyingInterceptorFactory"/>-->
+
+    <!--<component class-key="org.objectledge.hibernate.HibernateSessionFactory"-->
+               <!--class="org.objectledge.hibernate.HSQLSimpleConfigHibernateSessionFactory"/>-->
+    <!--  Other db -->
+      <component class-key="org.objectledge.hibernate.HibernateSessionFactory"
+                 class="org.objectledge.hibernate.SimpleConfigHibernateSessionFactory"/>
+
+    <!-- intake components -->
+    <component class="org.objectledge.intake.IntakeGroupFactory"/>
+
+    <!-- ResourceGroup recognizers -->
+    <component class-key="org.objectledge.security.ResourceRecognizerManager"
+               class="org.objectledge.security.ResourceRecognizerManagerImpl">
+        <parameter/>
+        <sequence>
+            <!--<parameter class-key="org.objectledge.example.PersonGroupRecognizer"/>-->
+        </sequence>
+    </component>
+
+    <!--  security components -->
+    <container key="securityContainer"/>
+    <component class-key="org.objectledge.security.SecurityManager"
+               class="org.objectledge.security.SecurityManagerImpl">
+        <parameter key="securityContainer"/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <sequence>
+        </sequence>
+    </component>
+    <component class-key="org.objectledge.security.PasswordVerifier"
+               class="org.objectledge.security.PasswordVerifierImpl"/>
+    <component class-key="org.objectledge.security.SecurityTokenModificationPolicy"
+               class="org.objectledge.security.SecurityTokenModificationPolicyImpl"/>
+    <component class="org.objectledge.security.object.hibernate.HibernateDataBackend"/>
+    <component class="pl.edu.pw.elka.mtoporow.isoman.security.DummyGroupNamingPolicy" />
+    <!--<component class="org.objectledge.example.security.DummyGroupNamingPolicy"/>-->
+    <component class="org.objectledge.web.mvc.security.AclSecurityHelper"/>
+    <component class="org.objectledge.web.mvc.security.SecurityPolicyCheckingHelper"/>
+
+    <component class="org.objectledge.web.mvc.security.SecurityPolicySystem"/>
+    <component class="org.objectledge.security.menu.SecureMenuSystem"/>
+    <component class="org.objectledge.ajax.service.SecurityCheckingService"/>
+
+    <!-- content extractors -->
+    <component key="org.objectledge.filesystem.ContentExtractorContent"
+               class="org.objectledge.filesystem.ContentExtractor"/>
+    <!-- becouse /locale direcoty is present in war, all locale dirs in jars should be extracted to be accessible -->
+    <component key="org.objectledge.filesystem.ContentExtractorLocale"
+               class="org.objectledge.filesystem.ContentExtractor"/>
+    <!--<component key="org.objectledge.filesystem.ContentExtractorDojo"-->
+               <!--class="org.objectledge.filesystem.ContentExtractor"/>-->
+
+    <!-- // valve utils ///////////////////////////////////////////////////////////////// -->
+
+    <component class="org.objectledge.encodings.HTMLEntityEncoder"/>
+    <component class="org.objectledge.upload.FileDownload"/>
+    <component class="org.objectledge.upload.FileUpload"/>
+
+    <component class="org.objectledge.authentication.NamingPolicy"/>
+    <component class="org.objectledge.authentication.LoginVerifier"/>
+    <component class="org.objectledge.authentication.PasswordGenerator"/>
+    <component class="org.objectledge.authentication.PasswordDigester">
+        <parameter value="MD5"/>
+    </component>
+
+
+    <!-- // valves ////////////////////////////////////////////////////////////////////// -->
+
+    <component class="org.objectledge.web.ContentTypeInitializerValve"/>
+    <component class="org.objectledge.context.Context"/>
+    <component class="org.objectledge.web.WebConfigurator"/>
+    <component class="org.objectledge.encodings.MVCResultsHTMLEntityEncoderValve"/>
+    <component class="org.objectledge.web.mvc.MVCResultsValve"/>
+    <component class="org.objectledge.web.mvc.MVCInitializerValve"/>
+    <component class="org.objectledge.i18n.LocaleLoaderValve"/>
+    <component class="org.objectledge.i18n.EncodingLoaderValve"/>
+    <component class="org.objectledge.i18n.UTF8EncodingLoaderValve"/>
+    <component class="org.objectledge.authentication.AuthenticationValve"/>
+    <component class="org.objectledge.parameters.RequestParametersLoaderValve"/>
+
+    <component class="org.objectledge.web.mvc.builders.ViewEnclosureManager"/>
+
+    <component class="org.objectledge.web.mvc.finders.NameSequenceFactory"/>
+    <container key="org.objectledge.web.mvc.finders.MVCFinder.container"/>
+    <component class="org.objectledge.web.mvc.finders.I18nMVCFinder">
+        <parameter key="org.objectledge.web.mvc.finders.MVCFinder.container"/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+    </component>
+    <component class="org.objectledge.web.mvc.actions.ActionExecutorValve"/>
+    <component class="org.objectledge.web.mvc.builders.BuilderExecutorValve">
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter value="4"/>
+        <parameter value="4"/>
+    </component>
+    <component class-key="org.objectledge.templating.Templating"
+               class="org.objectledge.templating.velocity.VelocityTemplating"/>
+    <component class="org.objectledge.templating.TemplatingContextLoaderValve"/>
+    <component class="org.objectledge.templating.tools.ContextToolPopulatorValve"/>
+    <component class="org.objectledge.web.mvc.ExceptionRedirectorValve"/>
+    <component class="org.objectledge.upload.FileUploadValve"/>
+    <component class-key="org.objectledge.i18n.I18n" class="org.objectledge.i18n.xml.XMLI18n"/>
+    <component class="org.objectledge.i18n.WebI18nToolFactory"/>
+    <component class="org.objectledge.i18n.DateFormatter"/>
+    <component class="org.objectledge.i18n.NumberFormatter"/>
+    <component class="org.objectledge.web.mvc.tools.PageToolFactory"/>
+    <component class-key="org.objectledge.web.mvc.tools.LinkToolFactory"
+               class="org.objectledge.web.mvc.tools.LinkToolFactoryImpl"/>
+    <component class="org.objectledge.encodings.RequestParametersHTMLEntityDecoderValve"/>
+    <component class="org.objectledge.web.mvc.tools.EmailToolFactory"/>
+    <component class="org.objectledge.i18n.WebDateFormatToolFactory"/>
+    <component class="org.objectledge.i18n.WebNumberFormatToolFactory"/>
+    <component class="org.objectledge.web.mvc.tools.ParametersToolFactory"/>
+    <component class="org.objectledge.web.mvc.components.ComponentToolFactory"/>
+    <component class="org.objectledge.web.mvc.tools.StringToolFactory"/>
+    <component class="org.objectledge.web.mvc.tools.HTMLEntityEncoderToolFactory"/>
+    <component class="org.objectledge.security.WebPolicyCheckerToolFactory"/>
+    <component class="org.objectledge.ajax.web.WebAjaxPolicyCheckerToolFactory"/>
+    <component class="org.objectledge.web.WebEnumToolFactory"/>
+
+    <component class="org.objectledge.templating.tools.ContextTools">
+        <sequence>
+            <parameter class-key="org.objectledge.i18n.WebI18nToolFactory"/>
+            <parameter class-key="org.objectledge.web.mvc.tools.LinkToolFactory"/>
+            <parameter class-key="org.objectledge.web.mvc.builders.ViewEnclosureManager"/>
+            <parameter class-key="org.objectledge.web.mvc.tools.PageToolFactory"/>
+            <parameter class-key="org.objectledge.web.mvc.components.ComponentToolFactory"/>
+            <parameter class-key="org.objectledge.web.mvc.tools.EmailToolFactory"/>
+            <parameter class-key="org.objectledge.web.mvc.tools.StringToolFactory"/>
+            <parameter class-key="org.objectledge.web.mvc.tools.HTMLEntityEncoderToolFactory"/>
+            <parameter class-key="org.objectledge.web.mvc.tools.ParametersToolFactory"/>
+            <parameter class-key="org.objectledge.i18n.WebDateFormatToolFactory"/>
+            <parameter class-key="org.objectledge.i18n.WebNumberFormatToolFactory"/>
+            <parameter class-key="org.objectledge.security.WebPolicyCheckerToolFactory"/>
+            <parameter class-key="org.objectledge.ajax.web.WebAjaxPolicyCheckerToolFactory"/>
+            <parameter class-key="org.objectledge.web.WebEnumToolFactory"/>
+        </sequence>
+    </component>
+
+
+    <component class="org.objectledge.hibernate.HibernateSessionValve"/>
+    <component class="org.objectledge.hibernate.HibernateSessionFinallyValve"/>
+
+    <component class="org.objectledge.intake.IntakeToolValve">
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <parameter value="10"/>
+    </component>
+    <component class="org.objectledge.intake.IntakeToolFinallyValve"/>
+
+    <!--  security valves-->
+    <component class="org.objectledge.security.SecurityAuthenticationValve"/>
+    <component class="org.objectledge.web.mvc.security.SecurityPolicyCheckingValve"/>
+
+    <!-- AJAX components -->
+    <container key="ajaxContainer"/>
+    <component class="org.objectledge.ajax.AjaxExecutorValve">
+        <parameter key="ajaxContainer"/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+        <sequence>
+        </sequence>
+    </component>
+
+    <!-- AJAX services -->
+    <!--<component class="org.objectledge.example.ajax.AjaxTest"/>-->
+
+
+    <!-- Components and services -->
+    <component class="org.objectledge.mail.MailSystem"/>
+
+    <!-- General purpose thread pool -->
+    <component class="org.objectledge.threads.ThreadPool">
+        <parameter key="nothing-to-do"/>
+        <parameter/>
+        <parameter/>
+        <parameter/>
+    </component>
+    <component key="nothing-to-do" class="org.objectledge.pipeline.SimplePipeline">
+        <sequence>
+        </sequence>
+    </component>
+
+
+    <!-- // pipelines //////////////////////////////////////////////////////////////////////// -->
+
+    <component key="http-ErrorHandlingPipeline" class="org.objectledge.pipeline.ErrorHandlingPipeline">
+        <parameter class-key="org.jcontainer.dna.Logger"/>
+        <sequence>
+            <parameter class-key="org.objectledge.web.ContentTypeInitializerValve"/>
+            <parameter class-key="org.objectledge.i18n.LocaleLoaderValve"/>
+            <parameter class-key="org.objectledge.i18n.UTF8EncodingLoaderValve"/>
+            <parameter class-key="org.objectledge.parameters.RequestParametersLoaderValve"/>
+            <parameter class-key="org.objectledge.encodings.RequestParametersHTMLEntityDecoderValve"/>
+            <parameter class-key="org.objectledge.web.mvc.MVCInitializerValve"/>
+            <parameter class-key="org.objectledge.security.SecurityAuthenticationValve"/>
+            <parameter class-key="org.objectledge.hibernate.HibernateSessionValve"/>
+            <parameter class-key="org.objectledge.upload.FileUploadValve"/>
+            <parameter class-key="org.objectledge.web.mvc.security.SecurityPolicyCheckingValve"/>
+            <parameter class-key="org.objectledge.templating.TemplatingContextLoaderValve"/>
+            <parameter class-key="org.objectledge.intake.IntakeToolValve"/>
+            <parameter class-key="org.objectledge.web.mvc.actions.ActionExecutorValve"/>
+            <parameter class-key="org.objectledge.templating.tools.ContextToolPopulatorValve"/>
+            <parameter class-key="org.objectledge.web.mvc.builders.BuilderExecutorValve"/>
+        </sequence>
+        <sequence>
+            <parameter class-key="org.objectledge.web.ContentTypeInitializerValve"/>
+            <parameter class-key="org.objectledge.templating.TemplatingContextLoaderValve"/>
+            <parameter class-key="org.objectledge.security.SecurityAuthenticationValve"/>
+            <parameter class-key="org.objectledge.web.mvc.ExceptionRedirectorValve"/>
+            <parameter class-key="org.objectledge.templating.tools.ContextToolPopulatorValve"/>
+            <parameter class-key="org.objectledge.web.mvc.builders.BuilderExecutorValve"/>
+        </sequence>
+        <sequence>
+            <parameter class-key="org.objectledge.hibernate.HibernateSessionFinallyValve"/>
+            <parameter class-key="org.objectledge.intake.IntakeToolFinallyValve"/>
+            <parameter class-key="org.objectledge.encodings.MVCResultsHTMLEntityEncoderValve"/>
+            <parameter class-key="org.objectledge.web.mvc.MVCResultsValve"/>
+        </sequence>
+    </component>
+
+
+    <component key="ajax-ErrorHandlingPipeline" class="org.objectledge.pipeline.ErrorHandlingPipeline">
+        <parameter class-key="org.jcontainer.dna.Logger"/>
+        <sequence>
+            <parameter class-key="org.objectledge.web.ContentTypeInitializerValve"/>
+            <parameter class-key="org.objectledge.security.SecurityAuthenticationValve"/>
+            <parameter class-key="org.objectledge.i18n.LocaleLoaderValve"/>
+            <parameter class-key="org.objectledge.i18n.UTF8EncodingLoaderValve"/>
+            <parameter class-key="org.objectledge.hibernate.HibernateSessionValve"/>
+            <parameter class-key="org.objectledge.ajax.AjaxExecutorValve"/>
+        </sequence>
+        <sequence>
+            <!--Exception section left empty -->
+        </sequence>
+        <sequence>
+            <parameter class-key="org.objectledge.hibernate.HibernateSessionFinallyValve"/>
+        </sequence>
+    </component>
+    <!-- // dispatchers ///////////////////////////////////////////////////////////////////// -->
+
+    <component key="http-request" class="org.objectledge.web.dispatcher.PipelineHttpDispatcher">
+        <parameter key="http-ErrorHandlingPipeline"/>
+        <parameter/>
+    </component>
+
+    <component key="ajax-request" class="org.objectledge.web.dispatcher.PipelineHttpDispatcher">
+        <parameter key="ajax-ErrorHandlingPipeline"/>
+        <parameter/>
+    </component>
+
+    <component class-key="org.objectledge.web.HttpDispatcher"
+               class="org.objectledge.web.dispatcher.SelectorHttpDispatcher">
+        <parameter/>
+        <sequence>
+            <parameter key="ajax-request"/>
+            <parameter key="http-request"/>
+        </sequence>
+    </component>
+
+</container>

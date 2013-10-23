@@ -1,0 +1,12 @@
+$viewEnclosureTool.override('layout.Page')
+
+#if($originalView)
+<p>
+    <a href="javascript: history.go(-1);">$i18n.get('go_back')</a>
+</p>
+#end
+
+#if($stackTrace)
+<h3>Information for system developers:</h3>
+<pre>$stackTrace</pre>
+#end

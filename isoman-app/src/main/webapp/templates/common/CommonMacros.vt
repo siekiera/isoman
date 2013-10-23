@@ -1,0 +1,31 @@
+#**
+ * Displays a result of a performed action. Uses $result and $errorResult context keys.
+ *#
+#macro(result)
+#if($errorResult)
+<!-- actionResult:$errorResult -->
+<div class="action-error-result">
+$i18n.get($errorResult)
+#if($errorResultData)
+  #if($errorResultData.size() >= 0) ## sprawdzenie parametr jest kolekcja
+	#foreach($errorDetail in $errorResultData)
+	  <div class="action-error-result-data">$i18n.get($errorDetail)</div>
+	#end
+  #else
+	<div class="action-error-result-data">$errorResultData</div>
+  #end
+#end
+</div>
+#elseif($result)
+<!-- actionResult:$result -->
+#if($result.size())
+  <div class="action-result">
+  #foreach($resultDetail in $result)
+    <div class="action-result-data">$i18n.get($resultDetail)</div>
+  #end
+  </div>
+#else
+<div class="action-result">$i18n.get($result)</div>
+#end
+#end
+#end

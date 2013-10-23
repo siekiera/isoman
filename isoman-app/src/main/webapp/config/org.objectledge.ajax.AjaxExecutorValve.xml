@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <ajax>
+   <!-- additional headers can be specified here
+   <headers>
+     <header name="" value=""/>
+   </headers>
+   -->
+   
+   <!-- known services declaration -->
+   <services>
+
+     <service name="SecurityChecking">
+       <method name="checkAjax">
+         <src class="org.objectledge.ajax.service.SecurityCheckingService" 
+             method="checkAjax">
+           <param name="service" type="String"/>
+           <param name="method" type="String"/>
+           <param name="deepCheck" type="boolean"/>
+           <param name="params" type="Map"/>
+   	     </src>
+         <policy ssl="false" auth="false">
+	     </policy>
+   	   </method>
+       <method name="checkLink">
+         <src class="org.objectledge.ajax.service.SecurityCheckingService" 
+             method="checkLink">
+           <param name="view" type="String"/>
+           <param name="action" type="String"/>
+           <param name="deepCheck" type="boolean"/>
+           <param name="params" type="Map"/>
+   	     </src>
+         <policy ssl="false" auth="false">
+	     </policy>
+   	   </method>
+     </service>
+
+   	 <service name="AjaxTest">
+       <method name="calc">
+         <src class="org.objectledge.example.ajax.AjaxTest" 
+             method="calc" groupMethod="calcGroup">
+           <param name="type" type="String"/>
+           <param name="par1" type="BigDecimal"/>
+           <param name="par2" type="BigDecimal"/>
+   	     </src>
+         <policy ssl="false" auth="false">
+<!--           <group><permission>calc_perform_permission</permission></group>	-->
+	     </policy>
+   	   </method>
+       <method name="serverTime">
+         <src class="org.objectledge.example.ajax.AjaxTest" 
+             method="serverTime">
+   	     </src>
+         <policy ssl="false" auth="false">
+<!--           <group><permission>time_read_permision</permission></group>	-->
+	     </policy>
+   	   </method>
+       <method name="getPeople">
+         <src class="org.objectledge.example.ajax.AjaxTest" 
+             method="getPeople">
+           <param name="name" type="String"/>
+           <param name="maxResults" type="int"/>
+   	     </src>
+         <policy ssl="false" auth="false"/>
+   	   </method>
+       <method name="getPerson">
+         <src class="org.objectledge.example.ajax.AjaxTest" 
+             method="getPerson">
+           <param name="id" type="long"/>
+   	     </src>
+         <policy ssl="false" auth="false"/>
+   	   </method>
+     </service>
+   </services>
+ </ajax>

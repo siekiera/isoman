@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   -author: Marcin Gołębski
+   -created on: 26-03-2009
+   -version: $Id: org.objectledge.security.menu.SecureMenuSystem.xml,v 1.13 2011-08-10 14:05:49 mgolebsk Exp $
+ -->
+
+<config>
+	<!--<menuSet name="default"> -->
+	  <!--<menu label="security.menu-name" key="ALT+S">-->
+	  	<!--<menuItem label="security.user.list" view="security.UserList"/>-->
+	  	<!--<menuItem label="security.role.list" view="security.RoleList"/>-->
+	  	<!--<menuItem label="security.permission.list" view="security.PermissionList"/>-->
+	  	<!--<menuItem label="security.resource_group.list" view="security.ResourceGroupList"/>-->
+	  	<!--<menuItem label="security.user.change_password" view="security.ChangePassword">-->
+	  		<!--<parameter name="UserId" valueName="userid"/>-->
+	  	<!--</menuItem>-->
+	  	<!--<menuItem label="security.logged_in.list" view="security.LoggedInUsers"/>-->
+	  	<!--<menuItem label="security.permission.required_list" view="security.RequiredPermissions"/>-->
+	  	<!--<menu label="security.reload">-->
+		  	<!--<menuItem label="security.reload.security" action="security.Reload"/>-->
+	  		<!--<menuItem label="security.reload.i18n" action="i18n.Reload"/>-->
+		  	<!--<menuItem label="security.reload.securemenu" action="securemenu.Reload"/>-->
+		  	<!--<menuItem label="security.reload.templating" action="templating.Restart"/>-->
+	  		<!--<menuItem label="security.reload.intake" action="intake.Reload"/>-->
+	  	<!--</menu>-->
+	<!--</menu>-->
+		<!---->
+		<!--<menu label="Features">-->
+		  <!--<menuItem label="Reload" view="demo.Reload"/>-->
+		  <!--<menuItem label="Hibernate Demo" view="demo.HibernateDemo"/>-->
+		  <!--<menuItem label="Intake Demo" view="demo.IntakeDemo"/>-->
+		  <!--<menuItem label="Locale &amp; encoding" view="demo.LocaleEncoding"/>-->
+		  <!--<menuItem label="ParametersTool Demo" view="demo.ParametersToolDemo">    -->
+		    <!--<parameter name="my-param">my-param-value</parameter>-->
+		  <!--</menuItem>-->
+          <!--<menu label="Security System">-->
+            <!--<menuItem label="Intro" view="demo.security.SecurityIntro"/>   -->
+            <!--<menuItem label="Link Control" view="demo.security.SecurityLinkControl"/>   -->
+            <!--<menuItem label="Ajax Control" view="demo.security.SecurityAjaxControl"/>  -->
+            <!--<menuItem label="Menu Control" view="demo.security.SecurePopupControl"/>  -->
+            <!--<menuItem label="Security Policy" view="demo.security.SecurityPolicyOnly"/>   -->
+            <!--<menuItem label="Security Annotation" view="demo.security.SecurityAnnotation"/>   -->
+            <!--<menuItem label="Security Details" view="demo.security.SecurityDetails"/>   -->
+            <!--<menuItem label="Security Universal" view="demo.security.SecurityUniversal"/>   -->
+		  <!--</menu>-->
+		  <!--<menuItem label="JVM Memory Monitor" view="demo.JVMMemoryMonitor"/>-->
+		  <!--<menu label="Dojo Toolkit">-->
+		      <!--<menuItem label="Simple Example" view="demo.DOJOsimple"/>-->
+		      <!--<menuItem label="Extended Example" view="demo.DOJO"/>-->
+		      <!--<menuItem label="Sorted Table" view="demo.DOJOsortedTable"/>-->
+		  <!--</menu>-->
+		  <!--<menuItem label="AJAX" view="demo.AJAX"/>-->
+		  <!--<menuItem label="Pdf" view="demo.Pdf"/>-->
+		  <!--<menuItem label="GuiVisibleException" view="demo.ThrowGUIVisibleException"/>-->
+		  <!--<menuItem label="EnumTool" view="demo.EnumToolDemo"/>-->
+		<!--</menu>-->
+
+        <!--<menu label="security.login" view="Login" mode="guestOnly"/>-->
+        <!--<menu label="security.logout" view="demo.Intro" action="security.authentication.Logout"/>-->
+	<!--</menuSet> -->
+	 
+
+</config>

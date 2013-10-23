@@ -1,0 +1,248 @@
+
+
+##Pure controls 
+
+#macro(select $_field $_idName $_labelName $_list)
+<select NAME="$_field.Key" SIZE="1">
+  #foreach( $_item in $_list) 
+    #if( "$_item.getByName($_idName)" == "$_field.Value") 
+		<option VALUE="$_item.getByName($_idName)" selected>$_item.getByName($_labelName)</option> 
+    #else
+		<option VALUE="$_item.getByName($_idName)">$_item.getByName($_labelName)</option>
+	#end  
+  #end  
+</select>
+#end	
+
+#macro(select_list $_field $_idList $_list)
+<select NAME="$_field.Key" SIZE="1">
+#foreach( $_item in $_idList) 
+#set($_itemCounter = $velocityCount - 1)
+#if( "$_item" == "$!_field.Value")
+<option VALUE="$_item" selected>$_list.get($_itemCounter)</option>## 
+#else<option VALUE="$_item">$_list.get($_itemCounter)</option>#end##  
+#end  
+</select>
+#end	
+
+#macro(select_map $_field $_optionsMap)
+<select name="$_field.Key" id="$_field.Key" #if(!$_field.isValid())class="error"#end>
+  #foreach($_option in $_optionsMap.keySet())
+  <option value="$!_optionsMap.get($_option)"
+  #if("$_optionsMap.get($_option)" == "$!_field.Value") selected#end>
+    $_option
+  </option>
+  #end
+</select>
+#end
+
+#macro(multi_checkbox $_field $_optionMap)
+#foreach($_option in $_optionMap.keySet())
+#set($_htmlId = "${_field.Key}_$_optionMap.get($_option)")
+<span><input name="$_field.Key" type="checkbox" value="$!_optionMap.get($_option)" id="$_htmlId"
+  #if($_field.hasValue($_optionMap.get($_option))) checked#end>
+  <label for="$_htmlId"><span>$_option</span></label><br/></span>
+#end
+#end
+
+#macro(show_select $_field $_idName $_labelName $_list)
+#foreach($_item in $_list) 
+#if("$_item.getByName($_idName)" == "$_field.Value") 
+$_item.getByName($_labelName)
+#end#end
+#end
+
+#macro(show_select_list $_field $_idList $_list)
+#foreach( $_item in $_idList) 
+#set($_itemCounter = $velocityCount - 1)
+#if( "$_item" == "$_field.Value")
+$_list.get($_itemCounter)
+#end  
+#end
+#end
+
+#macro(show_textarea $_field $_cols $_rows)
+#if(!$_field.isValid())<div class="edit-form-error">$i18n.get($_field.Message)</div><br/>#end##
+<div class="intake-textarea" name="$_field.Key" style="width:${_cols}em;height${_rows}em;">$!_field.Value</div>##
+#end
+
+#macro(edit_textarea $_field $_cols $_rows)
+#if(!$_field.isValid())<div class="edit-form-error">$i18n.get($_field.Message)</div>#end##
+<textarea class="intake-textarea" name="$_field.Key" cols="$_cols" rows="$_rows">$!_field.Value</textarea>##
+#end
+
+#macro(edit_textline $_field $_size $_maxlenght)
+#if(!$_field.isValid())<div class="edit-form-error">$i18n.get($_field.Message)</div>#end##
+<input class="intake-textline" name="$_field.Key" value="$!_field" size="$_size" maxlength="$_maxlenght" type="text">##
+#end
+
+
+#*
+ * Simple table row macros
+ *#
+
+#macro(tr_show_line $_label $_value)
+<tr><td class="intake-label">$_label</td><td>#if($_value)$_value#else&nbsp#end</td></tr>##
+#end
+
+#macro(tr_show_booleanline $_label $_value)
+<tr><td class="intake-label">$_label</td><td>#if($_value)$i18n.get("$_value")#else$i18n.get("false")#end</td></tr>##
+#end
+
+
+
+#*
+ * Single table row macros with CUSTOM label
+ *#
+
+#macro(tr_show_select $_label $_field $_idName $_labelName $_list)
+<tr><td>$_label:</td>##
+<td>#if(!$_field.isValid())<span class="edit-form-error">$i18n.get($_field.Message)</span><br>#end##	
+#show_select($_field $_idName $_labelName $_list)
+</td></tr>
+#end
+
+#macro(tr_show_select_list $_label $_field $_labelName $_list)
+<tr><td class="intake-label">$_label:</td>##
+<td>#if(!$_field.isValid())<span class="edit-form-error">$i18n.get($_field.Message)</span><br>#end##	
+#foreach( $_item in $_labelName) 
+#set($_itemCounter = $velocityCount - 1)
+#if( "$_item" == "$_field.Value")$_list.get($_itemCounter)#end
+#end
+</td></tr>
+#end
+
+#macro(tr_show_textarea $_label $_field $_cols $_rows)
+<tr><td class="intake-label">$_label:</td><td>##
+#show_textarea($_field $_cols $_rows)	
+</td></tr>
+#end
+
+#macro(tr_edit_textline $_label $_field $_size $_maxlenght)
+<tr><td class="intake-label">$_label: </td><td>##
+#edit_textline($_field $_size $_maxlenght)
+</td></tr>##
+#end
+
+#macro(tr_edit_sexline $_label $_field)
+<tr><td class="intake-label">$_label:</td><td>
+#if (!$_field.isValid() )<span class="edit-form-error">$i18n.get($_field.Message)</span><br>#end##	
+<select name="$_field.Key"><option value="M" #if($_field.Value.toString()=="M")selected#end>$i18n.get('person.sex.M')</option>##
+<option value="K" #if($_field.Value.toString()=="K")selected#end>$i18n.get('person.sex.K')</option></select></td></tr>##
+#end
+
+#macro(tr_edit_booleanline $_label $_field)
+<tr><td class="intake-label">$_label:</td><td>
+#if(!$_field.isValid())<span class="edit-form-error">$i18n.get($_field.Message)</span><br>#end##	
+<select name="$_field.Key"><option value="true" #if($_field.Value)selected#end>$i18n.get('Yes')</option>##
+<option value="false" #if(!$_field.Value)selected#end>$i18n.get('No')</option></select></td></tr>##
+#end
+
+#*
+ * This macro requires the following JavaScript entry:
+ * dojo.require("dijit.form.DateTextBox");
+ * params:
+ * $_pattern - 'dd.MM.yyyy'
+ * $_required - 'true' or 'false'
+*#
+#macro(tr_edit_date $_label $_field $_pattern $_required $_size $_maxlenght)
+<tr><td>$_label:</td><td>##
+#if ( !$_field.isValid())<span class="edit-form-error">$i18n.get($_field.Message)</span><br>#end##
+<input name="$_field.Key" dojoType="dijit.form.DateTextBox" constraints="{datePattern:'$_pattern'}" promptMessage="$_pattern" trim="true" value="$_field" maxlength="$_maxlenght" type="text" required="$_required">##
+</td></tr>##
+#end
+
+#macro(tr_edit_textarea $_label $_field $_cols $_rows)
+<tr><td class="intake-label">$_label:</td><td>##
+#edit_textarea($_field $_cols $_rows)
+</td></tr>##
+#end
+
+#macro(tr_edit_select $_label $_field $_idName $_labelName $_list)
+<tr><td class="intake-label">$_label:</td>##
+<td>#if(!$_field.isValid())<span class="edit-form-error">$i18n.get($_field.Message)</span><br>#end##	
+	#select($_field $_idName $_labelName $_list)
+  </td>
+  </tr>
+#end
+
+#macro(tr_edit_select_list $_label $_field $_idList $_list)
+<tr><td class="intake-label">$_label:</td>##
+<td>#if(!$_field.isValid())<span class="edit-form-error">$i18n.get($_field.Message)</span><br>#end##	
+#select_list($_field $_idList $_list)
+</td></tr>
+#end
+
+#macro(tr_select_map $_label $_field $_optionsMap)
+<tr><td class="intake-label">$_label:</td>##
+<td>#if(!$_field.isValid())<span class="edit-form-error">$i18n.get($_field.Message)</span><br/>#end##	
+#select_map($_field $_optionsMap)
+</td></tr>
+#end
+
+#macro(tr_multi_checkbox $_label $_field $_optionsMap)
+<tr><td class="intake-label">$_label:</td>##
+<td>#if(!$_field.isValid())<span class="edit-form-error">$i18n.get($_field.Message)</span><br/>#end##	
+#multi_checkbox($_field $_optionsMap)
+</td></tr>
+#end
+
+
+#*
+ * Single table row macros with standard label
+ *#
+
+#macro(tr_show_select_label $_field $_idName $_labelName $_list)
+	#tr_show_select($_field.DisplayName $_idName $_labelName $_list)
+#end
+
+#macro(tr_show_select_list_label $_field $_labelName $_list)
+	#tr_show_select_list($_field.DisplayName $_field $_labelName $_list)
+#end
+
+#macro(tr_show_textarea_label $_field $_cols $_rows)
+	#tr_show_textarea($_field.DisplayName $_field $_cols $_rows)
+#end
+
+#macro(tr_edit_textline_label $_field $_size $_maxlenght)
+	#tr_edit_textline($_field.DisplayName $_field $_size $_maxlenght)
+#end
+
+#macro(tr_edit_sexline_label $_field)
+	#tr_edit_sexline($_field.DisplayName $_field)
+#end
+
+#macro(tr_edit_booleanline_label $_field)
+	#tr_edit_booleanline($_field.DisplayName $_field)
+#end
+
+#*
+ * This macro requires the following JavaScript entry:
+ * dojo.require("dijit.form.DateTextBox");
+ * params:
+ * $_pattern - 'dd.MM.yyyy'
+ * $_required - 'true' or 'false'
+*#
+#macro(tr_edit_date_label $_field $_pattern $_required $_size $_maxlenght)
+	#tr_edit_date($_field.DisplayName $_field $_pattern $_required $_size $_maxlenght)
+#end
+
+#macro(tr_edit_textarea_label $_field $_cols $_rows)
+	#tr_edit_textarea($_field.DisplayName $_field $_cols $_rows)
+#end
+
+#macro(tr_edit_select_label $_field $_idName $_labelName $_list)
+	#tr_edit_select($_field.DisplayName $_field $_idName $_labelName $_list)
+#end
+
+#macro(tr_edit_select_list_label $_field $_idList $_list)
+	#tr_edit_select_list($_field.DisplayName $_field $_idList $_list)
+#end
+
+#macro(tr_select_map_label $_field $_optionsMap)
+	#tr_select_map($_field.DisplayName $_field $_optionsMap)
+#end
+
+#macro(tr_multi_checkbox_label $_field $_optionsMap)
+	#tr_multi_checkbox($_field.DisplayName $_field $_optionsMap)
+#end

@@ -1,0 +1,7 @@
+.idea/
+foo/
+target/
+overlays/
+*.iml
+*.class
+

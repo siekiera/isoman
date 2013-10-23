@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>pl.edu.pw.elka.mtoporow.isoman</groupId>
+    <artifactId>isoman-main</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>isoman-main</name>
+    <url>http://maven.apache.org</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--parametry BD-->
+        <db.name>isoman</db.name>
+        <db.url.base>jdbc:postgresql://localhost:5432</db.url.base>
+        <db.url>${db.url.base}/${db.name}</db.url>
+        <db.url.root>${db.url.base}/postgres</db.url.root>
+        <db.user>isoman</db.user>
+        <db.password>zxcvbnm</db.password>
+        <db.schema>public</db.schema>
+
+    </properties>
+    <profiles>
+        <profile>
+            <id>test</id>
+            <properties>
+                <db.name>isoman_test</db.name>
+                <db.user>isoman_test</db.user>
+            </properties>
+        </profile>
+    </profiles>
+    <modules>
+        <module>isoman-db-config</module>
+        <module>isoman-model</module>
+        <module>isoman-app</module>
+    </modules>
+</project>

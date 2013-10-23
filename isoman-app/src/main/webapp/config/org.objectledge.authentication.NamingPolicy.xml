@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2005, Warsaw University of Technology. 
+ All rights reserved.
+--> 
+<config>
+  <login-property>uid</login-property>
+  <syntax>
+    <ldap-syntax/>
+  </syntax>
+  <tokens>
+    <token>
+      <string>uid=</string>
+      <variable>uid</variable>
+    </token>
+	<token>
+      <string>ou=people</string>
+    </token>
+	<token>
+      <string>dc=objectledge</string>
+    </token>
+	<token>
+      <string>dc=org</string>
+    </token>
+  </tokens>
+</config>

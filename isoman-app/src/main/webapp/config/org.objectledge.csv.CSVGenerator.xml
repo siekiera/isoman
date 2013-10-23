@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration>
+   <http-headers>
+    <!-- headers commented out due to IE bug (https, mod_proxy, no-cache) -->
+    <!-- see http://support.microsoft.com/default.aspx?scid=kb;EN-US;q196505#kb1 -->
+    <!-- 
+    <http-header>
+    	<key>Pragma</key>
+    	<value>no-cache</value>
+    </http-header>
+    <http-header>
+    	<key>Cache-Control</key>
+    	<value>no-cache</value>
+    </http-header>
+    -->
+    <http-header>
+    	<key>Cache-Control</key>
+    	<value>max-age=10, must-revalidate</value>
+    </http-header>
+  </http-headers>
+</configuration>

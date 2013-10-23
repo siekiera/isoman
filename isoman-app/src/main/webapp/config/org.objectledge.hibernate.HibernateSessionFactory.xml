@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">@db.url@</property>
+        <property name="connection.username">@db.user@</property>
+        <property name="connection.password">@db.password@</property>
+        <property name="connection.pool_size">1</property>
+        <property name="connection.autocommit">false</property>
+        <property name="jena.db">PostgreSQL</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <property name="default_schema">@db.schema@</property>
+        <property name="hbm2ddl.auto">update</property>
+
+        <property name="show_sql">true</property>
+
+        <mapping class="org.objectledge.security.object.hibernate.HibernatePermission"
+                 resource="org/objectledge/security/object/hibernate/HibernatePermission.hbm.xml"/>
+        <mapping class="org.objectledge.security.object.hibernate.HibernateResourceGroup"
+                 resource="org/objectledge/security/object/hibernate/HibernateResourceGroup.hbm.xml"/>
+        <mapping class="org.objectledge.security.object.hibernate.HibernateRole"
+                 resource="org/objectledge/security/object/hibernate/HibernateRole.hbm.xml"/>
+        <mapping class="org.objectledge.security.object.hibernate.HibernateUser"
+                 resource="org/objectledge/security/object/hibernate/HibernateUser.hbm.xml"/>
+        <mapping class="org.objectledge.security.object.hibernate.HibernateUserResourceGroupRole"
+                 resource="org/objectledge/security/object/hibernate/HibernateUserResourceGroupRole.hbm.xml"/>
+
+        <!-- Example mapping  -->
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba" />
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot" />
+    </session-factory>
+</hibernate-configuration>

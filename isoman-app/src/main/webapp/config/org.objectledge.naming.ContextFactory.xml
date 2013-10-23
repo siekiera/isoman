@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2005, Warsaw University of Technology. 
+ All rights reserved.
+--> 
+
+<config>
+  <context name="people" initial_factory="org.objectledge.naming.db.DatabaseInitialDirContextFactory">
+    <component-property name="org.objectledge.database.persistence.Persistence"
+    					class-key="org.objectledge.database.persistence.Persistence"/>
+    <property name="java.naming.provider.url" value="ou=people,dc=objectledge,dc=org"/>
+  </context>    
+</config>

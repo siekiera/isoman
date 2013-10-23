@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   -author: marcin gołębski
+   -author: jarosław dawidczyk
+   -created on: 26-09-2005
+   -version: $id: org.objectledge.web.mvc.security.securitypolicysystem.xml,v 1.16 2006/02/17 12:28:11 mgolebsk exp $
+ -->
+
+
+<config>
+  <!--<globalLoginRequired>false</globalLoginRequired>-->
+  <!--<globalSSL>false</globalSSL>-->
+  <!--<globalAccess>true</globalAccess>-->
+
+	<!--&lt;!&ndash;  system bezpieczenstwa (kolejnosc NIE jest wazna)&ndash;&gt;-->
+	  <!--<policy name="logout" ssl="false" auth="true">-->
+	    <!--<action>security.authentication.Logout</action>-->
+	  <!--</policy>-->
+	<!---->
+      <!--&lt;!&ndash; zakazanie operacji na systemie bezpieczenstwa &ndash;&gt;	-->
+	  <!--<policy name="security_polisy" ssl="false" auth="true">-->
+	    <!--<group name="security"/>-->
+	    <!--<view>security.UserList</view>-->
+	    <!--<view>security.RoleList</view>-->
+	    <!--<view>security.PermissionList</view>-->
+	    <!--<view>security.ResourceGroupList</view>-->
+	    <!--<view>security.ChangePassword</view>-->
+	    <!--<view>security.LoggedInUsers</view>-->
+		<!--<view>security.UserEdit</view>-->
+	    <!--<view>security.GroupRoleEdit</view>-->
+	    <!--<view>security.RoleEdit</view>-->
+	    <!--<view>security.PermissionEdit</view>-->
+	    <!--<view>security.ResourceGroupEdit</view>-->
+	    <!--<view>security.RequiredPermissions</view>-->
+	    <!--<action>security.ChangePasswordAction</action>-->
+	    <!--<action>security.GroupRoleEditAction</action>-->
+	    <!--<action>security.PermissionEditAction</action>-->
+	    <!--<action>security.ResourceGroupEditAction</action>-->
+	    <!--<action>security.RoleEditAction</action>-->
+	    <!--<action>security.UserEditAction</action>-->
+	    <!--<action>security.CloseHttpSessionAction</action>-->
+	    <!--<action>security.Reload</action>-->
+	    <!--<action>intake.Reload</action>-->
+	    <!--<action>i18n.Reload</action>-->
+	    <!--<action>securemenu.Reload</action>-->
+	    <!--<action>templating.Restart</action>-->
+	  <!--</policy>  -->
+	<!---->
+	  <!--<policy name="Login" ssl="false" auth="false">-->
+	    <!--<view>Login</view>-->
+	  <!--</policy>-->
+
+	  <!--<policy name="security_polisy_test" ssl="false" auth="true">-->
+		<!--<group name="factory">-->
+			<!--<permission>security_permision_test_1</permission>-->
+		<!--</group>-->
+		<!--<group name="factory">-->
+			<!--<permission>security_permision_test_2</permission>-->
+			<!--<permission>security_permision_test_3</permission>-->
+		<!--</group>-->
+		<!--<view>demo.security.SecurityPolicyOnly</view>-->
+	  <!--</policy>-->
+</config>

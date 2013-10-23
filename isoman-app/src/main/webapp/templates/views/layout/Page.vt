@@ -1,0 +1,27 @@
+$viewEnclosureTool.top()
+$pageTool.insertTitlePrefix('IsoMan - ')
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>$pageTool.title</title>
+</head>
+<body style="margin-top: 20px">
+<table>
+    <tr>
+        <td style="width: 30%">
+            <span style="bold">Menu</span>
+            <ul>
+                <li><a href="$link.view('Index')">Strona główna</a></li>
+                <li><a href="$link.view('person.PersonIndex')">Lista osób</a></li>
+            </ul>
+        </td>
+        <td>
+            $embeddedPlaceholder
+        </td>
+    </tr>
+</table>
+</body>
+</html>

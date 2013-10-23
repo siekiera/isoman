@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2005, Warsaw University of Technology. 
+ All rights reserved.
+--> 
+<config>
+<!--
+  <anonymousName>uid=anonymous,ou=people,dc=objectledge,dc=org</anonymousName>
+-->  
+  <anonymousName>uid=anonymous,ou=people,dc=objectledge,dc=org</anonymousName>
+  <superuserName>uid=root,ou=people,dc=objectledge,dc=org</superuserName>
+</config>

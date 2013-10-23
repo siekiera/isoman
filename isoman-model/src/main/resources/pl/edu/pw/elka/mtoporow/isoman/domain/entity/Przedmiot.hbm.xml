@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot" table="przedmioty">
+
+        <id name="kod" type="java.lang.String">
+            <column name="kod" sql-type="bpchar"/>
+        </id>
+        <property name="nazwa" type="java.lang.String">
+            <column name="nazwa" not-null="true"/>
+        </property>
+        <property name="opis" type="java.lang.String">
+            <column name="opis"/>
+        </property>
+        <many-to-one name="wykladowca" column="id_wykladowcy"
+                     class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba"
+                     lazy="no-proxy" access="field"/>
+    </class>
+</hibernate-mapping>

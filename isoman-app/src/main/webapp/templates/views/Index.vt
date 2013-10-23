@@ -1,0 +1,3 @@
+$viewEnclosureTool.override('layout.Page')
+$pageTool.appendTitleSuffix('Strona główna')
+Hello world

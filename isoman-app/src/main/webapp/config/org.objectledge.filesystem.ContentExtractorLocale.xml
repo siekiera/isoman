@@ -1,0 +1,7 @@
+<config>
+  <providers>
+    <source>classpath</source>
+    <target>local</target>
+  </providers>   
+  <directory>locale</directory>
+</config>

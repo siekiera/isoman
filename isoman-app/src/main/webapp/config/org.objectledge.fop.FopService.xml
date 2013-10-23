@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration>
+  <entry>
+    <key>version</key>
+    <value>FOP SNAPSHOT</value>
+  </entry>
+
+  <!-- default values for commandline options -->
+  <!-- suppress all progress information, error message are still displayed -->
+  <entry>
+    <key>quiet</key>
+    <value>false</value>
+  </entry>
+<!-- sets debug mode on/off; debug mode hasm more progress 
+     information and a stacktrace in case of a fatal exception -->
+  <entry>
+    <key>debugMode</key>
+    <value>false</value>
+  </entry>
+  <!-- displays all configuration  settings and then exits -->
+  <entry>
+    <key>dumpConfiguration</key>
+    <value>false</value>
+  </entry>
+
+  <!-- stream-filter-list provides the default filters that are applied to all
+       stream objects within the PDF file. These are normally used for 
+       compression -->
+  <entry role="pdf">
+    <key>stream-filter-list</key>
+    <list>
+      <!-- provides compression using zlib flate (default is on)-->
+      <value>flate</value>
+      
+      <!-- encodes binary data into printable ascii characters (default off)
+           This provides about a 4:5 expansion of data size -->
+      <value>ascii-85</value>
+
+      <!-- encodes binary data with hex representation (default off)
+           This filter is not recommended as it doubles the data size -->
+      <!-- <value>ascii-hex</value> -->
+    </list>
+  </entry>
+  <fonts>
+   <font metrics-file="fop/metrics/ttfarial.xml" kerning="yes"
+      embed-file="fop/fonts/arial.ttf">
+      <font-triplet name="ttfarial" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttf.xml" kerning="yes"
+      embed-file="fop/fonts/.ttf">
+      <font-triplet name="ttf" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttfarialbd.xml" kerning="yes"
+      embed-file="fop/fonts/arialbd.ttf">
+      <font-triplet name="ttfarialbd" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttfarialbdi.xml" kerning="yes"
+      embed-file="fop/fonts/arialbdi.ttf">
+      <font-triplet name="ttfarialbdi" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttfariali.xml" kerning="yes"
+      embed-file="fop/fonts/ariali.ttf">
+      <font-triplet name="ttfariali" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttfarialn.xml" kerning="yes"
+      embed-file="fop/fonts/arialn.ttf">
+      <font-triplet name="ttfarialn" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttfarialbi.xml" kerning="yes"
+      embed-file="fop/fonts/arialbi.ttf">
+      <font-triplet name="ttfarialbi" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttfarialni.xml" kerning="yes"
+      embed-file="fop/fonts/arialni.ttf">
+      <font-triplet name="ttfarialni" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttfcomic.xml" kerning="yes"
+      embed-file="fop/fonts/comic.ttf">
+      <font-triplet name="ttfcomic" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttftimes.xml" kerning="yes"
+      embed-file="fop/fonts/times.ttf">
+      <font-triplet name="ttftimes" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttftimesbd.xml" kerning="yes"
+      embed-file="fop/fonts/timesbd.ttf">
+      <font-triplet name="ttftimesbd" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttftimesbi.xml" kerning="yes"
+      embed-file="fop/fonts/times.ttf">
+      <font-triplet name="ttftimesbi" style="normal" weight="normal"/>
+   </font>
+   <font metrics-file="fop/metrics/ttftimesi.xml" kerning="yes"
+      embed-file="fop/fonts/timesi.ttf">
+      <font-triplet name="ttftimesi" style="normal" weight="normal"/>
+   </font>
+  </fonts>
+</configuration>
