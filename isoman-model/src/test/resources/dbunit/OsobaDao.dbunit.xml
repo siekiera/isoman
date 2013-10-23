@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-    <osoby nr="1" login="koval" imie="Jan" pesel="64031677346" email="koval@gmail.com"/>
-    <osoby nr="2" login="zdzichu" imie="Zdzisław" pesel="72120877346" email="zdzichu@gmail.com"/>
+    <osoby nr="1" login="koval" imie="Jan" nazwisko="Kowalski" pesel="64031677346" email="koval@gmail.com"/>
+    <osoby nr="2" login="zdzichu" imie="Zdzisław" nazwisko="Isowski" pesel="72120877346" email="zdzichu@gmail.com"/>
 </dataset>

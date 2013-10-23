@@ -19,6 +19,7 @@
         <db.recreate.skip>true</db.recreate.skip>
         <db.config.skip>true</db.config.skip>
         <db.ledge-security.config.skip>true</db.ledge-security.config.skip>
+        <db.init.data.skip>true</db.init.data.skip>
         <target.dir>target/db</target.dir>
     </properties>
 
@@ -132,6 +133,22 @@
                             <autocommit>true</autocommit>
                             <srcFiles>
                                 <srcFile>${target.dir}/create_db_tables.sql</srcFile>
+                            </srcFiles>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-init-data</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${db.init.data.skip}</skip>
+                            <url>${db.url}</url>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>${target.dir}/initial_data.sql</srcFile>
+                                <srcFile>${target.dir}/test_inserts.sql</srcFile>
                             </srcFiles>
                         </configuration>
                     </execution>

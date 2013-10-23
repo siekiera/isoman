@@ -11,11 +11,12 @@ CREATE SEQUENCE osoby_seq;
 
 CREATE TABLE osoby
 (
-  nr         BIGINT                NOT NULL,
-  login      CHARACTER VARYING(30) NOT NULL,
-  imie       CHARACTER VARYING(48) NOT NULL,
-  pesel      CHARACTER VARYING(11) NOT NULL,
-  email      CHARACTER VARYING(30) NOT NULL,
+  nr       BIGINT                 NOT NULL,
+  login    CHARACTER VARYING(30)  NOT NULL,
+  imie     CHARACTER VARYING(48)  NOT NULL,
+  nazwisko CHARACTER VARYING(120) NOT NULL,
+  pesel    CHARACTER VARYING(11)  NOT NULL,
+  email    CHARACTER VARYING(30)  NOT NULL,
 --   last_login TIMESTAMP WITHOUT TIME ZONE,
   CONSTRAINT osoby_pk PRIMARY KEY (nr),
   CONSTRAINT osoby_login_uk UNIQUE (login),
@@ -24,7 +25,7 @@ CREATE TABLE osoby
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE osoby OWNER TO @db.user@;
+ALTER TABLE osoby OWNER TO @db.user @;
 
 COMMENT ON TABLE osoby IS 'Tabela reprezentująca osoby';
 COMMENT ON COLUMN osoby.nr IS 'Numer osoby';
@@ -48,7 +49,7 @@ CREATE TABLE typy_jednostek
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE typy_jednostek OWNER TO @db.user@;
+ALTER TABLE typy_jednostek OWNER TO @db.user @;
 
 
 ---
@@ -69,7 +70,7 @@ CREATE TABLE jednostki_organizacyjne
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE jednostki_organizacyjne OWNER TO @db.user@;
+ALTER TABLE jednostki_organizacyjne OWNER TO @db.user @;
 
 
 ---
@@ -92,7 +93,7 @@ CREATE TABLE przedmioty
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE przedmioty OWNER TO @db.user@;
+ALTER TABLE przedmioty OWNER TO @db.user @;
 
 ---
 ---  Tabela osób zapisanych na przedmioty
@@ -111,7 +112,7 @@ CREATE TABLE osoby_na_przedmiotach
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE osoby_na_przedmiotach OWNER TO @db.user@;
+ALTER TABLE osoby_na_przedmiotach OWNER TO @db.user @;
 
 
 ---
@@ -131,7 +132,7 @@ CREATE TABLE archiwa
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE archiwa OWNER TO @db.user@;
+ALTER TABLE archiwa OWNER TO @db.user @;
 
 ---
 ---  Tabela wersji archiwów
@@ -151,7 +152,7 @@ CREATE TABLE wersje_archiwow
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE wersje_archiwow OWNER TO @db.user@;
+ALTER TABLE wersje_archiwow OWNER TO @db.user @;
 
 ---
 ---  Tabela folderów źródłowych
@@ -168,7 +169,7 @@ CREATE TABLE foldery
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE foldery OWNER TO @db.user@;
+ALTER TABLE foldery OWNER TO @db.user @;
 
 ---
 ---  Tabela plików źródłowych
@@ -186,7 +187,7 @@ CREATE TABLE pliki
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE pliki OWNER TO @db.user@;
+ALTER TABLE pliki OWNER TO @db.user @;
 
 
 ---
@@ -204,7 +205,7 @@ CREATE TABLE role
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE role OWNER TO @db.user@;
+ALTER TABLE role OWNER TO @db.user @;
 
 ---
 ---  Tabela przypisań ról osobom
@@ -222,4 +223,4 @@ CREATE TABLE role_osob
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE role OWNER TO @db.user@;
+ALTER TABLE role OWNER TO @db.user @;

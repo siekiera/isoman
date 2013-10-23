@@ -6,17 +6,18 @@ $pageTool.appendTitleSuffix('Lista osób')
     <th>Login</th>
     <th>Imię</th>
     <th>Nazwisko</th>
-    <th>Data utworzenia konta</th>
-    <th></th>
-    <th></th>
+    <th>PESEL</th>
+    <th>email</th>
     #foreach($person in $persons)
         <tr>
             <td>$person.id</td>
+            <td>$person.login</td>
             <td>$person.imie</td>
+            <td>$person.nazwisko</td>
             <td>$person.pesel</td>
             <td>$person.email</td>
-##            <td><a href="$link.view('person.Form').set('edit', $person.id)">Edytuj</a></td>
-##            <td><a href="$link.action('person.Delete').set('delete', $person.id)">Usuń</a></td>
+        ##            <td><a href="$link.view('person.Form').set('edit', $person.id)">Edytuj</a></td>
+        ##            <td><a href="$link.action('person.Delete').set('delete', $person.id)">Usuń</a></td>
         </tr>
     #end
 </table>
