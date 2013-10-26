@@ -1,24 +1,33 @@
 $viewEnclosureTool.top()
 $pageTool.insertTitlePrefix('IsoMan - ')
+$pageTool.addStyleLink('style/style.css')
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+##    Style CSS
+    #foreach($styleLink in $pageTool.styleLinks)
+        <link rel="stylesheet" type="text/css" href="$styleLink.href" />
+    #end
+##    JQuery
+    #set($jslink = $link.sessionless())
+    <script type="text/javascript" src="$jslink.content('lib/jquery-2.0.3.js')"></script>
     <title>$pageTool.title</title>
 </head>
-<body style="margin-top: 20px">
-<table>
+<body>
+<table id="maintbl">
     <tr>
-        <td style="width: 30%">
-            <span style="bold">Menu</span>
+        <td id="menu">
+##            <span style="bold">Menu</span>
             <ul>
                 <li><a href="$link.view('Index')">Strona główna</a></li>
                 <li><a href="$link.view('person.PersonIndex')">Lista osób</a></li>
             </ul>
         </td>
-        <td>
+    </tr>
+        <td id="content">
             $embeddedPlaceholder
         </td>
     </tr>
