@@ -6,9 +6,8 @@ import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
 import org.objectledge.context.Context;
-import pl.edu.pw.elka.mtoporow.isoman.domain.dao.GenericDao;
-import pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.AbstractGenericDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
 import pl.edu.pw.elka.mtoporow.isoman.domain.session.impl.SessionFactoryMockImpl;
 
@@ -30,6 +29,9 @@ public abstract class BaseTest extends TestCase {
 
     private IDatabaseTester databaseTester;
 
+    private Context context;
+    private SessionFactory sessionFactory;
+
     /**
      * Pobiera plik z zestawem danych
      *
@@ -46,6 +48,7 @@ public abstract class BaseTest extends TestCase {
 
         IDataSet dataSet = new FlatXmlDataSetBuilder().build(getDataSetFile());
         databaseTester.setDataSet(dataSet);
+        databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
         databaseTester.onSetup();
 
     }
@@ -57,6 +60,7 @@ public abstract class BaseTest extends TestCase {
 
     /**
      * Tworzy implementację dao
+     *
      * @param daoClass
      * @param <B>
      * @return
@@ -64,6 +68,20 @@ public abstract class BaseTest extends TestCase {
      */
     protected <B> B createDao(Class daoClass) throws ReflectiveOperationException {
         Constructor constructor = daoClass.getConstructor(Context.class, SessionFactory.class);
-        return (B) constructor.newInstance(new Context(), new SessionFactoryMockImpl());
+        return (B) constructor.newInstance(getContext(), getSessionFactory());
+    }
+
+    private SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            sessionFactory = new SessionFactoryMockImpl();
+        }
+        return sessionFactory;
+    }
+
+    private Context getContext() {
+        if (context == null) {
+            context = new Context();
+        }
+        return context;
     }
 }

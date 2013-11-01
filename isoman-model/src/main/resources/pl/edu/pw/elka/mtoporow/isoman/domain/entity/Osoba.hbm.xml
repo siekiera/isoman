@@ -28,5 +28,13 @@
             <key column="kod" not-null="false"/>
             <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot"/>
         </set>
+        <set name="role" table="role_osob" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_osoby"/>
+            </key>
+            <many-to-many entity-name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Rola">
+                <column name="id_roli"/>
+            </many-to-many>
+        </set>
     </class>
 </hibernate-mapping>

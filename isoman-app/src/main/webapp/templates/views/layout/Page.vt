@@ -9,7 +9,7 @@ $pageTool.addStyleLink('style/style.css')
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 ##    Style CSS
     #foreach($styleLink in $pageTool.styleLinks)
-        <link rel="stylesheet" type="text/css" href="$styleLink.href" />
+        <link rel="stylesheet" type="text/css" href="$styleLink.href"/>
     #end
 ##    JQuery
     #set($jslink = $link.sessionless())
@@ -20,13 +20,19 @@ $pageTool.addStyleLink('style/style.css')
 <table id="maintbl">
     <tr>
         <td id="menu">
-##            <span style="bold">Menu</span>
+        ##            <span style="bold">Menu</span>
             <ul>
                 <li><a href="$link.view('Index')">Strona główna</a></li>
-                <li><a href="$link.view('person.PersonIndex')">Lista osób</a></li>
+                <li>Osoby
+                    <ul>
+                        <li><a href="$link.view('person.PersonIndex')">Lista</a></li>
+                        <li><a href="$link.view('person.AddPerson')">Dodaj</a></li>
+                    </ul>
+                </li>
             </ul>
         </td>
     </tr>
+    <tr>
         <td id="content">
             $embeddedPlaceholder
         </td>

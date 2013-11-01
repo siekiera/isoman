@@ -1,5 +1,6 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.dao;
 
+import org.hibernate.Transaction;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.GenericEntity;
 
 import java.util.List;
@@ -45,4 +46,10 @@ public interface GenericDao<T extends GenericEntity> {
      */
     List<T> getAll();
 
+    /**
+     * Rozpoczyna transakcję dla bieżącej sesji
+     *
+     * @return
+     */
+    Transaction beginTransaction();
 }

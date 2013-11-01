@@ -1,0 +1,26 @@
+$viewEnclosureTool.override('layout.Page')##
+$pageTool.appendTitleSuffix('Dodaj osobę')##
+<form method="POST" action="$link.action('person.AddPerson')">
+    <table>
+        <tr>
+            <td>Imię:</td>
+            <td><input type="text" name="name" size="20"/>,</td>
+        </tr>
+        <tr>
+            <td>Nazwisko:</td>
+            <td><input type="text" name="surname" size="50"/></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="email" size="40"/></td>
+        </tr>
+        <tr>
+            <td>Pesel</td>
+            <td><input type="text" name="pesel" size="11"</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Dodaj"/></td>
+        </tr>
+    </table>
+</form>

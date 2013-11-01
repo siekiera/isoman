@@ -17,6 +17,7 @@ public class Osoba extends UniqueEntity<Long> {
     private String pesel;
     private String email;
     private Set<Przedmiot> przedmiotyProwadzone;
+    private Set<Rola> role;
 
     public Long getNr() {
         return nr;
@@ -102,5 +103,13 @@ public class Osoba extends UniqueEntity<Long> {
     public int hashCode() {
         //FIXME
         return 0;
+    }
+
+    public Set<Rola> getRole() {
+        return role;
+    }
+
+    public void setRole(Set<Rola> role) {
+        this.role = role;
     }
 }

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <osoby nr="1" login="koval" imie="Jan" nazwisko="Kowalski" pesel="64031677346" email="koval@gmail.com"/>
+    <osoby nr="2" login="zdzichu" imie="Zdzisław" nazwisko="Isowski" pesel="72120877346" email="zdzichu@gmail.com"/>
+
+    <role id="1" nazwa="admin" opis="administrator"/>
+    <role id="2" nazwa="student" opis="student"/>
+
+    <role_osob id_roli="1" id_osoby="1"/>
+</dataset>

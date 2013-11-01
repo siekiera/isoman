@@ -1,4 +1,5 @@
 $viewEnclosureTool.override('layout.Page')
+$pageTool.appendTitleSuffix('Błąd')##
 
 #if($originalView)
 <p>

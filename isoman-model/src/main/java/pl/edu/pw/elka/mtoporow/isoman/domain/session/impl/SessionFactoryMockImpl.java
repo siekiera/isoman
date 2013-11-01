@@ -12,8 +12,13 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
  * @author Michał Toporowski
  */
 public class SessionFactoryMockImpl implements SessionFactory {
+    private Session session;
+
     @Override
     public Session getSession(Context context) {
-        return new Configuration().configure().buildSessionFactory().openSession();
+        if (session == null || !session.isOpen()) {
+            session = new Configuration().configure().buildSessionFactory().openSession();
+        }
+        return session;
     }
 }

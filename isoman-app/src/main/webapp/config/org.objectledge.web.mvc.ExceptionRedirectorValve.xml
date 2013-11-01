@@ -6,16 +6,16 @@
 
 <config>
     <exception class="org.objectledge.web.mvc.builders.MissingViewException"
-               view="error.Http404" level="DEBUG" />
-    <!--<exception class="java.lang.Exception" view="error.Error" level="DEBUG" />-->
-  <!--<exception class="org.objectledge.web.mvc.security.LoginRequiredException"-->
-  			 <!--view="Login" level="DEBUG"/>-->
-  <!--<exception class="org.objectledge.security.exception.AccessControlException"-->
-  			 <!--view="exception.AccessDenied" level="DEBUG"/>-->
-  <!--<exception class="org.objectledge.security.exception.LoginFailException"-->
-  			 <!--view="exception.BadPassword" level="DEBUG"/>  			 -->
-  <!--<exception class="org.objectledge.security.exception.AccountLockedException"-->
-  			 <!--view="exception.AccountLocked" level="DEBUG"/>-->
-  <!--<exception class="org.objectledge.pipeline.GUIVisibleException"-->
-  			 <!--view="exception.GUIVisibleExceptionView" level="DEBUG"/>  			 -->
+               view="exception.Http404" level="DEBUG"/>
+    <exception class="java.lang.Exception" view="exception.Error" level="DEBUG"/>
+    <!--<exception class="org.objectledge.web.mvc.security.LoginRequiredException"-->
+    <!--view="Login" level="DEBUG"/>-->
+    <!--<exception class="org.objectledge.security.exception.AccessControlException"-->
+    <!--view="exception.AccessDenied" level="DEBUG"/>-->
+    <!--<exception class="org.objectledge.security.exception.LoginFailException"-->
+    <!--view="exception.BadPassword" level="DEBUG"/>  			 -->
+    <!--<exception class="org.objectledge.security.exception.AccountLockedException"-->
+    <!--view="exception.AccountLocked" level="DEBUG"/>-->
+    <!--<exception class="org.objectledge.pipeline.GUIVisibleException"-->
+    <!--view="exception.GUIVisibleExceptionView" level="DEBUG"/>  			 -->
 </config>

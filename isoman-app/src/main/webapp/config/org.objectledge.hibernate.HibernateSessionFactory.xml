@@ -28,7 +28,9 @@
                  resource="org/objectledge/security/object/hibernate/HibernateUserResourceGroupRole.hbm.xml"/>
 
         <!-- Example mapping  -->
-        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba" />
-        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot" />
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Rola"/>
+
     </session-factory>
 </hibernate-configuration>

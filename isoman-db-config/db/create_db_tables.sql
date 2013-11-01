@@ -8,6 +8,8 @@
 ---  Tabela osób
 ---
 CREATE SEQUENCE osoby_seq;
+ALTER SEQUENCE osoby_seq
+OWNER TO @db.user @;
 
 CREATE TABLE osoby
 (
@@ -217,10 +219,10 @@ CREATE TABLE role_osob
   id_osoby BIGINT,
   id_roli  BIGINT,
   CONSTRAINT ro_pk PRIMARY KEY (id_osoby, id_roli),
-  CONSTRAINT ro_os_fk FOREIGN KEY (id_osoby) REFERENCES osoby (nr),
-  CONSTRAINT ro_role_fk FOREIGN KEY (id_roli) REFERENCES role (id)
+  CONSTRAINT ro_os_fk FOREIGN KEY (id_osoby) REFERENCES osoby (nr) ON DELETE CASCADE,
+  CONSTRAINT ro_role_fk FOREIGN KEY (id_roli) REFERENCES role (id) ON DELETE CASCADE
 )
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE role OWNER TO @db.user @;
+ALTER TABLE role_osob OWNER TO @db.user @;

@@ -2,6 +2,7 @@ package pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.objectledge.context.Context;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.GenericDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.GenericEntity;
@@ -16,8 +17,8 @@ import java.util.List;
  * @author Michał Toporowski
  */
 public abstract class AbstractGenericDao<T extends GenericEntity> implements GenericDao<T> {
-    private Context context;
-    private SessionFactory sessionFactory;
+    private final Context context;
+    private final SessionFactory sessionFactory;
 
     /**
      * Konstruktor klasy abstrakcyjnej
@@ -65,6 +66,12 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Gen
     protected Session getSession() {
         return sessionFactory.getSession(context);
     }
+
+    @Override
+    public Transaction beginTransaction() {
+        return getSession().beginTransaction();
+    }
+
 
     /**
      * Pobiera klasę encji
