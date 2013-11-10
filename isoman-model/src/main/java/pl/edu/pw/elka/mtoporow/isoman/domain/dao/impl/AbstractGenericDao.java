@@ -1,8 +1,10 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 import org.objectledge.context.Context;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.GenericDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.GenericEntity;
@@ -70,6 +72,15 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Gen
     @Override
     public Transaction beginTransaction() {
         return getSession().beginTransaction();
+    }
+
+    @Override
+    public List<T> getFiltered(List<Criterion> criteria) {
+        Criteria hbCriteria = getSession().createCriteria(getEntityClass());
+        for (Criterion criterion : criteria) {
+            hbCriteria.add(criterion);
+        }
+        return hbCriteria.list();
     }
 
 

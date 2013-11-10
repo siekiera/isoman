@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.TypJednostki" table="typy_jednostek">
+        <id name="id" type="java.lang.Long">
+            <column name="id"/>
+        </id>
+        <property name="nazwa" type="java.lang.String">
+            <column name="nazwa" not-null="true"/>
+        </property>
+        <many-to-one name="nadrzedny" column="id_rodzica"
+                     class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.TypJednostki"
+                     lazy="no-proxy" access="field"/>
+        <list name="podrzedne" lazy="true" cascade="none" inverse="true" access="field">
+            <key column="id_rodzica" not-null="false"/>
+            <list-index column="id"/>
+            <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.TypJednostki"/>
+        </list>
+
+    </class>
+</hibernate-mapping>

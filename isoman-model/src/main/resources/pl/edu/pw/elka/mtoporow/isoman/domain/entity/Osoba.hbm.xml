@@ -3,8 +3,8 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba" table="osoby">
-        <id name="nr" type="java.lang.Long">
-            <column name="nr"/>
+        <id name="id" type="java.lang.Long">
+            <column name="id"/>
             <generator class="sequence">
                 <param name="sequence">osoby_seq</param>
             </generator>
@@ -24,11 +24,11 @@
         <property name="email" type="java.lang.String">
             <column name="email" not-null="true" unique="true"/>
         </property>
-        <set name="przedmiotyProwadzone" lazy="true" cascade="none" inverse="true" access="field">
+        <set name="przedmiotyProwadzone" cascade="none" inverse="true" access="field">
             <key column="kod" not-null="false"/>
             <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot"/>
         </set>
-        <set name="role" table="role_osob" inverse="false" lazy="true" fetch="select">
+        <set name="role" table="role_osob" inverse="false" fetch="select">
             <key>
                 <column name="id_osoby"/>
             </key>
@@ -36,5 +36,16 @@
                 <column name="id_roli"/>
             </many-to-many>
         </set>
+        <many-to-one name="jednostkaOrganizacyjna" column="id_jednostki"
+                     class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.JednostkaOrganizacyjna"
+                     lazy="no-proxy" access="field"/>
+        <set name="przedmioty" table="osoby_na_przedmiotach" inverse="false" fetch="select" access="field">
+            <key column="id_osoby"/>
+            <many-to-many entity-name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot">
+                <column name="kod_przedmiotu" sql-type="bpchar"/>
+                <column name="id_jednostki" sql-type="int8"/>
+            </many-to-many>
+        </set>
+
     </class>
 </hibernate-mapping>

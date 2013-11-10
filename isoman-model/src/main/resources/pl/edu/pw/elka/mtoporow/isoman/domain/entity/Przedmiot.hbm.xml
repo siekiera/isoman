@@ -4,9 +4,12 @@
 <hibernate-mapping>
     <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot" table="przedmioty">
 
-        <id name="kod" type="java.lang.String">
-            <column name="kod" sql-type="bpchar"/>
-        </id>
+        <composite-id class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.id.PrzedmiotId" name="id">
+            <key-property name="idJednostki" column="id_jednostki" type="java.lang.Long"/>
+            <key-property name="kodPrzedmiotu" type="java.lang.String">
+                <column name="kod" sql-type="bpchar"/>
+            </key-property>
+        </composite-id>
         <property name="nazwa" type="java.lang.String">
             <column name="nazwa" not-null="true"/>
         </property>
@@ -16,5 +19,25 @@
         <many-to-one name="wykladowca" column="id_wykladowcy"
                      class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba"
                      lazy="no-proxy" access="field"/>
+        <many-to-one name="jednostka" column="id_jednostki"
+                     class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.JednostkaOrganizacyjna"
+                     lazy="no-proxy" access="field" insert="false" update="false"/>
+        <set name="uczestnicy" table="osoby_na_przedmiotach" inverse="false" fetch="select" access="field">
+            <key>
+                <column name="kod_przedmiotu" sql-type="bpchar"/>
+                <column name="id_jednostki" sql-type="int8"/>
+            </key>
+            <many-to-many entity-name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba">
+                <column name="id_osoby"/>
+            </many-to-many>
+        </set>
+        <list name="archiwa" inverse="true" fetch="select" access="field">
+            <key>
+                <column name="id_jednostki"/>
+                <column name="kod_przedmiotu" sql-type="bpchar"/>
+            </key>
+            <list-index column="id"/>
+            <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum"/>
+        </list>
     </class>
 </hibernate-mapping>

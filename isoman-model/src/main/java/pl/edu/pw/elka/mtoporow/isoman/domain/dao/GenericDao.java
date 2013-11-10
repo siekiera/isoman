@@ -1,6 +1,7 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.dao;
 
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.GenericEntity;
 
 import java.util.List;
@@ -52,4 +53,12 @@ public interface GenericDao<T extends GenericEntity> {
      * @return
      */
     Transaction beginTransaction();
+
+    /**
+     * Pobiera listę wyników przefiltrowaną na podstawie kryteriów hibernate'owych
+     *
+     * @param criteria lista kryteriów
+     * @return
+     */
+    List<T> getFiltered(List<Criterion> criteria);
 }

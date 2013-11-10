@@ -10,7 +10,7 @@ import java.util.Set;
  * @author Michał Toporowski
  */
 public class Osoba extends UniqueEntity<Long> {
-    private Long nr;
+    private Long id;
     private String login;
     private String imie;
     private String nazwisko;
@@ -18,23 +18,17 @@ public class Osoba extends UniqueEntity<Long> {
     private String email;
     private Set<Przedmiot> przedmiotyProwadzone;
     private Set<Rola> role;
-
-    public Long getNr() {
-        return nr;
-    }
+    private JednostkaOrganizacyjna jednostkaOrganizacyjna;
+    private Set<Przedmiot> przedmioty;
 
     @Override
     public Long getId() {
-        return nr;
+        return id;
     }
 
     @Override
     public void setId(Long id) {
-        this.nr = id;
-    }
-
-    public void setNr(Long nr) {
-        this.nr = nr;
+        this.id = id;
     }
 
     public String getLogin() {
@@ -93,7 +87,7 @@ public class Osoba extends UniqueEntity<Long> {
 
 
         return new EqualsBuilder()
-                .append(os.nr, this.nr)
+                .append(os.id, this.id)
                 .append(os.login, this.login)
                 .append(os.imie, this.imie)
                 .isEquals();
@@ -111,5 +105,21 @@ public class Osoba extends UniqueEntity<Long> {
 
     public void setRole(Set<Rola> role) {
         this.role = role;
+    }
+
+    public JednostkaOrganizacyjna getJednostkaOrganizacyjna() {
+        return jednostkaOrganizacyjna;
+    }
+
+    public void setJednostkaOrganizacyjna(JednostkaOrganizacyjna jednostkaOrganizacyjna) {
+        this.jednostkaOrganizacyjna = jednostkaOrganizacyjna;
+    }
+
+    public Set<Przedmiot> getPrzedmioty() {
+        return przedmioty;
+    }
+
+    public void setPrzedmioty(Set<Przedmiot> przedmioty) {
+        this.przedmioty = przedmioty;
     }
 }

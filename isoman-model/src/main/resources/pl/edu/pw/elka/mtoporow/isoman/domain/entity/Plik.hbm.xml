@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik" table="pliki">
+        <id name="id" type="java.lang.Long">
+            <column name="id" not-null="true"/>
+        </id>
+        <property name="nazwa" type="java.lang.String">
+            <column name="nazwa" not-null="true"/>
+        </property>
+        <property name="aktualny" type="java.lang.Boolean">
+            <column name="czy_aktualny" not-null="true"/>
+        </property>
+        <many-to-one name="folder" column="id_folderu" access="field"
+                     class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"/>
+    </class>
+</hibernate-mapping>

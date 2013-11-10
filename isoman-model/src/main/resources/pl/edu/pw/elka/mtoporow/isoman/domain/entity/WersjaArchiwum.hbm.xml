@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.WersjaArchiwum" table="wersje_archiwow">
+
+        <composite-id class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.id.WersjaArchiwumId" name="id">
+            <key-property name="nr" column="nr" type="java.lang.Long"/>
+            <key-property name="idArchiwum" column="id_archiwum" type="java.lang.Long"/>
+        </composite-id>
+        <property name="dataUtworzenia" type="java.util.Date">
+            <column name="data_utworzenia" not-null="true"/>
+        </property>
+        <property name="pokazywana" type="java.lang.Boolean">
+            <column name="czy_pokazywana" not-null="true"/>
+        </property>
+        <property name="sciezka" type="java.lang.String">
+            <column name="sciezka" not-null="true"/>
+        </property>
+        <property name="opis" type="java.lang.String">
+            <column name="opis"/>
+        </property>
+        <many-to-one name="archiwum" lazy="no-proxy" access="field" fetch="select" column="id_archiwum"
+                     insert="false" update="false"
+                     class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum"/>
+    </class>
+</hibernate-mapping>

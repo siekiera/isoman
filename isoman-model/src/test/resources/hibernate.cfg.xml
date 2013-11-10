@@ -38,6 +38,18 @@
                  resource="pl/edu/pw/elka/mtoporow/isoman/domain/entity/Przedmiot.hbm.xml"/>
         <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Rola"
                  resource="pl/edu/pw/elka/mtoporow/isoman/domain/entity/Rola.hbm.xml"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.JednostkaOrganizacyjna"
+                 resource="pl/edu/pw/elka/mtoporow/isoman/domain/entity/JednostkaOrganizacyjna.hbm.xml"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.TypJednostki"
+                 resource="pl/edu/pw/elka/mtoporow/isoman/domain/entity/TypJednostki.hbm.xml"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum"
+                 resource="pl/edu/pw/elka/mtoporow/isoman/domain/entity/Archiwum.hbm.xml"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.WersjaArchiwum"
+                 resource="pl/edu/pw/elka/mtoporow/isoman/domain/entity/WersjaArchiwum.hbm.xml"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik"
+                 resource="pl/edu/pw/elka/mtoporow/isoman/domain/entity/Plik.hbm.xml"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"
+                 resource="pl/edu/pw/elka/mtoporow/isoman/domain/entity/Folder.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

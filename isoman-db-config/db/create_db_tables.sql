@@ -5,38 +5,6 @@
 
 
 ---
----  Tabela osób
----
-CREATE SEQUENCE osoby_seq;
-ALTER SEQUENCE osoby_seq
-OWNER TO @db.user @;
-
-CREATE TABLE osoby
-(
-  nr       BIGINT                 NOT NULL,
-  login    CHARACTER VARYING(30)  NOT NULL,
-  imie     CHARACTER VARYING(48)  NOT NULL,
-  nazwisko CHARACTER VARYING(120) NOT NULL,
-  pesel    CHARACTER VARYING(11)  NOT NULL,
-  email    CHARACTER VARYING(30)  NOT NULL,
---   last_login TIMESTAMP WITHOUT TIME ZONE,
-  CONSTRAINT osoby_pk PRIMARY KEY (nr),
-  CONSTRAINT osoby_login_uk UNIQUE (login),
-  CONSTRAINT osoby_email_uk UNIQUE (email)
-)
-WITH (
-OIDS = FALSE
-);
-ALTER TABLE osoby OWNER TO @db.user @;
-
-COMMENT ON TABLE osoby IS 'Tabela reprezentująca osoby';
-COMMENT ON COLUMN osoby.nr IS 'Numer osoby';
-COMMENT ON COLUMN osoby.imie IS 'Imię osoby';
-COMMENT ON COLUMN osoby.pesel IS 'Nr PESEL';
-COMMENT ON COLUMN osoby.email IS 'Adres e-mail';
-
-
----
 ---  Tabela typów jednostek
 ---
 
@@ -76,6 +44,40 @@ ALTER TABLE jednostki_organizacyjne OWNER TO @db.user @;
 
 
 ---
+---  Tabela osób
+---
+CREATE SEQUENCE osoby_seq;
+ALTER SEQUENCE osoby_seq
+OWNER TO @db.user @;
+
+CREATE TABLE osoby
+(
+  id           BIGINT                 NOT NULL,
+  login        CHARACTER VARYING(30)  NOT NULL,
+  imie         CHARACTER VARYING(48)  NOT NULL,
+  nazwisko     CHARACTER VARYING(120) NOT NULL,
+  pesel        CHARACTER VARYING(11)  NOT NULL,
+  email        CHARACTER VARYING(30)  NOT NULL,
+  id_jednostki BIGINT                 NOT NULL,
+--   last_login TIMESTAMP WITHOUT TIME ZONE,
+  CONSTRAINT osoby_pk PRIMARY KEY (id),
+  CONSTRAINT osoby_login_uk UNIQUE (login),
+  CONSTRAINT osoby_email_uk UNIQUE (email),
+  CONSTRAINT osoby_jedn_fk FOREIGN KEY (id_jednostki) REFERENCES jednostki_organizacyjne (id)
+)
+WITH (
+OIDS = FALSE
+);
+ALTER TABLE osoby OWNER TO @db.user @;
+
+COMMENT ON TABLE osoby IS 'Tabela reprezentująca osoby';
+COMMENT ON COLUMN osoby.id IS 'Numer osoby';
+COMMENT ON COLUMN osoby.imie IS 'Imię osoby';
+COMMENT ON COLUMN osoby.pesel IS 'Nr PESEL';
+COMMENT ON COLUMN osoby.email IS 'Adres e-mail';
+
+
+---
 ---  Tabela przedmiotów
 ---
 
@@ -89,7 +91,7 @@ CREATE TABLE przedmioty
   opis          CHARACTER VARYING(200),
   CONSTRAINT prz_pk PRIMARY KEY (id_jednostki, kod),
   CONSTRAINT prz_jo_fk FOREIGN KEY (id_jednostki) REFERENCES jednostki_organizacyjne (id),
-  CONSTRAINT prz_wykl_fk FOREIGN KEY (id_wykladowcy) REFERENCES osoby (nr)
+  CONSTRAINT prz_wykl_fk FOREIGN KEY (id_wykladowcy) REFERENCES osoby (id)
 
 )
 WITH (
@@ -107,7 +109,7 @@ CREATE TABLE osoby_na_przedmiotach
   id_jednostki   BIGINT  NOT NULL,
   kod_przedmiotu CHAR(5) NOT NULL,
   CONSTRAINT onp_pk PRIMARY KEY (id_osoby, kod_przedmiotu),
-  CONSTRAINT onp_os_fk FOREIGN KEY (id_osoby) REFERENCES osoby (nr),
+  CONSTRAINT onp_os_fk FOREIGN KEY (id_osoby) REFERENCES osoby (id),
   CONSTRAINT onp_prz_fk FOREIGN KEY (id_jednostki, kod_przedmiotu) REFERENCES przedmioty (id_jednostki, kod)
 
 )
@@ -123,11 +125,12 @@ ALTER TABLE osoby_na_przedmiotach OWNER TO @db.user @;
 
 CREATE TABLE archiwa
 (
-  id             BIGINT                 NOT NULL,
-  nazwa          CHARACTER VARYING(48)  NOT NULL,
-  opis           CHARACTER VARYING(200) NOT NULL,
-  id_jednostki   BIGINT                 NOT NULL,
-  kod_przedmiotu CHAR(5)                NOT NULL,
+  id                  BIGINT                NOT NULL,
+  nazwa               CHARACTER VARYING(48) NOT NULL,
+  opis                CHARACTER VARYING(200),
+  id_jednostki        BIGINT                NOT NULL,
+  kod_przedmiotu      CHAR(5)               NOT NULL,
+  id_folderu_glownego BIGINT,
   CONSTRAINT arch_pk PRIMARY KEY (id),
   CONSTRAINT ar_prz_fk FOREIGN KEY (id_jednostki, kod_przedmiotu) REFERENCES przedmioty (id_jednostki, kod)
 )
@@ -147,7 +150,7 @@ CREATE TABLE wersje_archiwow
   data_utworzenia TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   czy_pokazywana  BOOLEAN DEFAULT FALSE       NOT NULL,
   sciezka         CHARACTER VARYING(160)      NOT NULL,
-  opis            CHARACTER VARYING(200)      NOT NULL,
+  opis            CHARACTER VARYING(200),
   CONSTRAINT wer_arch_pk PRIMARY KEY (nr, id_archiwum),
   CONSTRAINT wer_arch_fk FOREIGN KEY (id_archiwum) REFERENCES archiwa (id)
 )
@@ -172,6 +175,9 @@ WITH (
 OIDS = FALSE
 );
 ALTER TABLE foldery OWNER TO @db.user @;
+
+ALTER TABLE archiwa
+ADD CONSTRAINT ar_fg_fk FOREIGN KEY (id_folderu_glownego) REFERENCES foldery (id);
 
 ---
 ---  Tabela plików źródłowych
@@ -219,7 +225,7 @@ CREATE TABLE role_osob
   id_osoby BIGINT,
   id_roli  BIGINT,
   CONSTRAINT ro_pk PRIMARY KEY (id_osoby, id_roli),
-  CONSTRAINT ro_os_fk FOREIGN KEY (id_osoby) REFERENCES osoby (nr) ON DELETE CASCADE,
+  CONSTRAINT ro_os_fk FOREIGN KEY (id_osoby) REFERENCES osoby (id) ON DELETE CASCADE,
   CONSTRAINT ro_role_fk FOREIGN KEY (id_roli) REFERENCES role (id) ON DELETE CASCADE
 )
 WITH (

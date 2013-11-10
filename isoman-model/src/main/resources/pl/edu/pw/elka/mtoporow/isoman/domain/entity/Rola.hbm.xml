@@ -14,7 +14,7 @@
             <column name="opis"/>
         </property>
         <set name="osoby" table="role_osob" inverse="true"
-             lazy="true" fetch="select">
+             fetch="select">
             <key>
                 <column name="id_roli"/>
             </key>

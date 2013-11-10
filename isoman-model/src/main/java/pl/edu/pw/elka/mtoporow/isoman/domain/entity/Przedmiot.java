@@ -1,22 +1,32 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.entity;
 
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.id.PrzedmiotId;
+
+import java.util.List;
+import java.util.Set;
+
 /**
  * Encja przedmiotu
  *
  * @author Michał Toporowski
  */
-public class Przedmiot extends GenericEntity {
-    String kod;
-    String nazwa;
-    String opis;
-    Osoba wykladowca;
+public class Przedmiot extends UniqueEntity<PrzedmiotId> {
+    private PrzedmiotId id;
+    private JednostkaOrganizacyjna jednostka;
+    private String nazwa;
+    private String opis;
+    private Osoba wykladowca;
+    private Set<Osoba> uczestnicy;
+    private List<Archiwum> archiwa;
 
-    public String getKod() {
-        return kod;
+    @Override
+    public PrzedmiotId getId() {
+        return id;
     }
 
-    public void setKod(String kod) {
-        this.kod = kod;
+    @Override
+    public void setId(PrzedmiotId id) {
+        this.id = id;
     }
 
     public String getNazwa() {
@@ -33,5 +43,13 @@ public class Przedmiot extends GenericEntity {
 
     public void setOpis(String opis) {
         this.opis = opis;
+    }
+
+    public JednostkaOrganizacyjna getJednostka() {
+        return jednostka;
+    }
+
+    public void setJednostka(JednostkaOrganizacyjna jednostka) {
+        this.jednostka = jednostka;
     }
 }

@@ -34,7 +34,7 @@ public class OsobaDaoBean extends AbstractGenericUniqueDao<Osoba, Long> implemen
     }
 
     public void deleteById(Long id) {
-        String queryString = "DELETE FROM Osoba u WHERE u.nr = " + id;
+        String queryString = "DELETE FROM Osoba u WHERE u.id = " + id;
         Query query = getSession().createQuery(queryString);
         query.executeUpdate();
     }

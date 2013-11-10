@@ -31,6 +31,13 @@
         <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba"/>
         <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot"/>
         <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Rola"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.JednostkaOrganizacyjna"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.TypJednostki"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.WersjaArchiwum"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik"/>
+        <mapping class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"/>
+
 
     </session-factory>
 </hibernate-configuration>

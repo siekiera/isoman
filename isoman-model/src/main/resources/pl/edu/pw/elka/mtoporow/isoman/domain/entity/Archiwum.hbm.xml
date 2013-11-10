@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum" table="archiwa">
+        <id name="id" type="java.lang.Long">
+            <column name="id"/>
+        </id>
+        <property name="nazwa" type="java.lang.String">
+            <column name="nazwa" not-null="true"/>
+        </property>
+        <property name="opis" type="java.lang.String">
+            <column name="opis"/>
+        </property>
+        <many-to-one name="przedmiot" class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot"
+                     lazy="no-proxy" access="field">
+            <column name="id_jednostki"/>
+            <column name="kod_przedmiotu" sql-type="bpchar"/>
+        </many-to-one>
+        <one-to-one name="folderGlowny" class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"
+                    access="field"/>
+
+    </class>
+</hibernate-mapping>
