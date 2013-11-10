@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Interfejs dla wszystkich DAO
  */
-public interface GenericDao<T extends GenericEntity> {
+public interface BaseDao<T extends GenericEntity> {
 
 
     /**

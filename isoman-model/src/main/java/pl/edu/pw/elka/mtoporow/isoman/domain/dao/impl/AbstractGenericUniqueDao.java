@@ -2,7 +2,7 @@ package pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl;
 
 import org.hibernate.Query;
 import org.objectledge.context.Context;
-import pl.edu.pw.elka.mtoporow.isoman.domain.dao.GenericUniqueDao;
+import pl.edu.pw.elka.mtoporow.isoman.domain.dao.BaseUniqueDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.UniqueEntity;
 import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
 
@@ -13,10 +13,10 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
  */
 public abstract class AbstractGenericUniqueDao<T extends UniqueEntity<ID>, ID>
         extends AbstractGenericDao<T>
-        implements GenericUniqueDao<T, ID> {
+        implements BaseUniqueDao<T, ID> {
 
     /**
-     * Konstruktor klasy abstrakcyjnej
+     * Konstruktor
      *
      * @param context        kontekst
      * @param sessionFactory fabryka sesji Hibernate

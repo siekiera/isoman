@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.objectledge.context.Context;
-import pl.edu.pw.elka.mtoporow.isoman.domain.dao.GenericDao;
+import pl.edu.pw.elka.mtoporow.isoman.domain.dao.BaseDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.GenericEntity;
 import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
 
@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Michał Toporowski
  */
-public abstract class AbstractGenericDao<T extends GenericEntity> implements GenericDao<T> {
+public abstract class AbstractGenericDao<T extends GenericEntity> implements BaseDao<T> {
     private final Context context;
     private final SessionFactory sessionFactory;
 

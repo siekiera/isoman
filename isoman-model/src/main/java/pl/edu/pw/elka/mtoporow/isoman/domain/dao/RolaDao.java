@@ -9,5 +9,5 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Rola;
  *
  * @author Michał Toporowski
  */
-public interface RolaDao extends GenericUniqueDao<Rola, Long> {
+public interface RolaDao extends BaseUniqueDao<Rola, Long> {
 }

@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Michał Toporowski
  */
-public interface OsobaDao extends GenericUniqueDao<Osoba, Long> {
+public interface OsobaDao extends BaseUniqueDao<Osoba, Long> {
     public Osoba getById(Long id);
 
     public List<Osoba> getAllOsobas();

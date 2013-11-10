@@ -7,7 +7,7 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.entity.UniqueEntity;
  *
  * @author Michał Toporowski
  */
-public interface GenericUniqueDao<T extends UniqueEntity<IDTYPE>, IDTYPE> extends GenericDao<T> {
+public interface BaseUniqueDao<T extends UniqueEntity<IDTYPE>, IDTYPE> extends BaseDao<T> {
 
     /**
      * Pobiera encję na podstawie id

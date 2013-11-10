@@ -22,17 +22,13 @@ public class OsobaDaoBean extends AbstractGenericUniqueDao<Osoba, Long> implemen
     }
 
     @Deprecated
-    public Osoba getById(Long id) {
-        return (Osoba) getSession().get(Osoba.class, id);
-    }
-
-    @Deprecated
     public List<Osoba> getAllOsobas() {
         String queryString = "SELECT u FROM Osoba u";
         Query query = getSession().createQuery(queryString);
         return query.list();
     }
 
+    @Deprecated
     public void deleteById(Long id) {
         String queryString = "DELETE FROM Osoba u WHERE u.id = " + id;
         Query query = getSession().createQuery(queryString);
