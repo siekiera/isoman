@@ -14,8 +14,7 @@
         </property>
         <many-to-one name="przedmiot" class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot"
                      lazy="no-proxy" access="field">
-            <column name="id_jednostki"/>
-            <column name="kod_przedmiotu" sql-type="bpchar"/>
+            <column name="id_przedmiotu"/>
         </many-to-one>
         <one-to-one name="folderGlowny" class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"
                     access="field"/>

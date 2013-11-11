@@ -1,7 +1,6 @@
 package pl.edu.pw.elka.mtoporow.isoman.modules.actions.person;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.objectledge.context.Context;
 import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
@@ -45,16 +44,6 @@ public class AddPerson extends AbstractAction {
         osoba.setEmail(email);
         osoba.setLogin(name);
 
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            osobaDao.save(osoba);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new ProcessingException(e);
-        }
+        processSave(osobaDao, osoba);
     }
 }

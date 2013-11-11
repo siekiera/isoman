@@ -1,8 +1,22 @@
 <?xml version="1.0"?>
 <container>
 
+    <!-- DAO -->
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.OsobaDao"
                class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.OsobaDaoBean"/>
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.PrzedmiotDao"
+               class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.PrzedmiotDaoBean"/>
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.JODao"
+               class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.JODaoBean"/>
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.ArchiwumDao"
+               class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.ArchiwumDaoBean"/>
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.WersjaArchiwumDao"
+               class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.WersjaArchiwumDaoBean"/>
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.RolaDao"
+               class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.RolaDaoBean"/>
+
+
+    <!-- HB -->
 
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory"
                class="pl.edu.pw.elka.mtoporow.isoman.domain.session.impl.SessionFactoryImpl"/>
@@ -21,10 +35,10 @@
     <!--             class="org.objectledge.hibernate.PicofyingInterceptorFactory"/>-->
 
     <!--<component class-key="org.objectledge.hibernate.HibernateSessionFactory"-->
-               <!--class="org.objectledge.hibernate.HSQLSimpleConfigHibernateSessionFactory"/>-->
+    <!--class="org.objectledge.hibernate.HSQLSimpleConfigHibernateSessionFactory"/>-->
     <!--  Other db -->
-      <component class-key="org.objectledge.hibernate.HibernateSessionFactory"
-                 class="org.objectledge.hibernate.SimpleConfigHibernateSessionFactory"/>
+    <component class-key="org.objectledge.hibernate.HibernateSessionFactory"
+               class="org.objectledge.hibernate.SimpleConfigHibernateSessionFactory"/>
 
     <!-- intake components -->
     <component class="org.objectledge.intake.IntakeGroupFactory"/>
@@ -59,7 +73,7 @@
     <component class-key="org.objectledge.security.SecurityTokenModificationPolicy"
                class="org.objectledge.security.SecurityTokenModificationPolicyImpl"/>
     <component class="org.objectledge.security.object.hibernate.HibernateDataBackend"/>
-    <component class="pl.edu.pw.elka.mtoporow.isoman.security.DummyGroupNamingPolicy" />
+    <component class="pl.edu.pw.elka.mtoporow.isoman.security.DummyGroupNamingPolicy"/>
     <!--<component class="org.objectledge.example.security.DummyGroupNamingPolicy"/>-->
     <component class="org.objectledge.web.mvc.security.AclSecurityHelper"/>
     <component class="org.objectledge.web.mvc.security.SecurityPolicyCheckingHelper"/>
@@ -75,7 +89,7 @@
     <component key="org.objectledge.filesystem.ContentExtractorLocale"
                class="org.objectledge.filesystem.ContentExtractor"/>
     <!--<component key="org.objectledge.filesystem.ContentExtractorDojo"-->
-               <!--class="org.objectledge.filesystem.ContentExtractor"/>-->
+    <!--class="org.objectledge.filesystem.ContentExtractor"/>-->
 
     <!-- // valve utils ///////////////////////////////////////////////////////////////// -->
 

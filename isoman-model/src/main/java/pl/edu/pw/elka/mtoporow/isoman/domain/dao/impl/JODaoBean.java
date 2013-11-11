@@ -19,7 +19,7 @@ public class JODaoBean extends AbstractGenericUniqueDao<JednostkaOrganizacyjna, 
      * @param context        kontekst
      * @param sessionFactory fabryka sesji Hibernate
      */
-    protected JODaoBean(Context context, SessionFactory sessionFactory) {
+    public JODaoBean(Context context, SessionFactory sessionFactory) {
         super(context, sessionFactory);
     }
 }

@@ -33,6 +33,7 @@
     <modules>
         <module>isoman-db-config</module>
         <module>isoman-model</module>
+        <module>isoman-services</module>
         <module>isoman-app</module>
     </modules>
 </project>

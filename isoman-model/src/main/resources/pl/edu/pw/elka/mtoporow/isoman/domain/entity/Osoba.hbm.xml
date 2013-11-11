@@ -25,7 +25,7 @@
             <column name="email" not-null="true" unique="true"/>
         </property>
         <set name="przedmiotyProwadzone" cascade="none" inverse="true" access="field">
-            <key column="kod" not-null="false"/>
+            <key column="id_przedmiotu" not-null="false"/>
             <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot"/>
         </set>
         <set name="role" table="role_osob" inverse="false" fetch="select">
@@ -42,8 +42,7 @@
         <set name="przedmioty" table="osoby_na_przedmiotach" inverse="false" fetch="select" access="field">
             <key column="id_osoby"/>
             <many-to-many entity-name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot">
-                <column name="kod_przedmiotu" sql-type="bpchar"/>
-                <column name="id_jednostki" sql-type="int8"/>
+                <column name="id_przedmiotu"/>
             </many-to-many>
         </set>
 

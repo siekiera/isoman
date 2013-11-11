@@ -1,0 +1,15 @@
+$viewEnclosureTool.override('layout.Page')
+$pageTool.appendTitleSuffix('Lista przedmiotów')
+
+<h3>Lista przedmiotów</h3>
+<p>Jednostka organizacyjna $unitname</p>
+<table>
+    <th>Kod</th>
+    <th>Nazwa</th>
+    #foreach($subject in $subjects)
+        <tr>
+            <td>$subject.kod</td>
+            <td>$subject.nazwa</td>
+        </tr>
+    #end
+</table>

@@ -19,13 +19,14 @@
         </list>
         <many-to-one name="typ" column="id_typu" class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.TypJednostki"
                      lazy="no-proxy"/>
-        <list name="przedmioty" cascade="none" inverse="true" access="field">
-            <key column="id_jednostki"/>
-            <list-index column="kod"/>
+        <bag name="przedmioty" cascade="none" lazy="true" inverse="true" access="field" fetch="select">
+            <key>
+                <column name="id_jednostki"/>
+            </key>
             <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot"/>
-        </list>
-        <list name="osoby" cascade="none" inverse="true" access="field">
-            <key column="id_jednostki"/>
+        </bag>
+        <list name="osoby" cascade="none" inverse="true" lazy="true" access="field">
+            <key column="id_jednostki" not-null="true"/>
             <list-index column="id"/>
             <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba"/>
         </list>

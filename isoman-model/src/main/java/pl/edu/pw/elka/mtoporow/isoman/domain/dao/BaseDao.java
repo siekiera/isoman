@@ -61,4 +61,13 @@ public interface BaseDao<T extends GenericEntity> {
      * @return
      */
     List<T> getFiltered(List<Criterion> criteria);
+
+    /*
+     * Pobiera listę wyników przefiltrowaną na podstawie kryteriów hibernate'owych
+     *
+     * @param criteria lista kryteriów
+     * @return
+     */
+    List<T> getFiltered(Criterion... criteria);
+
 }

@@ -1,7 +1,5 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.entity;
 
-import pl.edu.pw.elka.mtoporow.isoman.domain.entity.id.PrzedmiotId;
-
 import java.util.List;
 import java.util.Set;
 
@@ -10,9 +8,10 @@ import java.util.Set;
  *
  * @author Michał Toporowski
  */
-public class Przedmiot extends UniqueEntity<PrzedmiotId> {
-    private PrzedmiotId id;
+public class Przedmiot extends UniqueEntity<Long> {
+    private Long id;
     private JednostkaOrganizacyjna jednostka;
+    private String kod;
     private String nazwa;
     private String opis;
     private Osoba wykladowca;
@@ -20,12 +19,12 @@ public class Przedmiot extends UniqueEntity<PrzedmiotId> {
     private List<Archiwum> archiwa;
 
     @Override
-    public PrzedmiotId getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(PrzedmiotId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,5 +50,37 @@ public class Przedmiot extends UniqueEntity<PrzedmiotId> {
 
     public void setJednostka(JednostkaOrganizacyjna jednostka) {
         this.jednostka = jednostka;
+    }
+
+    public String getKod() {
+        return kod;
+    }
+
+    public void setKod(String kod) {
+        this.kod = kod;
+    }
+
+    public Osoba getWykladowca() {
+        return wykladowca;
+    }
+
+    public void setWykladowca(Osoba wykladowca) {
+        this.wykladowca = wykladowca;
+    }
+
+    public Set<Osoba> getUczestnicy() {
+        return uczestnicy;
+    }
+
+    public void setUczestnicy(Set<Osoba> uczestnicy) {
+        this.uczestnicy = uczestnicy;
+    }
+
+    public List<Archiwum> getArchiwa() {
+        return archiwa;
+    }
+
+    public void setArchiwa(List<Archiwum> archiwa) {
+        this.archiwa = archiwa;
     }
 }

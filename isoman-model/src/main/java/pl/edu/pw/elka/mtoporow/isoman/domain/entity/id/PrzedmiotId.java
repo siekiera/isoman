@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  * @author Michał Toporowski
  */
+@Deprecated
 public class PrzedmiotId implements Serializable {
     private Long idJednostki;
     private String kodPrzedmiotu;

@@ -29,6 +29,11 @@ $pageTool.addStyleLink('style/style.css')
                         <li><a href="$link.view('person.AddPerson')">Dodaj</a></li>
                     </ul>
                 </li>
+                <li>Przedmioty
+                    <ul>
+                        <li><a href="$link.view('subject.SubjectIndex')">Lista</a></li>
+                    </ul>
+                </li>
             </ul>
         </td>
     </tr>

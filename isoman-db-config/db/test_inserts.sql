@@ -10,8 +10,8 @@ INSERT INTO osoby (id, login, imie, nazwisko, pesel, email, id_jednostki) VALUES
 INSERT INTO osoby (id, login, imie, nazwisko, pesel, email, id_jednostki) VALUES (1108, 'stu007', 'Student', 'Studenciak', '91121923456', 'stu007@isoman.org', 5000);
 INSERT INTO osoby (id, login, imie, nazwisko, pesel, email, id_jednostki) VALUES (1109, 'stu008', 'Student', 'Studenciak', '91121923456', 'stu008@isoman.org', 5000);
 
-INSERT INTO przedmioty (id_jednostki, id_wykladowcy, kod, nazwa, opis) VALUES (5000, 1001, 'KP', 'KP', 'Kiepski przedmiot');
+INSERT INTO przedmioty (id, id_jednostki, id_wykladowcy, kod, nazwa, opis) VALUES (1000, 5000, 1001, 'KP', 'KP', 'Kiepski przedmiot');
 
-INSERT INTO osoby_na_przedmiotach (id_osoby, id_jednostki, kod_przedmiotu) VALUES (1102, 5000, 'KP');
-INSERT INTO osoby_na_przedmiotach (id_osoby, id_jednostki, kod_przedmiotu) VALUES (1103, 5000, 'KP');
-INSERT INTO osoby_na_przedmiotach (id_osoby, id_jednostki, kod_przedmiotu) VALUES (1107, 5000, 'KP');
+INSERT INTO osoby_na_przedmiotach (id_osoby, id_przedmiotu) VALUES (1102, 1000);
+INSERT INTO osoby_na_przedmiotach (id_osoby, id_przedmiotu) VALUES (1103, 1000);
+INSERT INTO osoby_na_przedmiotach (id_osoby, id_przedmiotu) VALUES (1107, 1000);

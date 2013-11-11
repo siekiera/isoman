@@ -3,7 +3,6 @@ package pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl;
 import org.objectledge.context.Context;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.PrzedmiotDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot;
-import pl.edu.pw.elka.mtoporow.isoman.domain.entity.id.PrzedmiotId;
 import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
 
 /**
@@ -12,7 +11,7 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
  *
  * @author Michał Toporowski
  */
-public class PrzedmiotDaoBean extends AbstractGenericUniqueDao<Przedmiot, PrzedmiotId> implements PrzedmiotDao {
+public class PrzedmiotDaoBean extends AbstractGenericUniqueDao<Przedmiot, Long> implements PrzedmiotDao {
 
     /**
      * Konstruktor

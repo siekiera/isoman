@@ -1,7 +1,6 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.dao;
 
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot;
-import pl.edu.pw.elka.mtoporow.isoman.domain.entity.id.PrzedmiotId;
 
 /**
  * Dao dla przedmiotu
@@ -9,5 +8,5 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.entity.id.PrzedmiotId;
  *
  * @author Michał Toporowski
  */
-public interface PrzedmiotDao extends BaseUniqueDao<Przedmiot, PrzedmiotId> {
+public interface PrzedmiotDao extends BaseUniqueDao<Przedmiot, Long> {
 }

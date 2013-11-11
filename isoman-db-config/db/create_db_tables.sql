@@ -19,7 +19,7 @@ CREATE TABLE typy_jednostek
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE typy_jednostek OWNER TO @db.user@;
+ALTER TABLE typy_jednostek OWNER TO @db.user @;
 
 
 ---
@@ -40,7 +40,7 @@ CREATE TABLE jednostki_organizacyjne
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE jednostki_organizacyjne OWNER TO @db.user@;
+ALTER TABLE jednostki_organizacyjne OWNER TO @db.user @;
 
 
 ---
@@ -48,7 +48,7 @@ ALTER TABLE jednostki_organizacyjne OWNER TO @db.user@;
 ---
 CREATE SEQUENCE osoby_seq;
 ALTER SEQUENCE osoby_seq
-OWNER TO @db.user@;
+OWNER TO @db.user @;
 
 CREATE TABLE osoby
 (
@@ -68,7 +68,7 @@ CREATE TABLE osoby
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE osoby OWNER TO @db.user@;
+ALTER TABLE osoby OWNER TO @db.user @;
 
 COMMENT ON TABLE osoby IS 'Tabela reprezentująca osoby';
 COMMENT ON COLUMN osoby.id IS 'Numer osoby';
@@ -84,12 +84,13 @@ COMMENT ON COLUMN osoby.email IS 'Adres e-mail';
 
 CREATE TABLE przedmioty
 (
+  id            BIGINT                NOT NULL,
   id_jednostki  BIGINT                NOT NULL,
   id_wykladowcy BIGINT                NOT NULL,
-  kod           CHAR(5)               NOT NULL,
+  kod           CHARACTER VARYING(5)  NOT NULL,
   nazwa         CHARACTER VARYING(48) NOT NULL,
   opis          CHARACTER VARYING(200),
-  CONSTRAINT prz_pk PRIMARY KEY (id_jednostki, kod),
+  CONSTRAINT prz_pk PRIMARY KEY (id),
   CONSTRAINT prz_jo_fk FOREIGN KEY (id_jednostki) REFERENCES jednostki_organizacyjne (id),
   CONSTRAINT prz_wykl_fk FOREIGN KEY (id_wykladowcy) REFERENCES osoby (id)
 
@@ -97,7 +98,7 @@ CREATE TABLE przedmioty
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE przedmioty OWNER TO @db.user@;
+ALTER TABLE przedmioty OWNER TO @db.user @;
 
 ---
 ---  Tabela osób zapisanych na przedmioty
@@ -105,18 +106,17 @@ ALTER TABLE przedmioty OWNER TO @db.user@;
 
 CREATE TABLE osoby_na_przedmiotach
 (
-  id_osoby       BIGINT  NOT NULL,
-  id_jednostki   BIGINT  NOT NULL,
-  kod_przedmiotu CHAR(5) NOT NULL,
-  CONSTRAINT onp_pk PRIMARY KEY (id_osoby, kod_przedmiotu),
+  id_osoby      BIGINT NOT NULL,
+  id_przedmiotu BIGINT NOT NULL,
+  CONSTRAINT onp_pk PRIMARY KEY (id_osoby, id_przedmiotu),
   CONSTRAINT onp_os_fk FOREIGN KEY (id_osoby) REFERENCES osoby (id),
-  CONSTRAINT onp_prz_fk FOREIGN KEY (id_jednostki, kod_przedmiotu) REFERENCES przedmioty (id_jednostki, kod)
+  CONSTRAINT onp_prz_fk FOREIGN KEY (id_przedmiotu) REFERENCES przedmioty (id)
 
 )
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE osoby_na_przedmiotach OWNER TO @db.user@;
+ALTER TABLE osoby_na_przedmiotach OWNER TO @db.user @;
 
 
 ---
@@ -128,16 +128,15 @@ CREATE TABLE archiwa
   id                  BIGINT                NOT NULL,
   nazwa               CHARACTER VARYING(48) NOT NULL,
   opis                CHARACTER VARYING(200),
-  id_jednostki        BIGINT                NOT NULL,
-  kod_przedmiotu      CHAR(5)               NOT NULL,
+  id_przedmiotu       BIGINT                NOT NULL,
   id_folderu_glownego BIGINT,
   CONSTRAINT arch_pk PRIMARY KEY (id),
-  CONSTRAINT ar_prz_fk FOREIGN KEY (id_jednostki, kod_przedmiotu) REFERENCES przedmioty (id_jednostki, kod)
+  CONSTRAINT ar_prz_fk FOREIGN KEY (id_przedmiotu) REFERENCES przedmioty (id)
 )
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE archiwa OWNER TO @db.user@;
+ALTER TABLE archiwa OWNER TO @db.user @;
 
 ---
 ---  Tabela wersji archiwów
@@ -157,7 +156,7 @@ CREATE TABLE wersje_archiwow
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE wersje_archiwow OWNER TO @db.user@;
+ALTER TABLE wersje_archiwow OWNER TO @db.user @;
 
 ---
 ---  Tabela folderów źródłowych
@@ -174,7 +173,7 @@ CREATE TABLE foldery
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE foldery OWNER TO @db.user@;
+ALTER TABLE foldery OWNER TO @db.user @;
 
 ALTER TABLE archiwa
 ADD CONSTRAINT ar_fg_fk FOREIGN KEY (id_folderu_glownego) REFERENCES foldery (id);
@@ -195,7 +194,7 @@ CREATE TABLE pliki
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE pliki OWNER TO @db.user@;
+ALTER TABLE pliki OWNER TO @db.user @;
 
 
 ---
@@ -213,7 +212,7 @@ CREATE TABLE role
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE role OWNER TO @db.user@;
+ALTER TABLE role OWNER TO @db.user @;
 
 ---
 ---  Tabela przypisań ról osobom
@@ -231,4 +230,4 @@ CREATE TABLE role_osob
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE role_osob OWNER TO @db.user@;
+ALTER TABLE role_osob OWNER TO @db.user @;

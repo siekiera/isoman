@@ -83,6 +83,11 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Bas
         return hbCriteria.list();
     }
 
+    @Override
+    public List<T> getFiltered(Criterion... criteria) {
+        return getFiltered(criteria);
+    }
+
 
     /**
      * Pobiera klasę encji
