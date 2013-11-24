@@ -25,7 +25,7 @@
             <column name="email" not-null="true" unique="true"/>
         </property>
         <set name="przedmiotyProwadzone" cascade="none" inverse="true" access="field">
-            <key column="id_przedmiotu" not-null="false"/>
+            <key column="id" not-null="false"/>
             <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot"/>
         </set>
         <set name="role" table="role_osob" inverse="false" fetch="select">

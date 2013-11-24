@@ -8,6 +8,8 @@ import org.objectledge.pipeline.ProcessingException;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.OsobaDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba;
 import pl.edu.pw.elka.mtoporow.isoman.ol.extension.AbstractAction;
+import pl.edu.pw.elka.mtoporow.isoman.services.PersonService;
+import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
 
 /**
  * Akcja dla dodawania osób
@@ -15,14 +17,16 @@ import pl.edu.pw.elka.mtoporow.isoman.ol.extension.AbstractAction;
  *
  * @author Michał Toporowski
  */
-public class AddPerson extends AbstractAction {
+public class AddPersonAction extends AbstractAction {
 
     private final Context context;
     private final OsobaDao osobaDao;
+    private final PersonService personService;
 
-    public AddPerson(Context context, OsobaDao osobaDao) {
+    public AddPersonAction(Context context, OsobaDao osobaDao, PersonService personService) {
         this.context = context;
         this.osobaDao = osobaDao;
+        this.personService = personService;
     }
 
     @Override
@@ -34,6 +38,8 @@ public class AddPerson extends AbstractAction {
         final String surname = requestParameters.get("surname");
         final String email = requestParameters.get("email");
         final String pesel = requestParameters.get("pesel");
+        final String password = requestParameters.get("password");
+        final long roleId = requestParameters.getLong("role");
 
 
         Osoba osoba = new Osoba();
@@ -43,7 +49,15 @@ public class AddPerson extends AbstractAction {
         osoba.setPesel(pesel);
         osoba.setEmail(email);
         osoba.setLogin(name);
+//TODO:: obsługa błędów
 
-        processSave(osobaDao, osoba);
+//        processSave(osobaDao, osoba);
+
+        try {
+            personService.addPerson(osoba, password, roleId);
+        } catch (ServiceException e) {
+            throw new ProcessingException(e);
+        }
+
     }
 }

@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>isoman-services</artifactId>
-    <name>isoman-model</name>
+    <name>isoman-services</name>
     <version>0.1-SNAPSHOT</version>
 
     <properties>
@@ -106,6 +106,13 @@
             <groupId>pl.edu.pw.elka.mtoporow.isoman</groupId>
             <artifactId>isoman-model</artifactId>
             <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.edu.pw.elka.mtoporow.isoman</groupId>
+            <artifactId>isoman-model</artifactId>
+            <version>0.1-SNAPSHOT</version>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

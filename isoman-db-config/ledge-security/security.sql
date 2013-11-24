@@ -111,16 +111,16 @@ CREATE TABLE SECURITY_USER_RESOURCE_GROUP_ROLE
 );
 
 drop sequence if exists security_user_sequence cascade;
-create sequence security_user_sequence;
+create sequence security_user_sequence start 10000;
 
 drop sequence if exists security_permission_sequence cascade;
-create sequence security_permission_sequence;
+create sequence security_permission_sequence start 10000;
 
 drop sequence if exists security_role_sequence cascade;
-create sequence security_role_sequence;
+create sequence security_role_sequence start 10000;
 
 drop sequence if exists security_resource_group_sequence cascade;
-create sequence security_resource_group_sequence;
+create sequence security_resource_group_sequence start 10000;
 
 --drop sequence  cascade;
 --create sequence ;

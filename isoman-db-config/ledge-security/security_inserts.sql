@@ -19,7 +19,7 @@ INSERT INTO SECURITY_ROLE (ROLE_ID, ROLE_NAME) VALUES (1, 'security_root');
 INSERT INTO SECURITY_USER 
     (USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval) 
     VALUES
-    (1, 'root', '{md5}Y6nw6nu5gFB5a2SehUgYRQ==', 'Super', 'User', false, true, 0, 0);
+    (1, 'root', '{md5}Y6nw6nu5gFB5a2SehUgYRQ==', 'Super', 'User', false, true, 0, 900);
 
 --# Create anonymous account
 

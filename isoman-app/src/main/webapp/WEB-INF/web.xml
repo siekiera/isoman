@@ -18,4 +18,38 @@
         <welcome-file>isoman/v/Index</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    <!-- Added for XHTML support -->
+    <mime-mapping>
+        <extension>js</extension>
+        <mime-type>text/javascript</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+    <!-- -->
+
+    <security-role>
+        <role-name>nobody</role-name>
+    </security-role>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Application data</web-resource-name>
+            <url-pattern>/config/*</url-pattern>
+            <url-pattern>/locale/*</url-pattern>
+            <url-pattern>/logs/*</url-pattern>
+            <url-pattern>/templates/*</url-pattern>
+            <url-pattern>/data/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>nobody</role-name>
+        </auth-constraint>
+    </security-constraint>
 </web-app>

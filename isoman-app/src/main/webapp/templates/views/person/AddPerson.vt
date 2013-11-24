@@ -1,6 +1,6 @@
 $viewEnclosureTool.override('layout.Page')##
 $pageTool.appendTitleSuffix('Dodaj osobę')##
-<form method="POST" action="$link.action('person.AddPerson')">
+<form method="POST" action="$link.action('person.AddPersonAction')">
     <table>
         <tr>
             <td>Imię:</td>
@@ -16,7 +16,21 @@ $pageTool.appendTitleSuffix('Dodaj osobę')##
         </tr>
         <tr>
             <td>Pesel</td>
-            <td><input type="text" name="pesel" size="11"</td>
+            <td><input type="text" name="pesel" size="11"/></td>
+        </tr>
+        <tr>
+            <td>Hasło</td>
+            <td><input type="password" name="password" size="11"/></td>
+        </tr>
+        <tr>
+            <td>Rola</td>
+            <td>
+                <select name="role">
+                    #foreach($role in $roles)
+                    <option value="$role.id">$role.nazwa</option>
+                    #end
+                </select>
+            </td>
         </tr>
         <tr>
             <td></td>

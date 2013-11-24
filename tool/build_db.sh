@@ -1,3 +1,4 @@
 #!/bin/bash
-cd isoman-db-config
+#Wywoływać z tego katalogu
+cd ../isoman-db-config 
 mvn clean install -Ddb.config.skip=false -Ddb.init.data.skip=false

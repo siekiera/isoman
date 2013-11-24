@@ -148,8 +148,19 @@
             <type>war</type>
         </dependency>
         <dependency>
+            <groupId>org.objectledge</groupId>
+            <artifactId>ledge-web</artifactId>
+            <version>${ledge.version}</version>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
             <groupId>pl.edu.pw.elka.mtoporow.isoman</groupId>
             <artifactId>isoman-model</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.edu.pw.elka.mtoporow.isoman</groupId>
+            <artifactId>isoman-services</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

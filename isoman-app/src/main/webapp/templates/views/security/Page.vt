@@ -1,0 +1,13 @@
+##this page is required to proper serve security control pages
+$viewEnclosureTool.override('layout.Page')##
+
+<div id="secure-menu"></div>
+    $component.embed("security.menu.SecureMenu",[['cparam', $cparam]])
+
+    #result()
+
+<div style="margin-left: auto; margin-right: auto; width: 90%;">	
+	<center>
+		$embeddedPlaceholder
+	</center>
+</div>

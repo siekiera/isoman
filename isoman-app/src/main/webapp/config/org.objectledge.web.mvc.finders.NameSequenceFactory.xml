@@ -31,6 +31,8 @@
   <classes separator="." default-suffix="Default">
     <prefix>pl.edu.pw.elka.mtoporow.isoman.security.modules</prefix>
     <prefix>pl.edu.pw.elka.mtoporow.isoman.modules</prefix>
+    <prefix>org.objectledge.security.modules</prefix>
+    <prefix>org.objectledge.modules</prefix>
   </classes>
   <templates separator="/" default-suffix="Default"/>
 </config>  

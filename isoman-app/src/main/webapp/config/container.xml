@@ -15,8 +15,12 @@
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.RolaDao"
                class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.RolaDaoBean"/>
 
+    <!-- services -->
 
-    <!-- HB -->
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.services.PersonService"
+               class="pl.edu.pw.elka.mtoporow.isoman.services.impl.PersonServiceImpl"/>
+
+    <!-- Hibernate -->
 
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory"
                class="pl.edu.pw.elka.mtoporow.isoman.domain.session.impl.SessionFactoryImpl"/>

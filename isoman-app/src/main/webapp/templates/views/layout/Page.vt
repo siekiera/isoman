@@ -17,6 +17,11 @@ $pageTool.addStyleLink('style/style.css')
     <title>$pageTool.title</title>
 </head>
 <body>
+## menu creation
+##<div id="secure-menu"></div>
+##    $component.embed("security.menu.SecureMenu",[['cparam', $cparam]])
+##
+##    #result()
 <table id="maintbl">
     <tr>
         <td id="menu">
@@ -34,6 +39,7 @@ $pageTool.addStyleLink('style/style.css')
                         <li><a href="$link.view('subject.SubjectIndex')">Lista</a></li>
                     </ul>
                 </li>
+                <li><a href="$link.view('Login')">Login</a></li>
             </ul>
         </td>
     </tr>
