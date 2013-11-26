@@ -58,7 +58,9 @@ CREATE TABLE osoby
   nazwisko     CHARACTER VARYING(120) NOT NULL,
   pesel        CHARACTER VARYING(11)  NOT NULL,
   email        CHARACTER VARYING(30)  NOT NULL,
-  id_jednostki BIGINT                 NOT NULL,
+  haslo        CHARACTER VARYING(200) NOT NULL,
+  id_roli      BIGINT                 NOT NULL,
+  id_jednostki BIGINT                 ,
 --   last_login TIMESTAMP WITHOUT TIME ZONE,
   CONSTRAINT osoby_pk PRIMARY KEY (id),
   CONSTRAINT osoby_login_uk UNIQUE (login),
@@ -205,6 +207,7 @@ ALTER TABLE pliki OWNER TO @db.user@;
 CREATE TABLE role
 (
   id    BIGINT                NOT NULL,
+  kod   CHARACTER VARYING(16) NOT NULL,
   nazwa CHARACTER VARYING(48) NOT NULL,
   opis  CHARACTER VARYING(200),
   CONSTRAINT role_pk PRIMARY KEY (id)
@@ -214,20 +217,23 @@ OIDS = FALSE
 );
 ALTER TABLE role OWNER TO @db.user@;
 
+ALTER TABLE osoby
+    ADD CONSTRAINT os_ro_fk FOREIGN KEY (id_roli) REFERENCES role (id);
+
 ---
 ---  Tabela przypisań ról osobom
 ---
 
 
-CREATE TABLE role_osob
-(
-  id_osoby BIGINT,
-  id_roli  BIGINT,
-  CONSTRAINT ro_pk PRIMARY KEY (id_osoby, id_roli),
-  CONSTRAINT ro_os_fk FOREIGN KEY (id_osoby) REFERENCES osoby (id) ON DELETE CASCADE,
-  CONSTRAINT ro_role_fk FOREIGN KEY (id_roli) REFERENCES role (id) ON DELETE CASCADE
-)
-WITH (
-OIDS = FALSE
-);
-ALTER TABLE role_osob OWNER TO @db.user@;
+-- CREATE TABLE role_osob
+-- (
+--   id_osoby BIGINT,
+--   id_roli  BIGINT,
+--   CONSTRAINT ro_pk PRIMARY KEY (id_osoby, id_roli),
+--   CONSTRAINT ro_os_fk FOREIGN KEY (id_osoby) REFERENCES osoby (id) ON DELETE CASCADE,
+--   CONSTRAINT ro_role_fk FOREIGN KEY (id_roli) REFERENCES role (id) ON DELETE CASCADE
+-- )
+-- WITH (
+-- OIDS = FALSE
+-- );
+-- ALTER TABLE role_osob OWNER TO @db.user@;

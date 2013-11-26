@@ -31,6 +31,12 @@ public class OsobaDaoTest extends BaseTest {
         Assert.assertEquals(zdzichu.getLogin(), "zdzichu");
     }
 
+    public void testGetByLogin() {
+        Osoba osoba = osobaDao.getByLogin("zdzichu");
+        Assert.assertNotNull(osoba);
+        Assert.assertEquals(osoba.getLogin(), "zdzichu");
+    }
+
     @Override
     public void setUp() throws Exception {
         super.setUp();

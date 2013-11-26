@@ -10,6 +10,7 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Rola;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class RolaDaoTest extends BaseTest {
         List<Rola> role = rolaDao.getAll();
         Rola admin = role.get(0);
 
-        Set<Osoba> admins = admin.getOsoby();
+        List<Osoba> admins = admin.getOsoby();
         Assert.assertEquals(admins.size(), 1);
     }
 
@@ -39,8 +40,9 @@ public class RolaDaoTest extends BaseTest {
 
         Rola testRole = new Rola();
         testRole.setId(1000L);
+        testRole.setKod("test");
         testRole.setNazwa("test");
-        testRole.setOsoby(new HashSet<>(osobaDao.getAll()));
+        testRole.setOsoby(new ArrayList<>(osobaDao.getAll()));
 
         try {
             rolaDao.save(testRole);
@@ -50,7 +52,7 @@ public class RolaDaoTest extends BaseTest {
         }
 
         Rola dbRole = rolaDao.getById(1000L);
-        Assert.assertEquals(dbRole, testRole);
+        Assert.assertEquals(testRole, dbRole);
 
         tx = rolaDao.beginTransaction();
         try {

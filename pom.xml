@@ -35,5 +35,6 @@
         <module>isoman-model</module>
         <module>isoman-services</module>
         <module>isoman-app</module>
+        <module>isoman-common</module>
     </modules>
 </project>

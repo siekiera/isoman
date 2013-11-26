@@ -11,6 +11,12 @@ INSERT INTO SECURITY_RESOURCE_GROUP (RESOURCE_GROUP_ID, RESOURCE_GROUP_NAME) VAL
 --# Create the root role
 
 INSERT INTO SECURITY_ROLE (ROLE_ID, ROLE_NAME) VALUES (1, 'security_root');
+INSERT INTO SECURITY_ROLE (ROLE_ID, ROLE_NAME) VALUES (101, 'role_admin');
+INSERT INTO SECURITY_ROLE (ROLE_ID, ROLE_NAME) VALUES (102, 'role_wyk');
+INSERT INTO SECURITY_ROLE (ROLE_ID, ROLE_NAME) VALUES (103, 'role_dokt');
+INSERT INTO SECURITY_ROLE (ROLE_ID, ROLE_NAME) VALUES (104, 'role_stud');
+
+
 
 --# Create an account 'root' for system administartor
 --# Remeber to set a good password for this user in a production system!
@@ -27,6 +33,27 @@ INSERT INTO SECURITY_USER
      (USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval) 
      VALUES
      (8, 'anonymous', 'x', 'Anonymous', 'User', false, true, 0, 0);
+
+
+
+--Hasło: isoman123
+INSERT INTO SECURITY_USER
+(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval)
+  VALUES (101, 'admin', '{md5}Y6nw6nu5gFB5a2SehUgYRQ==', 'Super', 'User', false, true, 0, 900);
+INSERT INTO SECURITY_USER
+(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval)
+  VALUES (102, 'wykladowca', '{md5}Y6nw6nu5gFB5a2SehUgYRQ==', 'wykladowca', ' ', false, true, 0, 900);
+INSERT INTO SECURITY_USER
+(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval)
+  VALUES (103, 'doktorant', '{md5}Y6nw6nu5gFB5a2SehUgYRQ==', 'doktorant', ' ', false, true, 0, 900);
+INSERT INTO SECURITY_USER
+(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval)
+  VALUES (104, 'student', '{md5}Y6nw6nu5gFB5a2SehUgYRQ==', 'student', ' ', false, true, 0, 900);
+
+INSERT INTO SECURITY_USER_RESOURCE_GROUP_ROLE ( USER_ID, RESOURCE_GROUP_ID, ROLE_ID ) VALUES (101, 1, 1);
+INSERT INTO SECURITY_USER_RESOURCE_GROUP_ROLE ( USER_ID, RESOURCE_GROUP_ID, ROLE_ID ) VALUES (102, 1, 102);
+INSERT INTO SECURITY_USER_RESOURCE_GROUP_ROLE ( USER_ID, RESOURCE_GROUP_ID, ROLE_ID ) VALUES (103, 1, 103);
+INSERT INTO SECURITY_USER_RESOURCE_GROUP_ROLE ( USER_ID, RESOURCE_GROUP_ID, ROLE_ID ) VALUES (104, 1, 104);
 
 
 --# Assign the user 'turbine' a system-wide role 'turbine_root'

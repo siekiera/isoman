@@ -11,6 +11,7 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.entity.GenericEntity;
 import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -85,7 +86,7 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Bas
 
     @Override
     public List<T> getFiltered(Criterion... criteria) {
-        return getFiltered(criteria);
+        return getFiltered(Arrays.asList(criteria));
     }
 
 

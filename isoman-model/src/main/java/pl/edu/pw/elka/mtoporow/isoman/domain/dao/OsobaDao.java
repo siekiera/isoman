@@ -10,11 +10,19 @@ import java.util.List;
  * @author Michał Toporowski
  */
 public interface OsobaDao extends BaseUniqueDao<Osoba, Long> {
+    @Deprecated
     public Osoba getById(Long id);
 
     public List<Osoba> getAllOsobas();
 
 
     public void deleteById(Long id);
+
+    /**
+     * Pobiera osobę po nazwie
+     *
+     * @param name
+     */
+    public Osoba getByLogin(final String name);
 
 }

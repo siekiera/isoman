@@ -1,6 +1,6 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.entity;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Encja roli
@@ -9,9 +9,10 @@ import java.util.Set;
  */
 public class Rola extends UniqueEntity<Long> {
     private Long id;
+    private String kod;
     private String nazwa;
     private String opis;
-    private Set<Osoba> osoby;
+    private List<Osoba> osoby;
 
     @Override
     public Long getId() {
@@ -27,6 +28,14 @@ public class Rola extends UniqueEntity<Long> {
         return nazwa;
     }
 
+    public String getKod() {
+        return kod;
+    }
+
+    public void setKod(String kod) {
+        this.kod = kod;
+    }
+
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
     }
@@ -39,11 +48,11 @@ public class Rola extends UniqueEntity<Long> {
         this.opis = opis;
     }
 
-    public Set<Osoba> getOsoby() {
+    public List<Osoba> getOsoby() {
         return osoby;
     }
 
-    public void setOsoby(Set<Osoba> osoby) {
+    public void setOsoby(List<Osoba> osoby) {
         this.osoby = osoby;
     }
 

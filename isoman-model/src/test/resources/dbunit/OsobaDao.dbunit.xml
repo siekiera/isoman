@@ -3,8 +3,10 @@
     <typy_jednostek id="-1" nazwa="testowy_typ"/>
     <jednostki_organizacyjne id="-1" nazwa="jedn_testowa" id_typu="-1"/>
 
-    <osoby id="1" login="koval" imie="Jan" nazwisko="Kowalski" pesel="64031677346" email="koval@gmail.com"
-           id_jednostki="-1"/>
-    <osoby id="2" login="zdzichu" imie="Zdzisław" nazwisko="Isowski" pesel="72120877346" email="zdzichu@gmail.com"
-           id_jednostki="-1"/>
+    <role id="-1" kod="test" nazwa="test" opis="rola testowa"/>
+
+    <osoby id="1" login="koval" imie="Jan" nazwisko="Kowalski" haslo="haslo" pesel="64031677346" email="koval@gmail.com"
+           id_jednostki="-1" id_roli="-1" />
+    <osoby id="2" login="zdzichu" imie="Zdzisław" nazwisko="Isowski" haslo="haslo" pesel="72120877346" email="zdzichu@gmail.com"
+           id_jednostki="-1" id_roli="-1"/>
 </dataset>

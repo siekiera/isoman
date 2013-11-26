@@ -16,8 +16,9 @@ public class Osoba extends UniqueEntity<Long> {
     private String nazwisko;
     private String pesel;
     private String email;
+    private String haslo;
     private Set<Przedmiot> przedmiotyProwadzone;
-    private Set<Rola> role;
+    private Rola rola;
     private JednostkaOrganizacyjna jednostkaOrganizacyjna;
     private Set<Przedmiot> przedmioty;
 
@@ -71,6 +72,46 @@ public class Osoba extends UniqueEntity<Long> {
         this.email = email;
     }
 
+    public Set<Przedmiot> getPrzedmiotyProwadzone() {
+        return przedmiotyProwadzone;
+    }
+
+    public void setPrzedmiotyProwadzone(Set<Przedmiot> przedmiotyProwadzone) {
+        this.przedmiotyProwadzone = przedmiotyProwadzone;
+    }
+
+    public Rola getRola() {
+        return rola;
+    }
+
+    public void setRola(Rola rola) {
+        this.rola = rola;
+    }
+
+    public JednostkaOrganizacyjna getJednostkaOrganizacyjna() {
+        return jednostkaOrganizacyjna;
+    }
+
+    public void setJednostkaOrganizacyjna(JednostkaOrganizacyjna jednostkaOrganizacyjna) {
+        this.jednostkaOrganizacyjna = jednostkaOrganizacyjna;
+    }
+
+    public Set<Przedmiot> getPrzedmioty() {
+        return przedmioty;
+    }
+
+    public void setPrzedmioty(Set<Przedmiot> przedmioty) {
+        this.przedmioty = przedmioty;
+    }
+
+    public String getHaslo() {
+        return haslo;
+    }
+
+    public void setHaslo(String haslo) {
+        this.haslo = haslo;
+    }
+
     @Override
     public String toString() {
         return "Osoba{" +
@@ -97,29 +138,5 @@ public class Osoba extends UniqueEntity<Long> {
     public int hashCode() {
         //FIXME
         return 0;
-    }
-
-    public Set<Rola> getRole() {
-        return role;
-    }
-
-    public void setRole(Set<Rola> role) {
-        this.role = role;
-    }
-
-    public JednostkaOrganizacyjna getJednostkaOrganizacyjna() {
-        return jednostkaOrganizacyjna;
-    }
-
-    public void setJednostkaOrganizacyjna(JednostkaOrganizacyjna jednostkaOrganizacyjna) {
-        this.jednostkaOrganizacyjna = jednostkaOrganizacyjna;
-    }
-
-    public Set<Przedmiot> getPrzedmioty() {
-        return przedmioty;
-    }
-
-    public void setPrzedmioty(Set<Przedmiot> przedmioty) {
-        this.przedmioty = przedmioty;
     }
 }
