@@ -14,9 +14,6 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Rola;
 import pl.edu.pw.elka.mtoporow.isoman.services.PersonService;
 import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 /**
  * Serwis do zarządzania osobami
  * Data utworzenia: 21.11.13, 18:37
@@ -58,10 +55,10 @@ public class PersonServiceImpl implements PersonService {
             Group globalGroup = securityManager.getGlobalGroup();
 
             //przypisz role
-            for (Rola rola : osoba.getRole()) {
-                Role securityRole = securityManager.getRoleByName(rola.getNazwa());
-                securityManager.grant(user, globalGroup, securityRole);
-            }
+//            for (Rola rola : osoba.getRole()) {
+            Role securityRole = securityManager.getRoleByName(osoba.getRola().getNazwa());
+            securityManager.grant(user, globalGroup, securityRole);
+//            }
 
             tx.commit();
             LOG.info("addPerson: Transaction committed");
@@ -75,7 +72,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void addPerson(Osoba person, String password, Long roleId) throws ServiceException {
         Rola rola = rolaDao.getById(roleId);
-        person.setRole(new HashSet<>(Arrays.asList(rola)));
+        person.setRola(rola);
         //FIXME:: usunąć hardkod
         person.setJednostkaOrganizacyjna(joDao.getById(5000L));
         addPerson(person, password);

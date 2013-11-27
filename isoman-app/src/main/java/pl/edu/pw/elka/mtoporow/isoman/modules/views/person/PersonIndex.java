@@ -21,7 +21,7 @@ import java.util.List;
  * @author Michał Toporowski
  */
 @AccessConditions({
-        @AccessCondition(permissions = {Rights.RIGHT_MANAGE_PERSONS})
+        @AccessCondition(permissions = {Rights.MANAGE_PERSONS})
 })
 public class PersonIndex extends AbstractView {
 
@@ -31,6 +31,7 @@ public class PersonIndex extends AbstractView {
 
     /**
      * Konstruktor
+     *
      * @param context
      */
     public PersonIndex(Context context, OsobaDao osobaDao) {

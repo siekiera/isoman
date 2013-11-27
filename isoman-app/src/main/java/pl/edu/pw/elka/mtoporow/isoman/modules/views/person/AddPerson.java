@@ -21,7 +21,7 @@ import java.util.List;
  * @author Michał Toporowski
  */
 @AccessConditions({
-        @AccessCondition(permissions = {Rights.RIGHT_MANAGE_PERSONS})
+        @AccessCondition(permissions = {Rights.MANAGE_PERSONS})
 })
 public class AddPerson extends AbstractView {
 

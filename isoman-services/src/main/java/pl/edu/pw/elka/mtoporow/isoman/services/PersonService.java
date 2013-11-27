@@ -18,6 +18,7 @@ public interface PersonService {
      * @param password
      * @throws ServiceException
      */
+    @Deprecated
     void addPerson(Osoba person, String password) throws ServiceException;
 
     /**
@@ -28,5 +29,6 @@ public interface PersonService {
      * @param roleId
      * @throws ServiceException
      */
+    @Deprecated
     void addPerson(Osoba person, String password, Long roleId) throws ServiceException;
 }

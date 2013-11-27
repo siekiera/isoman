@@ -3,9 +3,12 @@ package pl.edu.pw.elka.mtoporow.isoman.modules.views.subject;
 import org.apache.log4j.Logger;
 import org.objectledge.context.Context;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.BuildException;
+import pl.edu.pw.elka.mtoporow.isoman.constants.security.Rights;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.JODao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.JednostkaOrganizacyjna;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot;
@@ -20,6 +23,9 @@ import java.util.List;
  *
  * @author Michał Toporowski
  */
+@AccessConditions(
+        @AccessCondition(permissions = {Rights.VIEW_SUBJECTS})
+)
 public class SubjectIndex extends AbstractView {
 
     private static final Logger logger = Logger.getLogger(SubjectIndex.class);

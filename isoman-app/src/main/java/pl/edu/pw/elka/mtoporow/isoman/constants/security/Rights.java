@@ -7,7 +7,9 @@ package pl.edu.pw.elka.mtoporow.isoman.constants.security;
  * @author Michał Toporowski
  */
 public class Rights {
-    public static final String RIGHT_MANAGE_PERSONS = "right_manage_persons";
-    public static final String RIGHT_ADD_PERSONS = "right_add_person";
+    public static final String MANAGE_PERSONS = "manage_persons";
+    public static final String ADD_PERSONS = "add_person";
+
+    public static final String VIEW_SUBJECTS = "view_subjects";
 
 }

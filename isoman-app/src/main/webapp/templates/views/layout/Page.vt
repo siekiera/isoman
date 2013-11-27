@@ -39,7 +39,8 @@ $pageTool.addStyleLink('style/style.css')
                         <li><a href="$link.view('subject.SubjectIndex')">Lista</a></li>
                     </ul>
                 </li>
-                <li><a href="$link.view('Login')">Login</a></li>
+                <li><a href="$link.view('Login')">Zaloguj</a></li>
+                <li><a href="$link.view('Login').action('security.authentication.Logout')">Wyloguj</a></li>
             </ul>
         </td>
     </tr>
