@@ -20,6 +20,10 @@
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.services.PersonService"
                class="pl.edu.pw.elka.mtoporow.isoman.services.impl.PersonServiceImpl"/>
 
+    <!-- config -->
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.common.config.ConfigManager"
+               class="pl.edu.pw.elka.mtoporow.isoman.common.config.impl.ConfigManagerImpl"/>
+
     <!-- Hibernate -->
 
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory"

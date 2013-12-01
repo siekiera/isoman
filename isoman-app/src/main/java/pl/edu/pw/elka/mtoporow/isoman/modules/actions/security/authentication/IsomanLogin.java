@@ -18,6 +18,7 @@ import org.objectledge.security.util.SecurityUtils;
 import org.objectledge.web.HttpContext;
 import org.objectledge.web.mvc.MVCContext;
 import org.objectledge.web.mvc.ProcessingStage;
+import pl.edu.pw.elka.mtoporow.isoman.common.config.ConfigManager;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.OsobaDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba;
 
@@ -33,8 +34,7 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
 
     private final OsobaDao osobaDao;
     private final PasswordDigester passwordDigester;
-    //FIXME:: przenieść do properties
-    private static final String SECURITY_USER_PASSWORD = "isoman123";
+    private final ConfigManager configManager;
 
     /**
      * Action constructor.
@@ -43,11 +43,13 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
      * @param securityManager  the user manager.
      * @param osobaDao
      * @param passwordDigester
+     * @param configManager
      */
-    public IsomanLogin(Logger logger, SecurityManager securityManager, OsobaDao osobaDao, PasswordDigester passwordDigester) {
+    public IsomanLogin(Logger logger, SecurityManager securityManager, OsobaDao osobaDao, PasswordDigester passwordDigester, ConfigManager configManager) {
         super(logger, securityManager);
         this.osobaDao = osobaDao;
         this.passwordDigester = passwordDigester;
+        this.configManager = configManager;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
 
             //przeszliśmy weryfikację Isomana - próbujemy się zalogować jako użytkownik SB Ledge'a z kodem roli jako loginem
             securityLogin = osoba.getRola().getKod();
-            securityPass = SECURITY_USER_PASSWORD;
+            securityPass = configManager.get("login.security.user.password");
         }
         loginSecurityUser(securityLogin, securityPass, context);
     }
