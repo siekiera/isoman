@@ -7,6 +7,7 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.dao.FolderDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.ArchiwumDaoBean;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.FolderDaoBean;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder;
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik;
 import pl.edu.pw.elka.mtoporow.isoman.services.FilesystemService;
 import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
 
@@ -56,6 +57,29 @@ public class FilesystemServiceImplTest extends BaseTest {
         //w BD jeszcze nie ma, ale już się utworzył
         folder = filesystemService.getOrCreateFolderByPath("drugieF/blabla");
         Assert.assertEquals(folder.getNazwa(), "blabla");
+    }
+
+    public void testGetFileByPath() throws ServiceException {
+        Plik plik;
+
+        plik = filesystemService.getFileByPath("archiwkoF/plikwA");
+        Assert.assertEquals(plik.getId().longValue(), 101L);
+
+        plik = filesystemService.getFileByPath("archiwkoF/folderwA/podfolderek/plik.w.Podfolderku");
+        Assert.assertEquals(plik.getId().longValue(), 10101L);
+
+        plik = filesystemService.getFileByPath("drugieF/blabla.dat");
+        Assert.assertNull(plik);
+    }
+
+    public void testGetOrCreateFileByPath() throws ServiceException {
+        Plik plik;
+
+        plik = filesystemService.getOrCreateFileByPath("archiwkoF/plikwA");
+        Assert.assertEquals(plik.getId().longValue(), 101L);
+
+        plik = filesystemService.getOrCreateFileByPath("drugieF/blabla.dat");
+        Assert.assertEquals(plik.getNazwa(), "blabla.dat");
     }
 
     @Override

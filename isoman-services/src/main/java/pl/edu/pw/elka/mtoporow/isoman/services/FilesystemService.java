@@ -1,6 +1,7 @@
 package pl.edu.pw.elka.mtoporow.isoman.services;
 
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder;
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik;
 import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
 
 /**
@@ -28,4 +29,22 @@ public interface FilesystemService {
      * @throws ServiceException jeśli archiwum nie istnieje
      */
     Folder getOrCreateFolderByPath(final String path) throws ServiceException;
+
+    /**
+     * Pobiera encję pliku na podstawie ścieżki
+     *
+     * @param path ścieżka
+     * @return encja pliku lub null, jeśli nie znaleziono
+     * @throws ServiceException jeśli archiwum nie istnieje
+     */
+    Plik getFileByPath(final String path) throws ServiceException;
+
+    /**
+     * Pobiera encję pliku na podstawie ścieżki, lub tworzy ją, jeśli nie istnieje
+     *
+     * @param path ścieżka
+     * @return encja pliku
+     * @throws ServiceException jeśli archiwum nie istnieje
+     */
+    Plik getOrCreateFileByPath(final String path) throws ServiceException;
 }

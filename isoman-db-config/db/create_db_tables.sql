@@ -170,7 +170,7 @@ CREATE TABLE foldery
   id_rodzica BIGINT,
   nazwa      CHARACTER VARYING(80) NOT NULL,
   CONSTRAINT fold_pk PRIMARY KEY (id),
-  CONSTRAINT fold_fold_pk FOREIGN KEY (id_rodzica) REFERENCES foldery (id)
+  CONSTRAINT fold_fold_pk FOREIGN KEY (id_rodzica) REFERENCES foldery (id) ON DELETE CASCADE
 )
 WITH (
 OIDS = FALSE
@@ -191,7 +191,7 @@ CREATE TABLE pliki
   czy_aktualny BOOLEAN               NOT NULL,
   nazwa        CHARACTER VARYING(80) NOT NULL,
   CONSTRAINT pl_pk PRIMARY KEY (id),
-  CONSTRAINT pl_fold_pk FOREIGN KEY (id_folderu) REFERENCES foldery (id)
+  CONSTRAINT pl_fold_pk FOREIGN KEY (id_folderu) REFERENCES foldery (id) ON DELETE CASCADE
 )
 WITH (
 OIDS = FALSE

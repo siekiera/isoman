@@ -5,6 +5,7 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.dao.ArchiwumDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.FolderDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder;
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik;
 import pl.edu.pw.elka.mtoporow.isoman.services.FilesystemService;
 import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
 
@@ -41,10 +42,48 @@ public class FilesystemServiceImpl implements FilesystemService {
         return getFolderByPath(path, true);
     }
 
+    @Override
+    public Plik getFileByPath(String path) throws ServiceException {
+        return getFileByPath(path, false);
+    }
+
+    @Override
+    public Plik getOrCreateFileByPath(String path) throws ServiceException {
+        return getFileByPath(path, true);
+    }
+
+    /**
+     * Pobiera encję pliku na podstawie ścieżki
+     *
+     * @param path              ścieżka
+     * @param createIfNotExists czy tworzyć encję, jeśli nie istnieje
+     * @return encja pliku (lub null, jeśli nie znaleziono i createIfNotExists = false)
+     * @throws ServiceException
+     */
+    private Plik getFileByPath(String path, boolean createIfNotExists) throws ServiceException {
+        Pair<String, String> extracted = getRestAndLast(path);
+        String folderPath = extracted.getFirst();
+        String filename = extracted.getSecond();
+
+        Folder folder = getFolderByPath(folderPath, createIfNotExists);
+        if (folder != null) {
+            Plik plik = getFileWithName(folder, filename);
+            if (plik == null) {
+                if (!createIfNotExists) {
+                    return null;
+                }
+                plik = new Plik(folder, filename, false);
+            }
+            return plik;
+        }
+        return null;
+    }
+
+
     /**
      * Pobiera encję folderu na podstawie ścieżki
      *
-     * @param path ścieżka
+     * @param path              ścieżka
      * @param createIfNotExists czy tworzyć encję, jeśli nie istnieje
      * @return encja folderu (lub null, jeśli nie znaleziono i createIfNotExists = false)
      * @throws ServiceException jeśli archiwum nie istnieje
@@ -98,6 +137,24 @@ public class FilesystemServiceImpl implements FilesystemService {
             for (Folder child : parent.getPodrzedne()) {
                 if (name.equals(child.getNazwa())) {
                     return child;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Znajduje wśród dzieci danego folderu plik o podanej nazwie
+     *
+     * @param parent
+     * @param name
+     * @return encja folderu lub null, jeśli nie znaleziono
+     */
+    private Plik getFileWithName(final Folder parent, final String name) {
+        if (parent.getPliki() != null) {
+            for (Plik plik : parent.getPliki()) {
+                if (name.equals(plik.getNazwa())) {
+                    return plik;
                 }
             }
         }

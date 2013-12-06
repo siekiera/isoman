@@ -12,6 +12,15 @@ public class Plik extends UniqueEntity<Long> {
     private String nazwa;
     private Boolean aktualny;
 
+    public Plik() {
+    }
+
+    public Plik(Folder folder, String nazwa, Boolean aktualny) {
+        this.folder = folder;
+        this.nazwa = nazwa;
+        this.aktualny = aktualny;
+    }
+
     @Override
     public Long getId() {
         return id;
