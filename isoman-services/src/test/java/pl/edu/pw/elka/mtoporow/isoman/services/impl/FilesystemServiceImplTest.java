@@ -13,7 +13,7 @@ import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
 import java.net.URL;
 
 /**
- * [Klasa X]
+ * Test klasy FilesystemServiceImpl
  * Data utworzenia: 06.12.13, 18:13
  *
  * @author Michał Toporowski
@@ -42,6 +42,20 @@ public class FilesystemServiceImplTest extends BaseTest {
         } catch (ServiceException e) {
             //Powinno wyjątkiem rzucić
         }
+    }
+
+    public void testGetOrCreateFolderByPath() throws ServiceException {
+        Folder folder;
+
+        folder = filesystemService.getOrCreateFolderByPath("archiwkoF/folderwA/podfolderek");
+        Assert.assertEquals(folder.getId().longValue(), 1010L);
+
+        folder = filesystemService.getOrCreateFolderByPath("drugieF");
+        Assert.assertEquals(folder.getId().longValue(), 2L);
+
+        //w BD jeszcze nie ma, ale już się utworzył
+        folder = filesystemService.getOrCreateFolderByPath("drugieF/blabla");
+        Assert.assertEquals(folder.getNazwa(), "blabla");
     }
 
     @Override

@@ -16,6 +16,17 @@ public class Folder extends UniqueEntity<Long> {
     private List<Plik> pliki;
     private Archiwum archiwum;
 
+    /**
+     * Konstruktor domyślny
+     */
+    public Folder() {
+    }
+
+    public Folder(String nazwa, Folder nadrzedny) {
+        this.nazwa = nazwa;
+        this.nadrzedny = nadrzedny;
+    }
+
     @Override
     public Long getId() {
         return id;

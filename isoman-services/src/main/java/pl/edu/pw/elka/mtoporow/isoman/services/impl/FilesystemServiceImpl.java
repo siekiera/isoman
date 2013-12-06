@@ -33,11 +33,28 @@ public class FilesystemServiceImpl implements FilesystemService {
 
     @Override
     public Folder getFolderByPath(String path) throws ServiceException {
+        return getFolderByPath(path, false);
+    }
+
+    @Override
+    public Folder getOrCreateFolderByPath(String path) throws ServiceException {
+        return getFolderByPath(path, true);
+    }
+
+    /**
+     * Pobiera encję folderu na podstawie ścieżki
+     *
+     * @param path ścieżka
+     * @param createIfNotExists czy tworzyć encję, jeśli nie istnieje
+     * @return encja folderu (lub null, jeśli nie znaleziono i createIfNotExists = false)
+     * @throws ServiceException jeśli archiwum nie istnieje
+     */
+    private Folder getFolderByPath(String path, boolean createIfNotExists) throws ServiceException {
         Pair<String, String> extPaths = getFirstAndRest(path);
 
         Archiwum archiwum = archiwumDao.getByRootFolder(extPaths.getFirst());
         if (archiwum != null && archiwum.getFolderGlowny() != null) {
-            return getChildFolder(archiwum.getFolderGlowny(), extPaths.getSecond());
+            return getChildFolder(archiwum.getFolderGlowny(), extPaths.getSecond(), createIfNotExists);
         }
         throw new ServiceException("Archive not found");
     }
@@ -47,20 +64,26 @@ public class FilesystemServiceImpl implements FilesystemService {
      *
      * @param parent
      * @param relativePath
-     * @return encja folderu lub null, jeśli nie udało się znaleźć
+     * @param createIfNotExists czy tworzyć encję, jeśli nie udało się znaleźć
+     * @return encja folderu (lub null, jeśli nie udało się znaleźć i createIfNotExists=false)
      */
-    private Folder getChildFolder(final Folder parent, final String relativePath) {
+    private Folder getChildFolder(final Folder parent, final String relativePath, final boolean createIfNotExists) {
         //koniec rekurencji
         if (relativePath == null || relativePath.isEmpty()) {
             return parent;
         }
         Pair<String, String> extracted = getFirstAndRest(relativePath);
+        String childName = extracted.getFirst();
+        String restOfPath = extracted.getSecond();
 
-        Folder childFolder = getChildWithName(parent, extracted.getFirst());
-        if (childFolder != null) {
-            return getChildFolder(childFolder, extracted.getSecond());
+        Folder childFolder = getChildWithName(parent, childName);
+        if (childFolder == null) {
+            if (!createIfNotExists) {
+                return null;
+            }
+            childFolder = new Folder(childName, parent);
         }
-        return null;
+        return getChildFolder(childFolder, restOfPath, createIfNotExists);
     }
 
     /**

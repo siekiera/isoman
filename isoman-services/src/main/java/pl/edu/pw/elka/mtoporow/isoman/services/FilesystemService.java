@@ -14,8 +14,18 @@ public interface FilesystemService {
     /**
      * Pobiera encję folderu na podstawie ścieżki
      *
-     * @param path
-     * @return
+     * @param path ścieżka
+     * @return encja folderu lub null, jeśli nie znaleziono
+     * @throws ServiceException jeśli archiwum nie istnieje
      */
     Folder getFolderByPath(final String path) throws ServiceException;
+
+    /**
+     * Pobiera encję folderu na podstawie ścieżki, lub tworzy ją, jeśli nie istnieje
+     *
+     * @param path ścieżka
+     * @return encja folderu
+     * @throws ServiceException jeśli archiwum nie istnieje
+     */
+    Folder getOrCreateFolderByPath(final String path) throws ServiceException;
 }
