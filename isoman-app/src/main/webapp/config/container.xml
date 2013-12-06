@@ -227,6 +227,8 @@
     <!-- Components and services -->
     <component class="org.objectledge.mail.MailSystem"/>
 
+    <component class="pl.edu.pw.elka.mtoporow.isoman.notifier.NotifierInitValve"/>
+
     <!-- General purpose thread pool -->
     <component class="org.objectledge.threads.ThreadPool">
         <parameter key="nothing-to-do"/>
@@ -260,6 +262,7 @@
             <parameter class-key="org.objectledge.web.mvc.actions.ActionExecutorValve"/>
             <parameter class-key="org.objectledge.templating.tools.ContextToolPopulatorValve"/>
             <parameter class-key="org.objectledge.web.mvc.builders.BuilderExecutorValve"/>
+            <parameter class-key="pl.edu.pw.elka.mtoporow.isoman.notifier.NotifierInitValve"/>
         </sequence>
         <sequence>
             <parameter class-key="org.objectledge.web.ContentTypeInitializerValve"/>

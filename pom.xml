@@ -11,6 +11,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <ledge.version>SNAPSHOT</ledge.version>
         <!--parametry BD-->
         <db.name>isoman</db.name>
         <db.url.base>jdbc:postgresql://localhost:5432</db.url.base>
@@ -36,5 +37,6 @@
         <module>isoman-services</module>
         <module>isoman-app</module>
         <module>isoman-common</module>
+        <module>isoman-notifier</module>
     </modules>
 </project>

@@ -6,7 +6,6 @@
         <artifactId>isoman-main</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
-    <groupId>pl.edu.pw.elka.mtoporow.isoman</groupId>
     <artifactId>isoman-app</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -161,6 +160,11 @@
         <dependency>
             <groupId>pl.edu.pw.elka.mtoporow.isoman</groupId>
             <artifactId>isoman-services</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.edu.pw.elka.mtoporow.isoman</groupId>
+            <artifactId>isoman-notifier</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
