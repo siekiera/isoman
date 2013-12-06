@@ -27,6 +27,8 @@ public abstract class BaseTest extends TestCase {
     private static final String DBUNIT_PASSWORD = "zxcvbnm";
     private static final String DBUNIT_SCHEMA = "public";
 
+    protected boolean columnSensing = false;
+
     private IDatabaseTester databaseTester;
 
     private Context context;
@@ -46,7 +48,9 @@ public abstract class BaseTest extends TestCase {
 
         databaseTester.getConnection().getConfig().setProperty(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true);
 
-        IDataSet dataSet = new FlatXmlDataSetBuilder().build(getDataSetFile());
+        FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+        builder.setColumnSensing(columnSensing);
+        IDataSet dataSet = builder.build(getDataSetFile());
         databaseTester.setDataSet(dataSet);
         databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
         databaseTester.onSetup();

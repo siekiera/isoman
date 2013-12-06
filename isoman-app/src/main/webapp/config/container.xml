@@ -14,11 +14,17 @@
                class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.WersjaArchiwumDaoBean"/>
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.RolaDao"
                class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.RolaDaoBean"/>
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.FolderDao"
+               class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.FolderDaoBean"/>
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.dao.PlikDao"
+               class="pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl.PlikDaoBean"/>
 
     <!-- services -->
 
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.services.PersonService"
                class="pl.edu.pw.elka.mtoporow.isoman.services.impl.PersonServiceImpl"/>
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.services.FilesystemService"
+               class="pl.edu.pw.elka.mtoporow.isoman.services.impl.FilesystemServiceImpl"/>
 
     <!-- config -->
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.common.config.ConfigManager"
