@@ -130,7 +130,7 @@ CREATE TABLE archiwa
   id                  BIGINT                NOT NULL,
   nazwa               CHARACTER VARYING(48) NOT NULL,
   opis                CHARACTER VARYING(200),
-  id_przedmiotu       BIGINT                NOT NULL,
+  id_przedmiotu       BIGINT,
   id_folderu_glownego BIGINT,
   CONSTRAINT arch_pk PRIMARY KEY (id),
   CONSTRAINT ar_prz_fk FOREIGN KEY (id_przedmiotu) REFERENCES przedmioty (id)

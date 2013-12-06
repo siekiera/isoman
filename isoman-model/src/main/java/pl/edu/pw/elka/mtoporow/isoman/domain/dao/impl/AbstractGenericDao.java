@@ -89,6 +89,14 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Bas
         return getFiltered(Arrays.asList(criteria));
     }
 
+    /**
+     * Tworzy kryteria dla klasy
+     *
+     * @return
+     */
+    protected Criteria createCriteria() {
+        return getSession().createCriteria(getEntityClass());
+    }
 
     /**
      * Pobiera klasę encji

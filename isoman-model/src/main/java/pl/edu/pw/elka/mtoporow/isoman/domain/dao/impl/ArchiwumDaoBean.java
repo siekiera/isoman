@@ -1,9 +1,15 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.objectledge.context.Context;
+import pl.edu.pw.elka.mtoporow.isoman.common.util.CollectionTool;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.ArchiwumDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum;
 import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
+
+import java.util.List;
 
 /**
  * Implementacja Dao dla archiwów
@@ -19,7 +25,16 @@ public class ArchiwumDaoBean extends AbstractGenericUniqueDao<Archiwum, Long> im
      * @param context        kontekst
      * @param sessionFactory fabryka sesji Hibernate
      */
-    protected ArchiwumDaoBean(Context context, SessionFactory sessionFactory) {
+    public ArchiwumDaoBean(Context context, SessionFactory sessionFactory) {
         super(context, sessionFactory);
+    }
+
+    @Override
+    public Archiwum getByRootFolder(String rootPath) {
+        Criteria criteria = createCriteria();
+        criteria.createAlias("folderGlowny", "folder")
+                .add(Restrictions.eq("folder.nazwa", rootPath));
+        List<Archiwum> archiwa = criteria.list();
+        return CollectionTool.getFirst(archiwa);
     }
 }

@@ -10,6 +10,7 @@ import pl.edu.pw.elka.mtoporow.isoman.notifier.watcher.FolderWatcher;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Zadanie monitorowania katalogów
@@ -23,12 +24,12 @@ public class NotifierTask extends Task {
     private final ConfigManager configManager;
     private final FolderWatcher folderWatcher;
     private final FolderListener folderListener;
+    private final Path rootPath;
 
     public NotifierTask(ConfigManager configManager) throws IOException {
         this.configManager = configManager;
         this.folderListener = new NotifyingFolderListener();
-
-        final String rootPath = configManager.get("notifier.root.dir");
+        this.rootPath = Paths.get(configManager.get("notifier.root.dir"));
         this.folderWatcher = new FolderWatcher(rootPath, folderListener);
     }
 

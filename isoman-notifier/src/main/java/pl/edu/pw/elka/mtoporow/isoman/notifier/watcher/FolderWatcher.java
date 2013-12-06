@@ -29,18 +29,30 @@ public class FolderWatcher {
     private final WatchService watcher;
     private final Map<WatchKey, Path> keys;
     private final FolderListener folderListener;
+    private final Path rootPath;
     private final boolean trace;
     private final boolean recursive = true;
 
-    public FolderWatcher(final String folder, FolderListener folderListener) throws IOException {
+    /**
+     * Konstruktor
+     *
+     * @param folder
+     * @param folderListener
+     * @throws IOException
+     */
+    public FolderWatcher(final Path folder, FolderListener folderListener) throws IOException {
         this.folderListener = folderListener;
         this.watcher = FileSystems.getDefault().newWatchService();
         this.keys = new HashMap<>();
         this.trace = true;
+        this.rootPath = folder;
 
-        this.registerDirs(Paths.get(folder));
+        this.registerDirs(this.rootPath);
     }
 
+    /**
+     * Główna pętla nasłuchująca zmiany
+     */
     public void process() {
         LOGGER.debug("Started watching directories for changes");
         while (true) {
@@ -112,12 +124,14 @@ public class FolderWatcher {
      * @param path
      */
     private void fireEvent(final WatchEvent.Kind kind, final Path path) {
+        final Path relativePath = rootPath.relativize(path);
+
         if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
-            folderListener.changed(path);
+            folderListener.changed(relativePath);
         } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-            folderListener.created(path);
+            folderListener.created(relativePath);
         } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
-            folderListener.deleted(path);
+            folderListener.deleted(relativePath);
         }
     }
 
