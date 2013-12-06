@@ -6,7 +6,7 @@
         </layout>
     </appender>
     <root>
-        <level value="INFO"/>
+        <level value="DEBUG"/>
         <appender-ref ref="Console"/>
     </root>
 </log4j:configuration>
