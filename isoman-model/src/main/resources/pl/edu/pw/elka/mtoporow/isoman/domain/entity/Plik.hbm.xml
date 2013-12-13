@@ -5,6 +5,9 @@
     <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik" table="pliki">
         <id name="id" type="java.lang.Long">
             <column name="id" not-null="true"/>
+            <generator class="sequence">
+                <param name="sequence">pliki_seq</param>
+            </generator>
         </id>
         <property name="nazwa" type="java.lang.String">
             <column name="nazwa" not-null="true"/>

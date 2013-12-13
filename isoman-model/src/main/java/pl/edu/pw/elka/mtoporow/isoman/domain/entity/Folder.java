@@ -10,11 +10,13 @@ import java.util.List;
  */
 public class Folder extends UniqueEntity<Long> {
     private Long id;
+    private Long fsid;
     private String nazwa;
+    private Boolean aktualny;
+    private Boolean doUsuniecia;
     private Folder nadrzedny;
     private List<Folder> podrzedne;
     private List<Plik> pliki;
-    private Archiwum archiwum;
 
     /**
      * Konstruktor domyślny
@@ -22,9 +24,20 @@ public class Folder extends UniqueEntity<Long> {
     public Folder() {
     }
 
-    public Folder(String nazwa, Folder nadrzedny) {
+    public Folder(Long fsid, String nazwa, Boolean aktualny, Boolean doUsuniecia, Folder nadrzedny) {
+        this.fsid = fsid;
         this.nazwa = nazwa;
+        this.aktualny = aktualny;
+        this.doUsuniecia = doUsuniecia;
         this.nadrzedny = nadrzedny;
+    }
+
+    public Long getFsid() {
+        return fsid;
+    }
+
+    public void setFsid(Long fsid) {
+        this.fsid = fsid;
     }
 
     @Override
@@ -43,6 +56,22 @@ public class Folder extends UniqueEntity<Long> {
 
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
+    }
+
+    public Boolean getAktualny() {
+        return aktualny;
+    }
+
+    public void setAktualny(Boolean aktualny) {
+        this.aktualny = aktualny;
+    }
+
+    public Boolean getDoUsuniecia() {
+        return doUsuniecia;
+    }
+
+    public void setDoUsuniecia(Boolean doUsuniecia) {
+        this.doUsuniecia = doUsuniecia;
     }
 
     public Folder getNadrzedny() {
@@ -67,13 +96,5 @@ public class Folder extends UniqueEntity<Long> {
 
     public void setPliki(List<Plik> pliki) {
         this.pliki = pliki;
-    }
-
-    public Archiwum getArchiwum() {
-        return archiwum;
-    }
-
-    public void setArchiwum(Archiwum archiwum) {
-        this.archiwum = archiwum;
     }
 }

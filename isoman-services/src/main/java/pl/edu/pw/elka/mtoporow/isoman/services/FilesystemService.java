@@ -25,10 +25,11 @@ public interface FilesystemService {
      * Pobiera encję folderu na podstawie ścieżki, lub tworzy ją, jeśli nie istnieje
      *
      * @param path ścieżka
+     * @param fsid identyfikator systemu plików
      * @return encja folderu
      * @throws ServiceException jeśli archiwum nie istnieje
      */
-    Folder getOrCreateFolderByPath(final String path) throws ServiceException;
+    Folder getOrCreateFolderByPath(final String path, final Long fsid) throws ServiceException;
 
     /**
      * Pobiera encję pliku na podstawie ścieżki

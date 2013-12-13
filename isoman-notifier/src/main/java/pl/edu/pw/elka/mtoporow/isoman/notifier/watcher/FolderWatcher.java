@@ -1,6 +1,7 @@
 package pl.edu.pw.elka.mtoporow.isoman.notifier.watcher;
 
 import org.apache.log4j.Logger;
+import pl.edu.pw.elka.mtoporow.isoman.notifier.watcher.util.InodeUtil;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -8,7 +9,6 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
@@ -124,14 +124,27 @@ public class FolderWatcher {
      * @param path
      */
     private void fireEvent(final WatchEvent.Kind kind, final Path path) {
-        final Path relativePath = rootPath.relativize(path);
+        final String relativePath = rootPath.relativize(path).toString();
+        final boolean isDirectory = Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS);
 
-        if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
-            folderListener.changed(relativePath);
-        } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-            folderListener.created(relativePath);
-        } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
-            folderListener.deleted(relativePath);
+        if (isDirectory) {
+            if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
+                folderListener.folderChanged(relativePath);
+            } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
+                //Tylko pod linuksem
+                Long fsid = InodeUtil.getInodeNr(path.toString());
+                folderListener.folderCreated(relativePath, fsid);
+            } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
+                folderListener.folderDeleted(relativePath);
+            }
+        } else {
+            if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
+                folderListener.fileChanged(relativePath);
+            } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
+                folderListener.fileCreated(relativePath);
+            } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
+                folderListener.fileDeleted(relativePath);
+            }
         }
     }
 
@@ -157,16 +170,16 @@ public class FolderWatcher {
      */
     private void registerDir(final Path dir) throws IOException {
         WatchKey key = dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);
-        if (trace) {
-            Path prev = keys.get(key);
-            if (prev == null) {
-                LOGGER.trace(String.format("register: %s\n", dir));
-            } else {
-                if (!dir.equals(prev)) {
-                    LOGGER.trace(String.format("update: %s -> %s\n", prev, dir));
-                }
-            }
-        }
+//        if (trace) {
+//            Path prev = keys.get(key);
+//            if (prev == null) {
+//                LOGGER.trace(String.format("register: %s\n", dir));
+//            } else {
+//                if (!dir.equals(prev)) {
+//                    LOGGER.trace(String.format("update: %s -> %s\n", prev, dir));
+//                }
+//            }
+//        }
         keys.put(key, dir);
     }
 

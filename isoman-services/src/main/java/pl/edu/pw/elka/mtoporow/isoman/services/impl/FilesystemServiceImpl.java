@@ -34,12 +34,12 @@ public class FilesystemServiceImpl implements FilesystemService {
 
     @Override
     public Folder getFolderByPath(String path) throws ServiceException {
-        return getFolderByPath(path, false);
+        return getFolderByPath(path, false, null);
     }
 
     @Override
-    public Folder getOrCreateFolderByPath(String path) throws ServiceException {
-        return getFolderByPath(path, true);
+    public Folder getOrCreateFolderByPath(String path, final Long fsid) throws ServiceException {
+        return getFolderByPath(path, true, fsid);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class FilesystemServiceImpl implements FilesystemService {
         String folderPath = extracted.getFirst();
         String filename = extracted.getSecond();
 
-        Folder folder = getFolderByPath(folderPath, createIfNotExists);
+        Folder folder = getFolderByPath(folderPath, createIfNotExists, null);
         if (folder != null) {
             Plik plik = getFileWithName(folder, filename);
             if (plik == null) {
@@ -73,6 +73,7 @@ public class FilesystemServiceImpl implements FilesystemService {
                     return null;
                 }
                 plik = new Plik(folder, filename, false);
+                //TODO?? dddać do folderu?
             }
             return plik;
         }
@@ -85,15 +86,16 @@ public class FilesystemServiceImpl implements FilesystemService {
      *
      * @param path              ścieżka
      * @param createIfNotExists czy tworzyć encję, jeśli nie istnieje
+     * @param fsid              identyfikator systemu plików
      * @return encja folderu (lub null, jeśli nie znaleziono i createIfNotExists = false)
      * @throws ServiceException jeśli archiwum nie istnieje
      */
-    private Folder getFolderByPath(String path, boolean createIfNotExists) throws ServiceException {
+    private Folder getFolderByPath(String path, boolean createIfNotExists, Long fsid) throws ServiceException {
         Pair<String, String> extPaths = getFirstAndRest(path);
 
         Archiwum archiwum = archiwumDao.getByRootFolder(extPaths.getFirst());
         if (archiwum != null && archiwum.getFolderGlowny() != null) {
-            return getChildFolder(archiwum.getFolderGlowny(), extPaths.getSecond(), createIfNotExists);
+            return getChildFolder(archiwum.getFolderGlowny(), extPaths.getSecond(), createIfNotExists, fsid);
         }
         throw new ServiceException("Archive not found");
     }
@@ -104,9 +106,10 @@ public class FilesystemServiceImpl implements FilesystemService {
      * @param parent
      * @param relativePath
      * @param createIfNotExists czy tworzyć encję, jeśli nie udało się znaleźć
+     * @param fsid              identyfikator systemu plików
      * @return encja folderu (lub null, jeśli nie udało się znaleźć i createIfNotExists=false)
      */
-    private Folder getChildFolder(final Folder parent, final String relativePath, final boolean createIfNotExists) {
+    private Folder getChildFolder(final Folder parent, final String relativePath, final boolean createIfNotExists, final Long fsid) {
         //koniec rekurencji
         if (relativePath == null || relativePath.isEmpty()) {
             return parent;
@@ -120,9 +123,10 @@ public class FilesystemServiceImpl implements FilesystemService {
             if (!createIfNotExists) {
                 return null;
             }
-            childFolder = new Folder(childName, parent);
+            childFolder = createFolder(parent, childName, fsid);
+            //TODO ?? parent.getPodrzedne().add(childFolder);
         }
-        return getChildFolder(childFolder, restOfPath, createIfNotExists);
+        return getChildFolder(childFolder, restOfPath, createIfNotExists, fsid);
     }
 
     /**
@@ -141,6 +145,26 @@ public class FilesystemServiceImpl implements FilesystemService {
             }
         }
         return null;
+    }
+
+    /**
+     * Tworzy folder o podanych parametrach
+     *
+     * @param parent
+     * @param name
+     * @param fsid
+     * @return
+     */
+    private Folder createFolder(final Folder parent, final String name, final Long fsid) {
+        //sprawdzamy najpierw, czy nie ma folderu do usunięcia o tym samym FSID
+        //dzieje się to, gdy zmieniamy nazwę folderu - wówczas stary jest usuwany, tworzony nowy
+        Folder existing = folderDao.getByFsid(fsid);
+        if (existing != null && existing.getDoUsuniecia()) {
+            existing.setNadrzedny(parent);
+            existing.setNazwa(name);
+            return existing;
+        }
+        return new Folder(fsid, name, false, false, parent);
     }
 
     /**

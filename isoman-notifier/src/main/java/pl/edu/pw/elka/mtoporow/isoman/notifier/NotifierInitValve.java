@@ -32,7 +32,7 @@ public class NotifierInitValve implements Valve {
             notifierTask = new NotifierTask(configManager);
             threadPool.runWorker(notifierTask);
         } catch (IOException e) {
-            //FIXME
+            logger.error("Error during notifier task initialization", e);
         }
     }
 

@@ -164,18 +164,33 @@ ALTER TABLE wersje_archiwow OWNER TO @db.user@;
 ---  Tabela folderów źródłowych
 ---
 
+CREATE SEQUENCE foldery_seq;
+ALTER SEQUENCE foldery_seq
+OWNER TO @db.user@;
+
 CREATE TABLE foldery
 (
   id         BIGINT                NOT NULL,
+  fsid       BIGINT                NOT NULL,
   id_rodzica BIGINT,
   nazwa      CHARACTER VARYING(80) NOT NULL,
+  czy_aktualny BOOLEAN DEFAULT FALSE NOT NULL,
+  do_usuniecia BOOLEAN DEFAULT FALSE NOT NULL,
   CONSTRAINT fold_pk PRIMARY KEY (id),
+  CONSTRAINT fold_uk UNIQUE (fsid) DEFERRABLE,
   CONSTRAINT fold_fold_pk FOREIGN KEY (id_rodzica) REFERENCES foldery (id) ON DELETE CASCADE
 )
 WITH (
 OIDS = FALSE
 );
 ALTER TABLE foldery OWNER TO @db.user@;
+
+COMMENT ON TABLE foldery IS 'Tabela folderów';
+COMMENT ON COLUMN foldery.fsid IS 'Identyfikator folderu zgodny z id systemu operacyjnego (inode pod uniksem)';
+COMMENT ON COLUMN foldery.id_rodzica IS 'Identyfikator folderu nadrzędnego';
+COMMENT ON COLUMN foldery.nazwa IS 'Nazwa folderu';
+COMMENT ON COLUMN foldery.czy_aktualny IS 'Flaga oznaczająca, czy folder aktualny';
+COMMENT ON COLUMN foldery.do_usuniecia IS 'Flaga oznaczająca folder do usunięcia';
 
 ALTER TABLE archiwa
 ADD CONSTRAINT ar_fg_fk FOREIGN KEY (id_folderu_glownego) REFERENCES foldery (id);
@@ -184,9 +199,13 @@ ADD CONSTRAINT ar_fg_fk FOREIGN KEY (id_folderu_glownego) REFERENCES foldery (id
 ---  Tabela plików źródłowych
 ---
 
+CREATE SEQUENCE pliki_seq;
+ALTER SEQUENCE pliki_seq
+OWNER TO @db.user@;
+
 CREATE TABLE pliki
 (
-  id           BIGINT                NOT NULL,
+  id         BIGINT                NOT NULL,
   id_folderu   BIGINT                NOT NULL,
   czy_aktualny BOOLEAN               NOT NULL,
   nazwa        CHARACTER VARYING(80) NOT NULL,
@@ -197,6 +216,12 @@ WITH (
 OIDS = FALSE
 );
 ALTER TABLE pliki OWNER TO @db.user@;
+
+COMMENT ON TABLE pliki IS 'Tabela plików';
+COMMENT ON COLUMN pliki.id IS 'Identyfikator pliku';
+COMMENT ON COLUMN pliki.id_folderu IS 'Identyfikator folderu nadrzędnego';
+COMMENT ON COLUMN foldery.nazwa IS 'Nazwa pliku';
+COMMENT ON COLUMN foldery.czy_aktualny IS 'Flaga oznaczająca, czy plik aktualny';
 
 
 ---

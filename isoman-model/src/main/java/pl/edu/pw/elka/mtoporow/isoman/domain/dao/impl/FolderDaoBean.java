@@ -1,9 +1,13 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl;
 
+import org.hibernate.criterion.Restrictions;
 import org.objectledge.context.Context;
+import pl.edu.pw.elka.mtoporow.isoman.common.util.CollectionTool;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.FolderDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder;
 import pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory;
+
+import java.util.List;
 
 /**
  * Implementacja dao encji folderu
@@ -21,5 +25,11 @@ public class FolderDaoBean extends AbstractGenericUniqueDao<Folder, Long> implem
      */
     public FolderDaoBean(Context context, SessionFactory sessionFactory) {
         super(context, sessionFactory);
+    }
+
+    @Override
+    public Folder getByFsid(Long fsid) {
+        List<Folder> folders = getFiltered(Restrictions.eq("fsid", fsid));
+        return CollectionTool.getFirst(folders);
     }
 }

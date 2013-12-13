@@ -9,4 +9,12 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder;
  * @author Michał Toporowski
  */
 public interface FolderDao extends BaseUniqueDao<Folder, Long> {
+
+    /**
+     * Pobiera folder po fsId
+     *
+     * @param fsid
+     * @return
+     */
+    Folder getByFsid(final Long fsid);
 }

@@ -20,6 +20,7 @@ import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
  *
  * @author Michał Toporowski
  */
+@Deprecated
 public class PersonServiceImpl implements PersonService {
 
     private final Logger LOG = Logger.getLogger(PersonServiceImpl.class);

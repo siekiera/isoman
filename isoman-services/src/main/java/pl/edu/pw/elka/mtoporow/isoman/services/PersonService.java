@@ -9,6 +9,7 @@ import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
  *
  * @author Michał Toporowski
  */
+@Deprecated
 public interface PersonService {
 
     /**
@@ -18,7 +19,6 @@ public interface PersonService {
      * @param password
      * @throws ServiceException
      */
-    @Deprecated
     void addPerson(Osoba person, String password) throws ServiceException;
 
     /**
@@ -29,6 +29,5 @@ public interface PersonService {
      * @param roleId
      * @throws ServiceException
      */
-    @Deprecated
     void addPerson(Osoba person, String password, Long roleId) throws ServiceException;
 }

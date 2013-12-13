@@ -16,8 +16,8 @@
                      lazy="no-proxy" access="field">
             <column name="id_przedmiotu"/>
         </many-to-one>
-        <one-to-one name="folderGlowny" class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"
-                    access="field"/>
+        <many-to-one name="folderGlowny" class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"
+                    access="field" column="id_folderu_glownego"/>
 
     </class>
 </hibernate-mapping>

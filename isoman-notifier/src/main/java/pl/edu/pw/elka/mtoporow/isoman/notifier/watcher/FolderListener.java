@@ -1,7 +1,5 @@
 package pl.edu.pw.elka.mtoporow.isoman.notifier.watcher;
 
-import java.nio.file.Path;
-
 /**
  * Słuchacz zmian w katalogach
  * Data utworzenia: 06.12.13, 12:55
@@ -15,20 +13,42 @@ public interface FolderListener {
      *
      * @param path
      */
-    void created(final Path path);
+    void fileCreated(final String path);
 
     /**
      * Zdarzenie zmiany pliku
      *
      * @param path
      */
-    void changed(final Path path);
+    void fileChanged(final String path);
 
     /**
      * Zdarzenie usunięcia pliku
      *
      * @param path
      */
-    void deleted(final Path path);
+    void fileDeleted(final String path);
+
+    /**
+     * Zdarzenie dodania katalogu
+     *
+     * @param path ścieżka
+     * @param fsid identyfikator systemowy (inode pod unixem)
+     */
+    void folderCreated(final String path, final Long fsid);
+
+    /**
+     * Zdarzenie zmiany katalogu
+     *
+     * @param path ścieżka
+     */
+    void folderChanged(final String path);
+
+    /**
+     * Zdarzenie usunięcia katalogu
+     *
+     * @param path
+     */
+    void folderDeleted(final String path);
 
 }

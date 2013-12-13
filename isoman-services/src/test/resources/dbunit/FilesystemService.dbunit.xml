@@ -1,20 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-    <foldery id="1" nazwa="archiwkoF"/>
-    <foldery id="2" nazwa="drugieF"/>
+    <foldery id="-1" fsid="-1" nazwa="archiwkoF"/>
+    <foldery id="-2" fsid="-2" nazwa="drugieF"/>
 
-    <foldery id="101" nazwa="folderwA" id_rodzica="1"/>
-    <foldery id="1010" nazwa="podfolderek" id_rodzica="101"/>
-    <foldery id="1011" nazwa="podfolderek2" id_rodzica="101"/>
-    <foldery id="10110" nazwa="podpodfolderek" id_rodzica="1011"/>
+    <foldery id="101"  fsid="101" nazwa="folderwA" id_rodzica="-1"/>
+    <foldery id="1010" fsid="1010" nazwa="podfolderek" id_rodzica="101"/>
+    <foldery id="1011" fsid="1011" nazwa="podfolderek2" id_rodzica="101"/>
+    <foldery id="10110" fsid="10110" nazwa="podpodfolderek" id_rodzica="1011"/>
 
-    <foldery id="102" nazwa="folderwB" id_rodzica="2"/>
+    <foldery id="102" fsid="102" nazwa="folderwB" id_rodzica="-2"/>
 
-    <pliki id="101" nazwa="plikwA" id_folderu="1" czy_aktualny="true"/>
+    <pliki id="101" nazwa="plikwA" id_folderu="-1" czy_aktualny="true"/>
     <pliki id="10101" nazwa="plik.w.Podfolderku" id_folderu="1010" czy_aktualny="true"/>
 
 
-    <archiwa id="1" nazwa="archiwko" id_folderu_glownego="1"/>
-    <archiwa id="2" nazwa="drugie" id_folderu_glownego="2"/>
+    <archiwa id="1" nazwa="archiwko" id_folderu_glownego="-1"/>
+    <archiwa id="2" nazwa="drugie" id_folderu_glownego="-2"/>
 
 </dataset>

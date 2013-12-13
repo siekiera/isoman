@@ -26,6 +26,12 @@ public class NotifierTask extends Task {
     private final FolderListener folderListener;
     private final Path rootPath;
 
+    /**
+     * Konstruktor zadania
+     *
+     * @param configManager
+     * @throws IOException
+     */
     public NotifierTask(ConfigManager configManager) throws IOException {
         this.configManager = configManager;
         this.folderListener = new NotifyingFolderListener();
@@ -43,20 +49,39 @@ public class NotifierTask extends Task {
         return "Directory change notifier task";
     }
 
+    /**
+     * Słuchacz katalogów powiadamiający bazę danych o zmianach
+     */
     private class NotifyingFolderListener implements FolderListener {
+
         @Override
-        public void created(Path path) {
+        public void fileCreated(String path) {
             //TODO
         }
 
         @Override
-        public void changed(Path path) {
-            //TODO
+        public void fileChanged(String path) {
+            //TODO.
         }
 
         @Override
-        public void deleted(Path path) {
-            //TODO
+        public void fileDeleted(String path) {
+            //TODO.
+        }
+
+        @Override
+        public void folderCreated(String path, Long fsid) {
+            //TODO.
+        }
+
+        @Override
+        public void folderChanged(String path) {
+            //TODO.
+        }
+
+        @Override
+        public void folderDeleted(String path) {
+            //TODO.
         }
     }
 

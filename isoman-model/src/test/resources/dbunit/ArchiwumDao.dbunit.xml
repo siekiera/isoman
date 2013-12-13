@@ -1,17 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-    <foldery id="1" nazwa="archiwkoF"/>
-    <foldery id="2" nazwa="drugieF"/>
-
-    <foldery id="101" nazwa="folderwA" id_rodzica="1"/>
-    <foldery id="1010" nazwa="podfolderek" id_rodzica="101"/>
-    <foldery id="1011" nazwa="podfolderek2" id_rodzica="101"/>
-    <foldery id="10110" nazwa="podpodfolderek" id_rodzica="1011"/>
-
-    <foldery id="102" nazwa="folderwB" id_rodzica="2"/>
-
-
-
+    <foldery id="1" fsid="1" nazwa="archiwkoF"/>
+    <foldery id="2" fsid="2" nazwa="drugieF"/>
 
     <archiwa id="1" nazwa="archiwko" id_folderu_glownego="1"/>
     <archiwa id="2" nazwa="drugie" id_folderu_glownego="2"/>

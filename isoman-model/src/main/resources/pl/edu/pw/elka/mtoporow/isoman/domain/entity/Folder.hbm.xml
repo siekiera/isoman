@@ -5,9 +5,21 @@
     <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder" table="foldery">
         <id name="id" type="java.lang.Long">
             <column name="id" not-null="true"/>
+            <generator class="sequence">
+                <param name="sequence">foldery_seq</param>
+            </generator>
         </id>
+        <property name="fsid" type="java.lang.Long">
+            <column name="fsid" not-null="true"/>
+        </property>
         <property name="nazwa" type="java.lang.String">
             <column name="nazwa" not-null="true"/>
+        </property>
+        <property name="aktualny" type="java.lang.Boolean">
+            <column name="czy_aktualny" not-null="true"/>
+        </property>
+        <property name="doUsuniecia" type="java.lang.Boolean">
+            <column name="do_usuniecia" not-null="true"/>
         </property>
         <many-to-one name="nadrzedny" column="id_rodzica" access="field"
                      class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"/>
@@ -19,7 +31,5 @@
             <key column="id_folderu"/>
             <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik"/>
         </bag>
-        <one-to-one name="archiwum" access="field"
-                    class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum"/>
     </class>
 </hibernate-mapping>
