@@ -208,6 +208,7 @@ CREATE TABLE pliki
   id         BIGINT                NOT NULL,
   id_folderu   BIGINT                NOT NULL,
   czy_aktualny BOOLEAN               NOT NULL,
+  do_usuniecia BOOLEAN               NOT NULL,
   nazwa        CHARACTER VARYING(80) NOT NULL,
   CONSTRAINT pl_pk PRIMARY KEY (id),
   CONSTRAINT pl_fold_pk FOREIGN KEY (id_folderu) REFERENCES foldery (id) ON DELETE CASCADE

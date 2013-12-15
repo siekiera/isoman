@@ -15,6 +15,9 @@
         <property name="aktualny" type="java.lang.Boolean">
             <column name="czy_aktualny" not-null="true"/>
         </property>
+        <property name="doUsuniecia" type="java.lang.Boolean">
+            <column name="do_usuniecia" not-null="true"/>
+        </property>
         <many-to-one name="folder" column="id_folderu" access="field"
                      class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"/>
     </class>

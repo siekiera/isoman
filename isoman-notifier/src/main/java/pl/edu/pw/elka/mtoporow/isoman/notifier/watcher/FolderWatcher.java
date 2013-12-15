@@ -126,26 +126,9 @@ public class FolderWatcher {
     private void fireEvent(final WatchEvent.Kind kind, final Path path) {
         final String relativePath = rootPath.relativize(path).toString();
         final boolean isDirectory = Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS);
-
-        if (isDirectory) {
-            if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
-                folderListener.folderChanged(relativePath);
-            } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                //Tylko pod linuksem
-                Long fsid = InodeUtil.getInodeNr(path.toString());
-                folderListener.folderCreated(relativePath, fsid);
-            } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
-                folderListener.folderDeleted(relativePath);
-            }
-        } else {
-            if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
-                folderListener.fileChanged(relativePath);
-            } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                folderListener.fileCreated(relativePath);
-            } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
-                folderListener.fileDeleted(relativePath);
-            }
-        }
+        final FolderEventType eventType = EventMapper.mapEvent(kind, isDirectory);
+        final Long fsid = eventType == FolderEventType.FOLDER_CREATED ? InodeUtil.getInodeNr(path.toString()) : null;
+        folderListener.eventFired(eventType, relativePath, fsid);
     }
 
     /**

@@ -70,4 +70,9 @@ public interface BaseDao<T extends GenericEntity> {
      */
     List<T> getFiltered(Criterion... criteria);
 
+    /**
+     * Czyści sesję Hibernate'a
+     */
+    void clearSession();
+
 }

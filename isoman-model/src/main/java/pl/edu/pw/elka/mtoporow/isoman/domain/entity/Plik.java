@@ -6,19 +6,21 @@ package pl.edu.pw.elka.mtoporow.isoman.domain.entity;
  *
  * @author Michał Toporowski
  */
-public class Plik extends UniqueEntity<Long> {
+public class Plik extends FSEntity<Long> {
     private Long id;
     private Folder folder;
     private String nazwa;
     private Boolean aktualny;
+    private Boolean doUsuniecia;
 
     public Plik() {
     }
 
-    public Plik(Folder folder, String nazwa, Boolean aktualny) {
+    public Plik(Folder folder, String nazwa, Boolean aktualny, Boolean doUsuniecia) {
         this.folder = folder;
         this.nazwa = nazwa;
         this.aktualny = aktualny;
+        this.doUsuniecia = doUsuniecia;
     }
 
     @Override
@@ -53,5 +55,13 @@ public class Plik extends UniqueEntity<Long> {
 
     public void setAktualny(Boolean aktualny) {
         this.aktualny = aktualny;
+    }
+
+    public Boolean getDoUsuniecia() {
+        return doUsuniecia;
+    }
+
+    public void setDoUsuniecia(Boolean doUsuniecia) {
+        this.doUsuniecia = doUsuniecia;
     }
 }

@@ -1,12 +1,19 @@
 package pl.edu.pw.elka.mtoporow.isoman.notifier.tasks;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.objectledge.context.Context;
+import org.objectledge.hibernate.HibernateSessionValve;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.threads.Task;
 import pl.edu.pw.elka.mtoporow.isoman.common.config.ConfigManager;
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.GenericEntity;
+import pl.edu.pw.elka.mtoporow.isoman.notifier.watcher.FolderEventType;
 import pl.edu.pw.elka.mtoporow.isoman.notifier.watcher.FolderListener;
 import pl.edu.pw.elka.mtoporow.isoman.notifier.watcher.FolderWatcher;
+import pl.edu.pw.elka.mtoporow.isoman.services.FilesystemService;
+import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -21,6 +28,8 @@ import java.nio.file.Paths;
 public class NotifierTask extends Task {
 
     private static final Logger LOGGER = Logger.getLogger(NotifierTask.class);
+    private final HibernateSessionValve hibernateSessionValve;
+    private final FilesystemService filesystemService;
     private final ConfigManager configManager;
     private final FolderWatcher folderWatcher;
     private final FolderListener folderListener;
@@ -29,10 +38,13 @@ public class NotifierTask extends Task {
     /**
      * Konstruktor zadania
      *
-     * @param configManager
-     * @throws IOException
+     * @param hibernateSessionValve
+     * @param filesystemService
+     * @param configManager         @throws IOException
      */
-    public NotifierTask(ConfigManager configManager) throws IOException {
+    public NotifierTask(HibernateSessionValve hibernateSessionValve, FilesystemService filesystemService, ConfigManager configManager) throws IOException {
+        this.hibernateSessionValve = hibernateSessionValve;
+        this.filesystemService = filesystemService;
         this.configManager = configManager;
         this.folderListener = new NotifyingFolderListener();
         this.rootPath = Paths.get(configManager.get("notifier.root.dir"));
@@ -50,38 +62,49 @@ public class NotifierTask extends Task {
     }
 
     /**
+     * Pobiera sesję Hibernate'a
+     *
+     * @return
+     */
+    private Session getSession() {
+        return hibernateSessionValve.getSession();
+    }
+
+    /**
      * Słuchacz katalogów powiadamiający bazę danych o zmianach
      */
     private class NotifyingFolderListener implements FolderListener {
 
         @Override
-        public void fileCreated(String path) {
-            //TODO
+        public void eventFired(FolderEventType eventType, String path, Long fsid) {
+            Transaction tx = getSession().beginTransaction();
+            try {
+                GenericEntity entityToSave = getEntityToSave(eventType, path, fsid);
+                getSession().save(entityToSave);
+                tx.commit();
+            } catch (Exception e) {
+                tx.rollback();
+                LOGGER.warn("Exception during folder listening", e);
+            }
+
         }
 
-        @Override
-        public void fileChanged(String path) {
-            //TODO.
-        }
+        private GenericEntity getEntityToSave(FolderEventType eventType, String path, Long fsid) throws ServiceException {
+            filesystemService.clearHibernateSession();
+            switch (eventType) {
+                case FILE_CHANGED:
+                case FILE_CREATED:
+                    return filesystemService.markFile(path);
+                case FILE_DELETED:
+                case FOLDER_DELETED:
+                    return filesystemService.markAsDeleted(path);
+                case FOLDER_CHANGED:
+                    return filesystemService.markChangedFolder(path);
+                case FOLDER_CREATED:
+                    return filesystemService.markCreatedFolder(path, fsid);
+            }
+            return null;
 
-        @Override
-        public void fileDeleted(String path) {
-            //TODO.
-        }
-
-        @Override
-        public void folderCreated(String path, Long fsid) {
-            //TODO.
-        }
-
-        @Override
-        public void folderChanged(String path) {
-            //TODO.
-        }
-
-        @Override
-        public void folderDeleted(String path) {
-            //TODO.
         }
     }
 

@@ -10,8 +10,8 @@
 
     <foldery id="102" fsid="102" nazwa="folderwB" id_rodzica="-2"/>
 
-    <pliki id="101" nazwa="plikwA" id_folderu="-1" czy_aktualny="true"/>
-    <pliki id="10101" nazwa="plik.w.Podfolderku" id_folderu="1010" czy_aktualny="true"/>
+    <pliki id="101" nazwa="plikwA" id_folderu="-1" czy_aktualny="true" do_usuniecia="false"/>
+    <pliki id="10101" nazwa="plik.w.Podfolderku" id_folderu="1010" czy_aktualny="true" do_usuniecia="false"/>
 
 
     <archiwa id="1" nazwa="archiwko" id_folderu_glownego="-1"/>

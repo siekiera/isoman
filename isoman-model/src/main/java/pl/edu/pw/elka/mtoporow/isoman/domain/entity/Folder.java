@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Michał Toporowski
  */
-public class Folder extends UniqueEntity<Long> {
+public class Folder extends FSEntity<Long> {
     private Long id;
     private Long fsid;
     private String nazwa;

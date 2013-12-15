@@ -4,6 +4,7 @@ import org.hibernate.envers.tools.Pair;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.ArchiwumDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.FolderDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum;
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.FSEntity;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik;
 import pl.edu.pw.elka.mtoporow.isoman.services.FilesystemService;
@@ -52,6 +53,47 @@ public class FilesystemServiceImpl implements FilesystemService {
         return getFileByPath(path, true);
     }
 
+    @Override
+    public Plik markFile(String path) throws ServiceException {
+        Plik plik = getFileByPath(path, true);
+        plik.setAktualny(true);
+        return plik;
+    }
+
+    @Override
+    public Folder markCreatedFolder(String path, Long fsid) throws ServiceException {
+        //To wystarczy - patrz createFolder()
+        return getOrCreateFolderByPath(path, fsid);
+    }
+
+    @Override
+    public Folder markChangedFolder(String path) throws ServiceException {
+        Folder folder = getFolderByPath(path);
+        if (folder == null) {
+            throw new ServiceException("Folder not found " + path);
+        }
+        folder.setAktualny(false);
+        return folder;
+    }
+
+    @Override
+    public FSEntity markAsDeleted(String path) throws ServiceException {
+        FSEntity toDelete = getFileByPath(path);
+        if (toDelete == null) {
+            toDelete = getFolderByPath(path);
+        }
+        if (toDelete == null) {
+            throw new ServiceException(String.format("Cannot delete. File or folder %s not found.", path));
+        }
+        toDelete.setDoUsuniecia(true);
+        return toDelete;
+    }
+
+    @Override
+    public void clearHibernateSession() {
+        folderDao.clearSession();
+    }
+
     /**
      * Pobiera encję pliku na podstawie ścieżki
      *
@@ -72,7 +114,7 @@ public class FilesystemServiceImpl implements FilesystemService {
                 if (!createIfNotExists) {
                     return null;
                 }
-                plik = new Plik(folder, filename, false);
+                plik = new Plik(folder, filename, false, false);
                 //TODO?? dddać do folderu?
             }
             return plik;
@@ -162,6 +204,8 @@ public class FilesystemServiceImpl implements FilesystemService {
         if (existing != null && existing.getDoUsuniecia()) {
             existing.setNadrzedny(parent);
             existing.setNazwa(name);
+            existing.setDoUsuniecia(false);
+            existing.setAktualny(false);
             return existing;
         }
         return new Folder(fsid, name, false, false, parent);

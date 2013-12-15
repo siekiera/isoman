@@ -9,46 +9,11 @@ package pl.edu.pw.elka.mtoporow.isoman.notifier.watcher;
 public interface FolderListener {
 
     /**
-     * Zdarzenie dodania pliku
+     * Zdarzenie zmiany w katalogu
      *
-     * @param path
+     * @param eventType typ zdarzenia
+     * @param path ścieżka zmienionego pliku/katalogu
+     * @param fsid identyfikator systemowy (tylko w przypadku FOLDER_CREATED)
      */
-    void fileCreated(final String path);
-
-    /**
-     * Zdarzenie zmiany pliku
-     *
-     * @param path
-     */
-    void fileChanged(final String path);
-
-    /**
-     * Zdarzenie usunięcia pliku
-     *
-     * @param path
-     */
-    void fileDeleted(final String path);
-
-    /**
-     * Zdarzenie dodania katalogu
-     *
-     * @param path ścieżka
-     * @param fsid identyfikator systemowy (inode pod unixem)
-     */
-    void folderCreated(final String path, final Long fsid);
-
-    /**
-     * Zdarzenie zmiany katalogu
-     *
-     * @param path ścieżka
-     */
-    void folderChanged(final String path);
-
-    /**
-     * Zdarzenie usunięcia katalogu
-     *
-     * @param path
-     */
-    void folderDeleted(final String path);
-
+    void eventFired(final FolderEventType eventType, final String path, final Long fsid);
 }

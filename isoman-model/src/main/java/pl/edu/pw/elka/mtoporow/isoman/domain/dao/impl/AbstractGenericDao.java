@@ -61,15 +61,6 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Bas
         return query.list();
     }
 
-    /**
-     * Pobiera sesję
-     *
-     * @return
-     */
-    protected Session getSession() {
-        return sessionFactory.getSession(context);
-    }
-
     @Override
     public Transaction beginTransaction() {
         return getSession().beginTransaction();
@@ -89,6 +80,20 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Bas
         return getFiltered(Arrays.asList(criteria));
     }
 
+    @Override
+    public void clearSession() {
+        getSession().clear();
+    }
+
+    /**
+     * Pobiera sesję
+     *
+     * @return
+     */
+    protected Session getSession() {
+        return sessionFactory.getSession(context);
+    }
+
     /**
      * Tworzy kryteria dla klasy
      *
@@ -106,6 +111,5 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Bas
     protected Class<T> getEntityClass() {
         ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
         return (Class) type.getActualTypeArguments()[0];
-
     }
 }

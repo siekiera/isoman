@@ -18,3 +18,11 @@ INSERT INTO przedmioty (id, id_jednostki, id_wykladowcy, kod, nazwa, opis) VALUE
 INSERT INTO osoby_na_przedmiotach (id_osoby, id_przedmiotu) VALUES (1102, 1000);
 INSERT INTO osoby_na_przedmiotach (id_osoby, id_przedmiotu) VALUES (1103, 1000);
 INSERT INTO osoby_na_przedmiotach (id_osoby, id_przedmiotu) VALUES (1107, 1000);
+
+INSERT INTO foldery(id, fsid, czy_aktualny, do_usuniecia, nazwa) VALUES (1001, 2334778, FALSE, FALSE, 'archi1');
+INSERT INTO foldery(id, fsid, czy_aktualny, do_usuniecia, nazwa) VALUES (1002, 2334824, FALSE, FALSE, 'archi2');
+INSERT INTO foldery(id, fsid, czy_aktualny, do_usuniecia, nazwa) VALUES (1003, 2334825, FALSE, FALSE, 'archi3');
+
+INSERT INTO archiwa(id, id_przedmiotu, id_folderu_glownego, nazwa, opis) VALUES (1001, 1000, 1001, 'archiwum1', 'Archiwum pierwsze');
+INSERT INTO archiwa(id, id_przedmiotu, id_folderu_glownego, nazwa, opis) VALUES (1002, 1000, 1002, 'archiwum2', 'Archiwum drugie');
+INSERT INTO archiwa(id, id_przedmiotu, id_folderu_glownego, nazwa, opis) VALUES (1003, 1000, 1003, 'archiwum3', 'Archiwum trzecie');
