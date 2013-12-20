@@ -21,10 +21,10 @@
 
     <!-- services -->
 
-    <component class-key="pl.edu.pw.elka.mtoporow.isoman.services.PersonService"
-               class="pl.edu.pw.elka.mtoporow.isoman.services.impl.PersonServiceImpl"/>
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.services.FilesystemService"
                class="pl.edu.pw.elka.mtoporow.isoman.services.impl.FilesystemServiceImpl"/>
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.services.FSUpdateService"
+               class="pl.edu.pw.elka.mtoporow.isoman.services.impl.FSUpdateServiceImpl"/>
 
     <!-- config -->
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.common.config.ConfigManager"

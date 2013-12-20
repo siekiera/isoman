@@ -56,7 +56,7 @@ public class FilesystemServiceImpl implements FilesystemService {
     @Override
     public Plik markFile(String path) throws ServiceException {
         Plik plik = getFileByPath(path, true);
-        plik.setAktualny(true);
+        plik.setAktualny(false);
         return plik;
     }
 

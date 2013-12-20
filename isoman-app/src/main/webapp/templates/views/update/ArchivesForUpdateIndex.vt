@@ -1,0 +1,35 @@
+$viewEnclosureTool.override('layout.Page')
+$pageTool.appendTitleSuffix('Lista archiwów do aktualizacji')
+
+<h3>Lista archiwów do aktualizacji</h3>
+<table>
+    <th>Nazwa archiwum</th>
+    <th>Plików zmienionych</th>
+    <th>Plików usuniętych</th>
+    <th>Katalogów zmienionych</th>
+    <th>Katalogów usuniętych</th>
+    #foreach($r in $reportList)
+        <tr>
+            <td>$r.archiwum.nazwa</td>
+            <td>$r.modifiedFiles</td>
+            <td>$r.deletedFiles</td>
+            <td>$r.modifiedFolders</td>
+            <td>$r.deletedFolders</td>
+        </tr>
+    #end
+</table>
+##
+##<table>
+##    <th>Nazwa archiwum</th>
+##    <th>Ścieżka w archiwum</th>
+##    <th>Zmieniony</th>
+##    <th>Usunięty</th>
+##    #foreach($r in $reportList)
+##        <tr>
+##            <td>$r.archiveName</td>
+##            <td>$r.pathInArchive</td>
+##            <td>$r.forUpdate</td>
+##            <td>$r.forRemoval</td>
+##        </tr>
+##    #end
+##</table>

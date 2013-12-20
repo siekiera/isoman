@@ -10,7 +10,6 @@ import pl.edu.pw.elka.mtoporow.isoman.domain.dao.OsobaDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.RolaDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba;
 import pl.edu.pw.elka.mtoporow.isoman.ol.extension.AbstractAction;
-import pl.edu.pw.elka.mtoporow.isoman.services.PersonService;
 
 /**
  * Akcja dla dodawania osób
@@ -23,14 +22,12 @@ public class AddPersonAction extends AbstractAction {
     private final Context context;
     private final OsobaDao osobaDao;
     private final RolaDao rolaDao;
-    private final PersonService personService;
     private final PasswordDigester passwordDigester;
 
-    public AddPersonAction(Context context, OsobaDao osobaDao, RolaDao rolaDao, PersonService personService, PasswordDigester passwordDigester) {
+    public AddPersonAction(Context context, OsobaDao osobaDao, RolaDao rolaDao, PasswordDigester passwordDigester) {
         this.context = context;
         this.osobaDao = osobaDao;
         this.rolaDao = rolaDao;
-        this.personService = personService;
         this.passwordDigester = passwordDigester;
     }
 
@@ -60,12 +57,5 @@ public class AddPersonAction extends AbstractAction {
 //TODO::sprawdzić czy rola istnieje w Ledge'u??
 
         processSave(osobaDao, osoba);
-
-//        try {
-//            personService.addPerson(osoba, password, roleId);
-//        } catch (ServiceException e) {
-//            throw new ProcessingException(e);
-//        }
-
     }
 }

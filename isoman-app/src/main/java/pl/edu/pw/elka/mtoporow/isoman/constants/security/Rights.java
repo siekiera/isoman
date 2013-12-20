@@ -12,4 +12,6 @@ public class Rights {
 
     public static final String VIEW_SUBJECTS = "view_subjects";
 
+    public static final String UPDATE_ARCHIVES = "update_archives";
+
 }
