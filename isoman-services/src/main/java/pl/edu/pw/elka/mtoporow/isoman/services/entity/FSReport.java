@@ -20,4 +20,44 @@ public class FSReport {
         this.forRemoval = forRemoval;
         this.forUpdate = forUpdate;
     }
+
+    public String getArchiveName() {
+        return archiveName;
+    }
+
+    public void setArchiveName(String archiveName) {
+        this.archiveName = archiveName;
+    }
+
+    public String getPathInArchive() {
+        return pathInArchive;
+    }
+
+    public void setPathInArchive(String pathInArchive) {
+        this.pathInArchive = pathInArchive;
+    }
+
+    public boolean isDirectory() {
+        return isDirectory;
+    }
+
+    public void setDirectory(boolean directory) {
+        isDirectory = directory;
+    }
+
+    public boolean isForRemoval() {
+        return forRemoval;
+    }
+
+    public void setForRemoval(boolean forRemoval) {
+        this.forRemoval = forRemoval;
+    }
+
+    public boolean isForUpdate() {
+        return forUpdate;
+    }
+
+    public void setForUpdate(boolean forUpdate) {
+        this.forUpdate = forUpdate;
+    }
 }

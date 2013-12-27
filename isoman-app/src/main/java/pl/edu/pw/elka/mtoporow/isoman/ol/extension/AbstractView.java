@@ -16,6 +16,10 @@ public class AbstractView extends AbstractBuilder {
         return RequestParameters.getRequestParameters(context);
     }
 
+    protected RequestParameters getRequestParameters() {
+        return RequestParameters.getRequestParameters(context);
+    }
+
     protected Session getSession(Context context) {
         return HibernateSessionContext.getHibernateSessionContext(context).getSession();
     }
