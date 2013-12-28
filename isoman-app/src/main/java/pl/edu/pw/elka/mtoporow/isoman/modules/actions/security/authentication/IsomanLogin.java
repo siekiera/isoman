@@ -10,10 +10,11 @@ import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
 import org.objectledge.security.SecurityContext;
 import org.objectledge.security.SecurityManager;
+import org.objectledge.security.SecurityProvider;
 import org.objectledge.security.exception.LoginFailException;
 import org.objectledge.security.exception.UnknownEntityException;
 import org.objectledge.security.exception.WrongPasswordException;
-import org.objectledge.security.object.SecurityUser;
+import org.objectledge.security.object.interfaces.SecurityUserRO;
 import org.objectledge.security.util.SecurityUtils;
 import org.objectledge.web.HttpContext;
 import org.objectledge.web.mvc.MVCContext;
@@ -35,6 +36,7 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
     private final OsobaDao osobaDao;
     private final PasswordDigester passwordDigester;
     private final ConfigManager configManager;
+    private final SecurityProvider securityProvider;
 
     /**
      * Action constructor.
@@ -44,12 +46,14 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
      * @param osobaDao
      * @param passwordDigester
      * @param configManager
+     * @param securityProvider
      */
-    public IsomanLogin(Logger logger, SecurityManager securityManager, OsobaDao osobaDao, PasswordDigester passwordDigester, ConfigManager configManager) {
+    public IsomanLogin(Logger logger, SecurityManager securityManager, OsobaDao osobaDao, PasswordDigester passwordDigester, ConfigManager configManager, SecurityProvider securityProvider) {
         super(logger, securityManager);
         this.osobaDao = osobaDao;
         this.passwordDigester = passwordDigester;
         this.configManager = configManager;
+        this.securityProvider = securityProvider;
     }
 
     @Override
@@ -109,22 +113,22 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
     private void loginSecurityUser(final String login, final String password, Context context) throws ProcessingException {
         final HttpContext httpContext = HttpContext.getHttpContext(context);
         final HttpSession session = httpContext.getRequest().getSession();
-        final SecurityUser anonymous = getAnonymousAccount();
+        final SecurityUserRO anonymous = getAnonymousAccount();
 
-        SecurityUser user = null;
+        SecurityUserRO user = null;
         boolean authenticated;
         LoginFailException exception = null;
         try {
-            user = securityManager.getUserByName(login);
+            user = securityProvider.getUserByName(login);
             checkUserAuthentication(login, password, user);
             SecurityUtils.clearSession(session);
             authenticated = true;
-        } catch (UnknownEntityException e) {
+        } catch (final UnknownEntityException e) {
             logger.debug("unknown username " + login);
             user = anonymous;
             authenticated = false;
             exception = new WrongPasswordException(login);
-        } catch (LoginFailException e) {
+        } catch (final LoginFailException e) {
             user = anonymous;
             authenticated = false;
             exception = e;
@@ -140,7 +144,7 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
             if (authenticated) {
                 securityManager.setUserLastLogin(user);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new ProcessingException(e);
         }
 
@@ -148,7 +152,7 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
             throw exception;
         }
 
-        MVCContext mvcContext = MVCContext.getMVCContext(context);
+        final MVCContext mvcContext = MVCContext.getMVCContext(context);
         mvcContext.setStage(ProcessingStage.POST_AUTHENTICATION);
     }
 }

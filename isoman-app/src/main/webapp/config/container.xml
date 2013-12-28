@@ -68,12 +68,13 @@
 
     <!--  security components -->
     <container key="securityContainer"/>
+  <component class="org.objectledge.security.SecurityProviderImpl"/>
     <component class-key="org.objectledge.security.SecurityManager"
                class="org.objectledge.security.SecurityManagerImpl">
         <parameter key="securityContainer"/>
         <parameter/>
         <parameter/>
-        <parameter/>
+    <parameter class-key="org.objectledge.security.CachedDataBackend"/>
         <parameter/>
         <parameter/>
         <parameter/>
@@ -87,8 +88,10 @@
     <component class-key="org.objectledge.security.SecurityTokenModificationPolicy"
                class="org.objectledge.security.SecurityTokenModificationPolicyImpl"/>
     <component class="org.objectledge.security.object.hibernate.HibernateDataBackend"/>
+    <component class="org.objectledge.security.CachedDataBackend">
+        <parameter class-key="org.objectledge.security.object.hibernate.HibernateDataBackend"/>
+    </component>
     <component class="pl.edu.pw.elka.mtoporow.isoman.security.DummyGroupNamingPolicy"/>
-    <!--<component class="org.objectledge.example.security.DummyGroupNamingPolicy"/>-->
     <component class="org.objectledge.web.mvc.security.AclSecurityHelper"/>
     <component class="org.objectledge.web.mvc.security.SecurityPolicyCheckingHelper"/>
 
@@ -222,6 +225,7 @@
         <parameter/>
         <parameter/>
         <parameter/>
+        <parameter/>
         <sequence>
         </sequence>
     </component>
@@ -247,6 +251,12 @@
         </sequence>
     </component>
 
+  <!-- Komponent konwersujący obiekty JSON <-> Java -->
+  <container key="JSONSerializerContainer"/>
+  <component class="org.objectledge.ajax.serializer.JSONSerializer">
+     <parameter key="JSONSerializerContainer"/>
+     <parameter/>
+  </component>
 
     <!-- // pipelines //////////////////////////////////////////////////////////////////////// -->
 

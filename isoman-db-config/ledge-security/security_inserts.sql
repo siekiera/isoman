@@ -19,16 +19,16 @@ INSERT INTO SECURITY_ROLE (ROLE_ID, ROLE_NAME) VALUES (1, 'security_root');
 --# InitialPassword password: 'root'
 
 INSERT INTO SECURITY_USER 
-    (USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval) 
+    (USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, password_change, force_change_password, max_inactive_interval)
     VALUES
-    (1, 'root', '{md5}Y6nw6nu5gFB5a2SehUgYRQ==', 'Super', 'User', false, true, 0, 900);
+    (1, 'root', '{md5}Y6nw6nu5gFB5a2SehUgYRQ==', 'Super', 'User', false, true, 0, '2013-01-01', false, 900);
 
 --# Create anonymous account
 
 INSERT INTO SECURITY_USER
-     (USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval) 
+     (USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, password_change, force_change_password,max_inactive_interval)
      VALUES
-     (8, 'anonymous', 'x', 'Anonymous', 'User', false, true, 0, 0);
+     (8, 'anonymous', 'x', 'Anonymous', 'User', false, true, 0, '2013-01-01', false, 0);
 
 
 
@@ -95,17 +95,17 @@ INSERT INTO SECURITY_ROLE (ROLE_ID, ROLE_NAME) VALUES (104, 'student');
 --# isoman users
 --Hasło: isoman123
 INSERT INTO SECURITY_USER
-(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval, resource_group_id)
-  VALUES (101, 'admin', '{md5}bfWgg9507/6CfBAkUYUyYw==', 'Super', 'User', false, true, 0, 900, 1);
+(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, password_change, force_change_password, access_counter, max_inactive_interval, resource_group_id)
+  VALUES (101, 'admin', '{md5}bfWgg9507/6CfBAkUYUyYw==', 'Super', 'User', false, true, '2013-01-01', false, 0, 900, 1);
 INSERT INTO SECURITY_USER
-(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval, resource_group_id)
-  VALUES (102, 'wykladowca', '{md5}bfWgg9507/6CfBAkUYUyYw==', 'wykladowca', ' ', false, true, 0, 900, 1);
+(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, password_change, force_change_password, access_counter, max_inactive_interval, resource_group_id)
+  VALUES (102, 'wykladowca', '{md5}bfWgg9507/6CfBAkUYUyYw==', 'wykladowca', ' ', false, true, '2013-01-01', false, 0, 900, 1);
 INSERT INTO SECURITY_USER
-(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval, resource_group_id)
-  VALUES (103, 'doktorant', '{md5}bfWgg9507/6CfBAkUYUyYw==', 'doktorant', ' ', false, true, 0, 900, 1);
+(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, password_change, force_change_password, access_counter, max_inactive_interval, resource_group_id)
+  VALUES (103, 'doktorant', '{md5}bfWgg9507/6CfBAkUYUyYw==', 'doktorant', ' ', false, true, '2013-01-01', false, 0, 900, 1);
 INSERT INTO SECURITY_USER
-(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, access_counter, max_inactive_interval, resource_group_id)
-  VALUES (104, 'student', '{md5}bfWgg9507/6CfBAkUYUyYw==', 'student', ' ', false, true, 0, 900, 1);
+(USER_ID, LOGIN_NAME, PASSWORD_VALUE, FIRST_NAME, LAST_NAME, locked, confirmed, password_change, force_change_password, access_counter, max_inactive_interval, resource_group_id)
+  VALUES (104, 'student', '{md5}bfWgg9507/6CfBAkUYUyYw==', 'student', ' ', false, true, '2013-01-01', false, 0, 900, 1);
 
 --Admin: wszystko
 INSERT INTO SECURITY_USER_RESOURCE_GROUP_ROLE ( USER_ID, RESOURCE_GROUP_ID, ROLE_ID ) VALUES (101, 1, 101);
