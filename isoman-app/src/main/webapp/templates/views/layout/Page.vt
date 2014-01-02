@@ -15,6 +15,11 @@ $pageTool.addStyleLink('style/style.css')
     #set($jslink = $link.sessionless())
     <script type="text/javascript" src="$jslink.content('lib/jquery-2.0.3.js')"></script>
     <title>$pageTool.title</title>
+
+    #foreach($scriptLink in $pageTool.scriptLinks)
+        <script type="text/javascript" src="$scriptLink.src"##
+            #if($scriptLink.charset) charset="$scriptLink.charset"#end></script>
+    #end
 </head>
 <body>
 ## menu creation

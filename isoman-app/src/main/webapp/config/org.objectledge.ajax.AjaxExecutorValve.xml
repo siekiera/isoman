@@ -19,15 +19,26 @@
         </service>
 
         <!--<service name="AjaxTest">-->
-            <!--<service-class class="org.objectledge.example.ajax.AjaxTest" security-level="NONE">-->
-                <!--<allow>-->
+        <!--<service-class class="org.objectledge.example.ajax.AjaxTest" security-level="NONE">-->
+        <!--<allow>-->
+        <!--<method name="calc"/>-->
+        <!--<method name="serverTime"/>-->
+        <!--<method name="getPeople"/>-->
+        <!--<method name="getPerson"/>-->
+        <!--</allow>-->
+        <!--</service-class>-->
+        <!--</service>-->
+
+        <service name="AjaxTest">
+            <service-class class="pl.edu.pw.elka.mtoporow.isoman.ajax.AjaxTest" security-level="NONE">
+                <allow>
                     <!--<method name="calc"/>-->
-                    <!--<method name="serverTime"/>-->
+                    <method name="serverTime"/>
                     <!--<method name="getPeople"/>-->
                     <!--<method name="getPerson"/>-->
-                <!--</allow>-->
-            <!--</service-class>-->
-        <!--</service>-->
+                </allow>
+            </service-class>
+        </service>
 
     </services>
 

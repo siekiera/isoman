@@ -1,0 +1,21 @@
+$viewEnclosureTool.override('layout.Page')
+$pageTool.appendTitleSuffix('Strona główna')
+Hello world
+
+$pageTool.addScriptLink('script/AjaxTool.js')
+
+#set ($url = $link.view('AJAX'))
+
+<script type="text/javascript">
+    function update() {
+        postAjax("$url", "AjaxTest", "serverTime", [], function(data) {
+            jQuery("\#result").html("Czas " + new Date(data));
+        });
+    }
+
+    jQuery(document).ready(update);
+
+</script>
+
+<div id="result"></div>
+<input type="submit" onclick="update()"/>

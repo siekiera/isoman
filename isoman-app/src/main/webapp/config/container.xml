@@ -232,6 +232,7 @@
 
     <!-- AJAX services -->
     <!--<component class="org.objectledge.example.ajax.AjaxTest"/>-->
+    <component class="pl.edu.pw.elka.mtoporow.isoman.ajax.AjaxTest"/>
 
 
     <!-- Components and services -->

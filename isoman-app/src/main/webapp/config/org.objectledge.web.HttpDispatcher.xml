@@ -33,7 +33,7 @@
   <rule>
     <equal>
       <variable name="pathInfo"/>
-      <string value="/view/AJAX"/>
+      <string value="/v/AJAX"/>
 	</equal>
   </rule>
 
