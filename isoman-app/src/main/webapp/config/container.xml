@@ -30,6 +30,11 @@
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.common.config.ConfigManager"
                class="pl.edu.pw.elka.mtoporow.isoman.common.config.impl.ConfigManagerImpl"/>
 
+    <!-- generator -->
+
+    <component class-key="pl.edu.pw.elka.mtoporow.isoman.generator.ArchiveGenerator"
+               class="pl.edu.pw.elka.mtoporow.isoman.generator.ArchiveGeneratorImpl"/>
+
     <!-- Hibernate -->
 
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory"
@@ -68,13 +73,13 @@
 
     <!--  security components -->
     <container key="securityContainer"/>
-  <component class="org.objectledge.security.SecurityProviderImpl"/>
+    <component class="org.objectledge.security.SecurityProviderImpl"/>
     <component class-key="org.objectledge.security.SecurityManager"
                class="org.objectledge.security.SecurityManagerImpl">
         <parameter key="securityContainer"/>
         <parameter/>
         <parameter/>
-    <parameter class-key="org.objectledge.security.CachedDataBackend"/>
+        <parameter class-key="org.objectledge.security.CachedDataBackend"/>
         <parameter/>
         <parameter/>
         <parameter/>
@@ -252,12 +257,12 @@
         </sequence>
     </component>
 
-  <!-- Komponent konwersujący obiekty JSON <-> Java -->
-  <container key="JSONSerializerContainer"/>
-  <component class="org.objectledge.ajax.serializer.JSONSerializer">
-     <parameter key="JSONSerializerContainer"/>
-     <parameter/>
-  </component>
+    <!-- Komponent konwersujący obiekty JSON <-> Java -->
+    <container key="JSONSerializerContainer"/>
+    <component class="org.objectledge.ajax.serializer.JSONSerializer">
+        <parameter key="JSONSerializerContainer"/>
+        <parameter/>
+    </component>
 
     <!-- // pipelines //////////////////////////////////////////////////////////////////////// -->
 

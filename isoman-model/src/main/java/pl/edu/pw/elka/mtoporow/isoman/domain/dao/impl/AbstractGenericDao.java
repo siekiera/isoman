@@ -55,6 +55,7 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Bas
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<T> getAll() {
         String queryString = "SELECT e FROM " + getEntityClass().getSimpleName() + "  e";
         Query query = getSession().createQuery(queryString);
@@ -67,6 +68,7 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Bas
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<T> getFiltered(List<Criterion> criteria) {
         Criteria hbCriteria = getSession().createCriteria(getEntityClass());
         for (Criterion criterion : criteria) {

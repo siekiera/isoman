@@ -4,6 +4,9 @@ $pageTool.appendTitleSuffix('Lista archiwów do aktualizacji')
 #set( $contentLink = $link.view('update.ArchiveUpdatedContent'))
 #set( $contentLinkAllowed = $policy.check($contentLink, false))
 
+#set( $updateLink = $link.view('update.ArchivesForUpdateIndex').action('update.UpdateArchiveAction'))
+#set( $updateLinkAllowed = $policy.check($updateLink, false))
+
 <h3>Lista archiwów do aktualizacji</h3>
 <table>
     <th>Nazwa archiwum</th>
@@ -12,6 +15,7 @@ $pageTool.appendTitleSuffix('Lista archiwów do aktualizacji')
     <th>Katalogów zmienionych</th>
     <th>Katalogów usuniętych</th>
     <th>Szczegóły</th>
+    <th>Aktualizuj</th>
     #foreach($r in $reportList)
         <tr>
             <td>$r.archiwum.nazwa</td>
@@ -20,6 +24,7 @@ $pageTool.appendTitleSuffix('Lista archiwów do aktualizacji')
             <td>$r.modifiedFolders</td>
             <td>$r.deletedFolders</td>
             <td><a href="$contentLink.set("archiveId", $r.archiwum.id)">Szczegóły</a></td>
+            <td><a href="$updateLink.set("archiveId", $r.archiwum.id)">Aktualizuj</a></td>
         </tr>
     #end
 </table>

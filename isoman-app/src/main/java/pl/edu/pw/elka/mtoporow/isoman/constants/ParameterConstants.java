@@ -8,4 +8,5 @@ package pl.edu.pw.elka.mtoporow.isoman.constants;
  */
 public class ParameterConstants {
     public static final String ARCHIVE_ID = "archiveId";
+    public static final String SWITCH_VERSIONS = "switchVersions";
 }

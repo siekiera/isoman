@@ -1,14 +1,21 @@
 package pl.edu.pw.elka.mtoporow.isoman.services.impl;
 
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.ArchiwumDao;
+import pl.edu.pw.elka.mtoporow.isoman.domain.dao.WersjaArchiwumDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Plik;
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.WersjaArchiwum;
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.id.WersjaArchiwumId;
+import pl.edu.pw.elka.mtoporow.isoman.generator.ArchiveGenerator;
+import pl.edu.pw.elka.mtoporow.isoman.generator.GeneratorException;
 import pl.edu.pw.elka.mtoporow.isoman.services.FSUpdateService;
 import pl.edu.pw.elka.mtoporow.isoman.services.entity.ArchiveReport;
 import pl.edu.pw.elka.mtoporow.isoman.services.entity.FSReport;
+import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,9 +27,13 @@ import java.util.List;
 public class FSUpdateServiceImpl implements FSUpdateService {
 
     private final ArchiwumDao archiwumDao;
+    private final WersjaArchiwumDao wersjaArchiwumDao;
+    private final ArchiveGenerator archiveGenerator;
 
-    public FSUpdateServiceImpl(ArchiwumDao archiwumDao) {
+    public FSUpdateServiceImpl(ArchiwumDao archiwumDao, WersjaArchiwumDao wersjaArchiwumDao, ArchiveGenerator archiveGenerator) {
         this.archiwumDao = archiwumDao;
+        this.wersjaArchiwumDao = wersjaArchiwumDao;
+        this.archiveGenerator = archiveGenerator;
     }
 
 
@@ -46,8 +57,28 @@ public class FSUpdateServiceImpl implements FSUpdateService {
     }
 
     @Override
-    public void update(Archiwum archiwum) {
+    public WersjaArchiwum update(final long archiveId, boolean switchVersions) throws ServiceException {
+        Archiwum archiwum = archiwumDao.getById(archiveId);
+        WersjaArchiwum wersjaArchiwum = wersjaArchiwumDao.getLast(archiwum.getId());
+        long nextVer;
+        if (wersjaArchiwum == null) {
+            switchVersions = false;
+            nextVer = 0;
+        } else {
+            nextVer = (wersjaArchiwum.getId().getNr()) + 1;
+        }
+        //generuj nowe archiwum
+        String nextLoc;
+        try {
+            nextLoc = archiveGenerator.generate(archiwum.getFolderGlowny().getNazwa(), nextVer);
+        } catch (GeneratorException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+        //zapisz
+        WersjaArchiwum newVersion = newArchiveVersion(archiwum, nextVer, nextLoc, switchVersions);
+        //zaktualizuj stukturę katalogów
         updateFolder(archiwum.getFolderGlowny());
+        return newVersion;
     }
 
     /**
@@ -75,5 +106,31 @@ public class FSUpdateServiceImpl implements FSUpdateService {
         folder.setPliki(newFiles);
     }
 
+    /**
+     * Tworzy nową wersję archiwum
+     *
+     * @param archiwum
+     * @param nextVer
+     * @param nextLoc
+     * @param switchVersion
+     * @return
+     */
+    private WersjaArchiwum newArchiveVersion(Archiwum archiwum, long nextVer, String nextLoc, boolean switchVersion) {
+        WersjaArchiwum wersjaArchiwum = new WersjaArchiwum();
+        wersjaArchiwum.setId(new WersjaArchiwumId(nextVer, archiwum.getId()));
+        wersjaArchiwum.setArchiwum(archiwum);
+        wersjaArchiwum.setDataUtworzenia(new Date());
+        wersjaArchiwum.setSciezka(nextLoc);
+        wersjaArchiwum.setPokazywana(switchVersion);
 
+        //zaznacz starą wersję jako nieaktywną
+        if (switchVersion) {
+            WersjaArchiwum current = wersjaArchiwumDao.getCurrent(archiwum.getId());
+            current.setPokazywana(false);
+        }
+
+        //dodaj
+//        archiwum.getWersje().add(wersjaArchiwum);
+        return wersjaArchiwum;
+    }
 }

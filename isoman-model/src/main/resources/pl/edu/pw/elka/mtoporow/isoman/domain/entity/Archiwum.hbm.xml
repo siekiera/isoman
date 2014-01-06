@@ -17,7 +17,11 @@
             <column name="id_przedmiotu"/>
         </many-to-one>
         <many-to-one name="folderGlowny" class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder"
-                    access="field" column="id_folderu_glownego"/>
+                     access="field" column="id_folderu_glownego"/>
+        <bag name="wersje" access="field" inverse="true">
+            <key column="id_archiwum"/>
+            <one-to-many class="pl.edu.pw.elka.mtoporow.isoman.domain.entity.WersjaArchiwum"/>
+        </bag>
 
     </class>
 </hibernate-mapping>

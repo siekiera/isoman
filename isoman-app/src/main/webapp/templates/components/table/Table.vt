@@ -1,0 +1,19 @@
+## Komponent tabelki
+## Autor: Michał Toporowski
+##
+## Parametry: tableItems
+
+<table>
+    <th>Nazwa archiwum</th>
+    <th>Ścieżka w archiwum</th>
+    <th>Zmieniony</th>
+    <th>Usunięty</th>
+    #foreach($item in $tableItems)
+        <tr>
+            <td>$r.archiveName</td>
+            <td>$r.pathInArchive</td>
+            <td>$r.forUpdate</td>
+            <td>$r.forRemoval</td>
+        </tr>
+    #end
+</table>

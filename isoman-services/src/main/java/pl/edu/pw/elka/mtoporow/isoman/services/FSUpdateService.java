@@ -1,8 +1,10 @@
 package pl.edu.pw.elka.mtoporow.isoman.services;
 
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum;
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.WersjaArchiwum;
 import pl.edu.pw.elka.mtoporow.isoman.services.entity.ArchiveReport;
 import pl.edu.pw.elka.mtoporow.isoman.services.entity.FSReport;
+import pl.edu.pw.elka.mtoporow.isoman.services.exception.ServiceException;
 
 import java.util.List;
 
@@ -33,7 +35,9 @@ public interface FSUpdateService {
     /**
      * Aktualizuje strukturę dla danego archiwum
      *
-     * @param archiwum
+     * @param archiveId      id archiwum
+     * @param switchVersions czy przełączyć pokazywaną wersję
+     * @return encja nowej wersji archiwum
      */
-    public void update(final Archiwum archiwum);
+    public WersjaArchiwum update(final long archiveId, final boolean switchVersions) throws ServiceException;
 }

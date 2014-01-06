@@ -38,5 +38,6 @@
         <module>isoman-app</module>
         <module>isoman-common</module>
         <module>isoman-notifier</module>
+        <module>isoman-generator</module>
     </modules>
 </project>

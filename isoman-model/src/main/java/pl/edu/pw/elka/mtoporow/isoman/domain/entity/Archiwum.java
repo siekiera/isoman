@@ -1,5 +1,7 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.entity;
 
+import java.util.List;
+
 /**
  * Encja archiwum
  * Data utworzenia: 03.11.13, 12:27
@@ -13,6 +15,7 @@ public class Archiwum extends UniqueEntity<Long> {
     private String opis;
     private Przedmiot przedmiot;
     private Folder folderGlowny;
+    private List<WersjaArchiwum> wersje;
 
     @Override
     public Long getId() {
@@ -54,5 +57,13 @@ public class Archiwum extends UniqueEntity<Long> {
 
     public void setFolderGlowny(Folder folderGlowny) {
         this.folderGlowny = folderGlowny;
+    }
+
+    public List<WersjaArchiwum> getWersje() {
+        return wersje;
+    }
+
+    public void setWersje(List<WersjaArchiwum> wersje) {
+        this.wersje = wersje;
     }
 }
