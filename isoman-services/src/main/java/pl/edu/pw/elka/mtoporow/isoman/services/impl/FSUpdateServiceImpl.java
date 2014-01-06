@@ -1,6 +1,8 @@
 package pl.edu.pw.elka.mtoporow.isoman.services.impl;
 
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.ArchiwumDao;
+import pl.edu.pw.elka.mtoporow.isoman.domain.dao.FolderDao;
+import pl.edu.pw.elka.mtoporow.isoman.domain.dao.PlikDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.WersjaArchiwumDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Archiwum;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Folder;
@@ -28,11 +30,15 @@ public class FSUpdateServiceImpl implements FSUpdateService {
 
     private final ArchiwumDao archiwumDao;
     private final WersjaArchiwumDao wersjaArchiwumDao;
+    private final FolderDao folderDao;
+    private final PlikDao plikDao;
     private final ArchiveGenerator archiveGenerator;
 
-    public FSUpdateServiceImpl(ArchiwumDao archiwumDao, WersjaArchiwumDao wersjaArchiwumDao, ArchiveGenerator archiveGenerator) {
+    public FSUpdateServiceImpl(ArchiwumDao archiwumDao, WersjaArchiwumDao wersjaArchiwumDao, FolderDao folderDao, PlikDao plikDao, ArchiveGenerator archiveGenerator) {
         this.archiwumDao = archiwumDao;
         this.wersjaArchiwumDao = wersjaArchiwumDao;
+        this.folderDao = folderDao;
+        this.plikDao = plikDao;
         this.archiveGenerator = archiveGenerator;
     }
 
@@ -78,6 +84,8 @@ public class FSUpdateServiceImpl implements FSUpdateService {
         WersjaArchiwum newVersion = newArchiveVersion(archiwum, nextVer, nextLoc, switchVersions);
         //zaktualizuj stukturę katalogów
         updateFolder(archiwum.getFolderGlowny());
+        //zapisz
+        wersjaArchiwumDao.save(wersjaArchiwum);
         return newVersion;
     }
 
@@ -94,12 +102,16 @@ public class FSUpdateServiceImpl implements FSUpdateService {
                 updateFolder(child);
                 child.setAktualny(true);
                 newChildren.add(child);
+            } else {
+                folderDao.deleteTree(child);
             }
         }
         for (Plik child : folder.getPliki()) {
             if (!child.getDoUsuniecia()) {
                 child.setAktualny(true);
                 newFiles.add(child);
+            } else {
+                plikDao.delete(child);
             }
         }
         folder.setPodrzedne(newChildren);

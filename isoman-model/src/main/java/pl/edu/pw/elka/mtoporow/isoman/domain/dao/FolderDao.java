@@ -17,4 +17,11 @@ public interface FolderDao extends BaseUniqueDao<Folder, Long> {
      * @return
      */
     Folder getByFsid(final Long fsid);
+
+    /**
+     * Usuwa folder i wszystkie jego podfoldery
+     *
+     * @param folder
+     */
+    void deleteTree(final Folder folder);
 }

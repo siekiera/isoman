@@ -32,4 +32,15 @@ public class FolderDaoBean extends AbstractGenericUniqueDao<Folder, Long> implem
         List<Folder> folders = getFiltered(Restrictions.eq("fsid", fsid));
         return CollectionTool.getFirst(folders);
     }
+
+    @Override
+    public void deleteTree(Folder folder) {
+        if (!CollectionTool.containsElements(folder.getPodrzedne())) {
+            delete(folder);
+        } else {
+            for (Folder child : folder.getPodrzedne()) {
+                deleteTree(child);
+            }
+        }
+    }
 }
