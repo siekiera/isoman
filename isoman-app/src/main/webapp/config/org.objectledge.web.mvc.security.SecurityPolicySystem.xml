@@ -60,4 +60,8 @@
 		</group>
 		<view>demo.security.SecurityPolicyOnly</view>
 	  </policy>
+
+      <policy name="policy" ssl="false" auth="true">
+          <view>subject.SubjectIndex</view>
+      </policy>
 </config>

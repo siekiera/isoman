@@ -1,6 +1,7 @@
 $viewEnclosureTool.top()
 $pageTool.insertTitlePrefix('IsoMan - ')
 $pageTool.addStyleLink('style/style.css')
+$pageTool.addStyleLink('style/menu.css')
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -22,32 +23,10 @@ $pageTool.addStyleLink('style/style.css')
     #end
 </head>
 <body>
-## menu creation
-##<div id="secure-menu"></div>
-##    $component.embed("security.menu.SecureMenu",[['cparam', $cparam]])
-##
-##    #result()
 <table id="maintbl">
     <tr>
-        <td id="menu">
-        ##            <span style="bold">Menu</span>
-            <ul>
-                <li><a href="$link.view('Index')">Strona główna</a></li>
-                <li>Osoby
-                    <ul>
-                        <li><a href="$link.view('person.PersonIndex')">Lista</a></li>
-                        <li><a href="$link.view('person.AddPerson')">Dodaj</a></li>
-                    </ul>
-                </li>
-                <li>Przedmioty
-                    <ul>
-                        <li><a href="$link.view('subject.SubjectIndex')">Lista</a></li>
-                    </ul>
-                </li>
-                <li><a href="$link.view('update.ArchivesForUpdateIndex')">Aktualizacja</a></li>
-                <li><a href="$link.view('Login')">Zaloguj</a></li>
-                <li><a href="$link.view('Login').action('security.authentication.Logout')">Wyloguj</a></li>
-            </ul>
+        <td>
+            $component.embed('Menu')
         </td>
     </tr>
     <tr>

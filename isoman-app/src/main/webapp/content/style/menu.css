@@ -1,0 +1,51 @@
+
+#maintbl {
+    margin: 0 auto;
+    width: 1000px;
+    max-width: 1000px;
+}
+
+#menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+#menu li {
+    list-style: none;
+    display: inline;
+    position: relative;
+    font-family: Helvetica;
+    margin: 0 15px;
+    padding: 0 5px;
+}
+
+#menu li:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+#menu li ul {
+    display: none;
+    position: absolute;
+    background-color: #000000;
+    top: 100%;
+    left: 0; /**/
+    padding: 0;
+    margin: 0;
+    width: 220px;
+    text-align: left;
+}
+
+#menu li:hover > ul {
+    display: block;
+}
+
+#menu li ul li, #menu li ul li a {
+    float: none;
+    display: block;
+}
+
+#menu a {
+    color: inherit;
+    text-decoration: inherit;
+}

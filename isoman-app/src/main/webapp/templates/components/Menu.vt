@@ -1,0 +1,34 @@
+##
+## Komponent menu
+## Autor: Michał Toporowski, 10.01.2014
+##
+
+#macro(putname $item)
+    #if($item.action)
+        <a href="$link.view($item.view).action($item.action)">$item.name</a>
+    #elseif($item.view)
+        <a href="$link.view($item.view)">$item.name</a>
+    #else
+        $item.name
+    #end
+#end
+
+#macro(putmenu $item)
+    #if($item.name)
+        <li>#putname($item)
+    #end
+    #if($item.subItems)
+        <ul>
+        #foreach($subitem in $item.subItems)
+            #putmenu($subitem)
+        #end
+        </ul>
+    #end
+    #if($item.name)
+        </li>
+    #end
+#end
+
+<div id="menu">
+    #putmenu($menu)
+</div>
