@@ -40,6 +40,9 @@
     <component class-key="pl.edu.pw.elka.mtoporow.isoman.domain.session.SessionFactory"
                class="pl.edu.pw.elka.mtoporow.isoman.domain.session.impl.SessionFactoryImpl"/>
 
+    <!-- Other webapp components -->
+    <component class="pl.edu.pw.elka.mtoporow.isoman.security.AuthenticationChecker"/>
+
     <!-- // hibernate ///////////////////////////////////////////////////////////////// -->
 
     <container key="hibernateContainer"/>

@@ -30,6 +30,11 @@ $pageTool.addStyleLink('style/menu.css')
         </td>
     </tr>
     <tr>
+        <td>
+            $component.embed('LoginInfo')
+        </td>
+    </tr>
+    <tr>
         <td id="content">
             $embeddedPlaceholder
         </td>

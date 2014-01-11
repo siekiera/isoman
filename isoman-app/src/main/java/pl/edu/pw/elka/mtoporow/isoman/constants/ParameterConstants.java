@@ -7,6 +7,9 @@ package pl.edu.pw.elka.mtoporow.isoman.constants;
  * @author Michał Toporowski
  */
 public class ParameterConstants {
+    //VTL
     public static final String ARCHIVE_ID = "archiveId";
     public static final String SWITCH_VERSIONS = "switchVersions";
+    //sesja
+    public static final String SESSION_PERSON_ID = "personId";
 }

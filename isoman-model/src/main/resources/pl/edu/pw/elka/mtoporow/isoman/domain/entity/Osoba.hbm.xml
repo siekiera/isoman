@@ -4,7 +4,7 @@
 <hibernate-mapping>
     <class name="pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba" table="osoby">
         <id name="id" type="java.lang.Long">
-            <column name="id"/>
+            <column name="id" not-null="true"/>
             <generator class="sequence">
                 <param name="sequence">osoby_seq</param>
             </generator>

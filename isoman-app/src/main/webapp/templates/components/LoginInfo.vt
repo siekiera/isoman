@@ -1,0 +1,15 @@
+##
+## Komponent wyświetlający informacje o zalogowanym użytkowniku
+## Autor: Michał Toporowski, 11.01.14
+##
+
+<div class="logininfo">
+    Witamy w Isomanie.
+    #if($person)
+        Zalogowano jako $person.imie $person.nazwisko ($person.login), rola: $role.
+    #elseif ($role)
+        Zalogowano jako użytkownik wewnętrzny $role.
+    #else
+        Niezalogowano.
+    #end
+</div>

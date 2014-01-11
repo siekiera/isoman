@@ -11,10 +11,7 @@ import java.util.List;
  */
 public interface OsobaDao extends BaseUniqueDao<Osoba, Long> {
     @Deprecated
-    public Osoba getById(Long id);
-
     public List<Osoba> getAllOsobas();
-
 
     public void deleteById(Long id);
 

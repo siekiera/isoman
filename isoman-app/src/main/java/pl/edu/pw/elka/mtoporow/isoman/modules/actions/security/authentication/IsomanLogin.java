@@ -20,6 +20,7 @@ import org.objectledge.web.HttpContext;
 import org.objectledge.web.mvc.MVCContext;
 import org.objectledge.web.mvc.ProcessingStage;
 import pl.edu.pw.elka.mtoporow.isoman.common.config.ConfigManager;
+import pl.edu.pw.elka.mtoporow.isoman.constants.ParameterConstants;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.OsobaDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba;
 
@@ -58,8 +59,9 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
 
     @Override
     public void process(Context context) throws ProcessingException {
-
         final Parameters parameters = RequestParameters.getRequestParameters(context);
+        final HttpContext httpContext = HttpContext.getHttpContext(context);
+        final HttpSession session = httpContext.getRequest().getSession();
         final String login = parameters.get(LOGIN_PARAM, null);
         final String password = parameters.get(PASSWORD_PARAM, null);
         parameters.remove(LOGIN_PARAM);
@@ -88,7 +90,12 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
             securityLogin = osoba.getRola().getKod();
             securityPass = configManager.get("login.security.user.password");
         }
-        loginSecurityUser(securityLogin, securityPass, context);
+        //zaloguj użytkownika systemu bezpieczeństwa Ledge'a
+        loginSecurityUser(securityLogin, securityPass, context, session);
+        if (osoba != null) {
+            //zapisz dodatkowo do sesji id osoby isomana
+            session.setAttribute(ParameterConstants.SESSION_PERSON_ID, osoba.getId());
+        }
     }
 
     /**
@@ -110,9 +117,7 @@ public class IsomanLogin extends BaseAuthenticationAction implements Valve {
      * @param context
      * @throws ProcessingException
      */
-    private void loginSecurityUser(final String login, final String password, Context context) throws ProcessingException {
-        final HttpContext httpContext = HttpContext.getHttpContext(context);
-        final HttpSession session = httpContext.getRequest().getSession();
+    private void loginSecurityUser(final String login, final String password, final Context context, final HttpSession session) throws ProcessingException {
         final SecurityUserRO anonymous = getAnonymousAccount();
 
         SecurityUserRO user = null;
