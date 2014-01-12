@@ -20,20 +20,6 @@ body {
     text-align: justify;
 }
 
-table.prheader {
-    width: 900px;
-}
-
-p.prsort {
-    text-align: right;
-}
-
-table.prinfo {
-    border: 1px solid #000000;
-    width: 900px;
-    margin: 5px auto;
-}
-
 table.info {
     width: 900px;
     margin: 5px auto;
@@ -101,6 +87,14 @@ table.mainpage td {
 
 table.mainpage img {
     max-width: 200px;
+}
+
+.action-result {
+    color: #009900;
+}
+
+.action-error-result {
+    color: #990000;
 }
 
 

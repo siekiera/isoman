@@ -34,9 +34,10 @@ public class ArchiveGeneratorImpl implements ArchiveGenerator {
         String destDir = appendPath(outputRoot, source);
         String filename = versionNumber + ".iso";
         String isoDest = appendPath(destDir, filename);
+        String relDest = appendPath(source, filename);
         createFoldersIfNotExist(destDir);
         ExecutionUtil.exec(isoDest, appendPath(sourceRoot, source));
-        return isoDest;
+        return relDest;
     }
 
     /**

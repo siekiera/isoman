@@ -66,6 +66,7 @@ public class FSUpdateServiceImpl implements FSUpdateService {
     public WersjaArchiwum update(final long archiveId, boolean switchVersions) throws ServiceException {
         Archiwum archiwum = archiwumDao.getById(archiveId);
         WersjaArchiwum wersjaArchiwum = wersjaArchiwumDao.getLast(archiwum.getId());
+        boolean newActive = switchVersions;
         long nextVer;
         if (wersjaArchiwum == null) {
             switchVersions = false;
@@ -81,11 +82,14 @@ public class FSUpdateServiceImpl implements FSUpdateService {
             throw new ServiceException(e.getMessage(), e);
         }
         //zapisz
-        WersjaArchiwum newVersion = newArchiveVersion(archiwum, nextVer, nextLoc, switchVersions);
+        WersjaArchiwum newVersion = new WersjaArchiwum(new WersjaArchiwumId(nextVer, archiwum.getId()), new Date(), newActive, nextLoc, null, archiwum);
+        if (switchVersions) {
+            deactivateCurrent(archiwum.getId());
+        }
         //zaktualizuj stukturę katalogów
         updateFolder(archiwum.getFolderGlowny());
         //zapisz
-        wersjaArchiwumDao.save(wersjaArchiwum);
+        wersjaArchiwumDao.save(newVersion);
         return newVersion;
     }
 
@@ -119,30 +123,14 @@ public class FSUpdateServiceImpl implements FSUpdateService {
     }
 
     /**
-     * Tworzy nową wersję archiwum
+     * Deaktywuje bieżącą wersję
      *
-     * @param archiwum
-     * @param nextVer
-     * @param nextLoc
-     * @param switchVersion
-     * @return
+     * @param archiveId id archiwum
      */
-    private WersjaArchiwum newArchiveVersion(Archiwum archiwum, long nextVer, String nextLoc, boolean switchVersion) {
-        WersjaArchiwum wersjaArchiwum = new WersjaArchiwum();
-        wersjaArchiwum.setId(new WersjaArchiwumId(nextVer, archiwum.getId()));
-        wersjaArchiwum.setArchiwum(archiwum);
-        wersjaArchiwum.setDataUtworzenia(new Date());
-        wersjaArchiwum.setSciezka(nextLoc);
-        wersjaArchiwum.setPokazywana(switchVersion);
-
-        //zaznacz starą wersję jako nieaktywną
-        if (switchVersion) {
-            WersjaArchiwum current = wersjaArchiwumDao.getCurrent(archiwum.getId());
+    private void deactivateCurrent(final long archiveId) {
+        WersjaArchiwum current = wersjaArchiwumDao.getCurrent(archiveId);
+        if (current != null) {
             current.setPokazywana(false);
         }
-
-        //dodaj
-//        archiwum.getWersje().add(wersjaArchiwum);
-        return wersjaArchiwum;
     }
 }

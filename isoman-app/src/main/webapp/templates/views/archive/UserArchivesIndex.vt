@@ -1,6 +1,8 @@
 $viewEnclosureTool.override('layout.Page')
 $pageTool.appendTitleSuffix('Lista podręczników')
 
+#set ($dlink = $link.view('archive.UserArchivesIndex').action('GetFile'))
+
 <h3>Lista podręczników</h3>
 #if($archives)
 <table #tableclass()>
@@ -11,7 +13,7 @@ $pageTool.appendTitleSuffix('Lista podręczników')
         <tr #rowclass($velocityCount)>
             <td>$archive.nazwa</td>
             <td>$archive.przedmiot.nazwa</td>
-            <td><a href="#">Pobierz</a></td>
+            <td><a href="$dlink.set('archiveId', $archive.id)">Pobierz</a></td>
         </tr>
     #end
 </table>

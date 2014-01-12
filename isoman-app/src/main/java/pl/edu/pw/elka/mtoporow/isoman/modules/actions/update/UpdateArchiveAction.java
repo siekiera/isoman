@@ -32,6 +32,7 @@ public class UpdateArchiveAction extends AbstractAction {
         try {
             fsUpdateService.update(archiveId, switchVersions);
             tx.commit();
+            getTemplatingContext(context).put("result", "Zaktualizowano archiwum");
         } catch (Exception e) {
             tx.rollback();
             throw new ProcessingException(e);

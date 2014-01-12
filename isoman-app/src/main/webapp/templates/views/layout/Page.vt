@@ -37,6 +37,7 @@ $pageTool.addStyleLink('style/table.css')
     </tr>
     <tr>
         <td id="content">
+            #result()
             $embeddedPlaceholder
         </td>
     </tr>

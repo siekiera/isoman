@@ -18,6 +18,18 @@ public class WersjaArchiwum extends UniqueEntity<WersjaArchiwumId> {
     private String opis;
     private Archiwum archiwum;
 
+    public WersjaArchiwum() {
+    }
+
+    public WersjaArchiwum(WersjaArchiwumId id, Date dataUtworzenia, Boolean pokazywana, String sciezka, String opis, Archiwum archiwum) {
+        this.id = id;
+        this.dataUtworzenia = dataUtworzenia;
+        this.pokazywana = pokazywana;
+        this.sciezka = sciezka;
+        this.opis = opis;
+        this.archiwum = archiwum;
+    }
+
     public WersjaArchiwumId getId() {
         return id;
     }
