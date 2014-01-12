@@ -106,6 +106,17 @@ public abstract class AbstractGenericDao<T extends GenericEntity> implements Bas
     }
 
     /**
+     * Wyciąga listę z kryteriów
+     *
+     * @param criteria kryteria
+     * @return lista wyników
+     */
+    @SuppressWarnings("unchecked")
+    protected List<T> evaluateCriteria(final Criteria criteria) {
+        return criteria.list();
+    }
+
+    /**
      * Pobiera klasę encji
      *
      * @return

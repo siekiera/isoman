@@ -16,8 +16,15 @@ public class MenuItems {
         MENU_ROOT.addSubItem(new MenuItem("Strona główna", "Index"));
 
         MenuItem subjectsMenu = new MenuItem("Przedmioty", null);
-        subjectsMenu.addSubItem(new MenuItem("Lista", "subject.SubjectIndex"));
+        subjectsMenu.addSubItem(new MenuItem("Lista", "subject.UserSubjectIndex"));
+        subjectsMenu.addSubItem(new MenuItem("Zarządzanie", "subject.SubjectIndex"));
+
         MENU_ROOT.addSubItem(subjectsMenu);
+
+        MenuItem manualsMenu = new MenuItem("Podręczniki", null);
+        manualsMenu.addSubItem(new MenuItem("Lista", "archive.UserArchivesIndex"));
+
+        MENU_ROOT.addSubItem(manualsMenu);
 
         MenuItem personsMenu = new MenuItem("Osoby", null);
         personsMenu.addSubItem(new MenuItem("Lista", "person.PersonIndex"));
@@ -33,6 +40,9 @@ public class MenuItems {
         return MENU_ROOT;
     }
 
+    /**
+     * Element menu
+     */
     public static class MenuItem {
         private String name;
         private String view;

@@ -26,7 +26,7 @@ public class UpdateArchiveAction extends AbstractAction {
     public void process(Context context) throws ProcessingException {
         RequestParameters requestParameters = getRequestParameters(context);
         long archiveId = requestParameters.getLong(ParameterConstants.ARCHIVE_ID);
-        boolean switchVersions = requestParameters.getBoolean(ParameterConstants.SWITCH_VERSIONS, false);
+        boolean switchVersions = requestParameters.getBoolean(ParameterConstants.SWITCH_VERSIONS, true);
         //wygeneruj archiwum i zaktualizuj wersje
         Transaction tx = getSession(context).beginTransaction();
         try {

@@ -1,0 +1,20 @@
+$viewEnclosureTool.override('layout.Page')
+$pageTool.appendTitleSuffix('Lista podręczników')
+
+<h3>Lista podręczników</h3>
+#if($archives)
+<table>
+    <th>Nazwa</th>
+    <th>Przedmiot</th>
+    <th>Pobierz</th>
+    #foreach($archive in $archives)
+        <tr>
+            <td>$archive.nazwa</td>
+            <td>$archive.przedmiot.nazwa</td>
+            <td><a href="#">Pobierz</a></td>
+        </tr>
+    #end
+</table>
+#else
+Brak podręczników do wyświetlenia.
+#end

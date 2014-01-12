@@ -1,0 +1,20 @@
+$viewEnclosureTool.override('layout.Page')
+$pageTool.appendTitleSuffix('Lista przedmiotów')
+
+<h3>Lista przedmiotów</h3>
+#if($subjects)
+<table>
+    <th>Kod</th>
+    <th>Nazwa</th>
+    <th>Podręczniki</th>
+    #foreach($subject in $subjects)
+        <tr>
+            <td>$subject.kod</td>
+            <td>$subject.nazwa</td>
+            <td><a href="$link.view('archive.UserArchivesIndex').set('subjectId', $subject.id)">Podręczniki</a></td>
+        </tr>
+    #end
+</table>
+#else
+Brak przedmiotów do wyświetlenia.
+#end

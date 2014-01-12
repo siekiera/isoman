@@ -9,43 +9,41 @@ import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.BuildException;
 import pl.edu.pw.elka.mtoporow.isoman.constants.security.Rights;
-import pl.edu.pw.elka.mtoporow.isoman.domain.dao.JODao;
-import pl.edu.pw.elka.mtoporow.isoman.domain.entity.JednostkaOrganizacyjna;
+import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Przedmiot;
 import pl.edu.pw.elka.mtoporow.isoman.ol.extension.AbstractView;
+import pl.edu.pw.elka.mtoporow.isoman.security.AuthenticationChecker;
 
-import java.util.List;
-
+import java.util.Collection;
 
 /**
- * Indeks przedmiotów
- * Data utworzenia: 10.11.13, 21:58
+ * Indeks przedmiotów dostępnych dla użytkownika
+ * Data utworzenia: 11.01.14, 12:57
  *
  * @author Michał Toporowski
  */
 @AccessConditions(
-        @AccessCondition(permissions = {Rights.MANAGE_PERSONS})
+        @AccessCondition(permissions = {Rights.VIEW_SUBJECTS})
 )
-public class SubjectIndex extends AbstractView {
-
+public class UserSubjectIndex extends AbstractView {
     private static final Logger logger = Logger.getLogger(SubjectIndex.class);
 
-    private final JODao joDao;
+    private final AuthenticationChecker authenticationChecker;
 
-    public SubjectIndex(Context context, JODao joDao) {
+    public UserSubjectIndex(Context context, AuthenticationChecker authenticationChecker) {
         super(context);
-        this.joDao = joDao;
+        this.authenticationChecker = authenticationChecker;
     }
 
     @Override
     public String build(Template template, String embeddedBuildResults) throws BuildException, ProcessingException {
-        TemplatingContext templatingContext = getTemplatingContext();
-        //FIXME::zmienić
-        JednostkaOrganizacyjna jo = joDao.getById(5000L);
-        List<Przedmiot> subjects = jo.getPrzedmioty();
-        logger.info("Obtained: " + subjects);
-        templatingContext.put("subjects", subjects);
-        templatingContext.put("unitname", jo.getNazwa());
+        final TemplatingContext templatingContext = getTemplatingContext();
+        final Osoba loggedPerson = authenticationChecker.getLoggedPerson(context);
+        if (loggedPerson != null) {
+            Collection<Przedmiot> subjects = loggedPerson.getPrzedmioty();
+            logger.debug("Obtained: " + subjects);
+            putIfNotEmpty(templatingContext, "subjects", subjects);
+        }
         return super.build(template, embeddedBuildResults);
     }
 }

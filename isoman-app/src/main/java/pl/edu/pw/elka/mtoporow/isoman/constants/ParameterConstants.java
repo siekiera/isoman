@@ -10,6 +10,7 @@ public class ParameterConstants {
     //VTL
     public static final String ARCHIVE_ID = "archiveId";
     public static final String SWITCH_VERSIONS = "switchVersions";
+    public static final String SUBJECT_ID = "subjectId";
     //sesja
     public static final String SESSION_PERSON_ID = "personId";
 }

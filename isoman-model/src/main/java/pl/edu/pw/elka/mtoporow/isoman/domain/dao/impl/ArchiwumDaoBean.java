@@ -1,7 +1,6 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl;
 
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.objectledge.context.Context;
 import pl.edu.pw.elka.mtoporow.isoman.common.util.CollectionTool;
@@ -34,7 +33,34 @@ public class ArchiwumDaoBean extends AbstractGenericUniqueDao<Archiwum, Long> im
         Criteria criteria = createCriteria();
         criteria.createAlias("folderGlowny", "folder")
                 .add(Restrictions.eq("folder.nazwa", rootPath));
-        List<Archiwum> archiwa = criteria.list();
+        List<Archiwum> archiwa = evaluateCriteria(criteria);
         return CollectionTool.getFirst(archiwa);
     }
+
+    @Override
+    public List<Archiwum> getUserArchives(final Long personId) {
+        return evaluateCriteria(createUserArchivesCriteria(personId));
+    }
+
+    @Override
+    public List<Archiwum> getUserArchives(final Long personId, final Long subjectId) {
+        Criteria criteria = createUserArchivesCriteria(personId)
+                .add(Restrictions.eq("p.id", subjectId));
+        return evaluateCriteria(criteria);
+    }
+
+    /**
+     * Tworzy kryteria wyszukujące archiwa użytkownika
+     *
+     * @param personId
+     * @return
+     */
+    private Criteria createUserArchivesCriteria(final Long personId) {
+        return createCriteria()
+                .createAlias("przedmiot", "p")
+                .createAlias("p.uczestnicy", "u")
+                .add(Restrictions.eq("u.id", personId));
+    }
+
+
 }
