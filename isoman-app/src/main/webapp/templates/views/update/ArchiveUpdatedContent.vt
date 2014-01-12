@@ -3,17 +3,17 @@ $pageTool.appendTitleSuffix('Lista zmodyfikowanych plików w archiwum')
 
 <h3>Pliki do aktualizacji w archiwum $archiwum.nazwa</h3>
 
-<table>
+<table #tableclass()>
     <th>Nazwa archiwum</th>
     <th>Ścieżka w archiwum</th>
     <th>Zmieniony</th>
     <th>Usunięty</th>
     #foreach($r in $reportList)
-        <tr>
+        <tr #rowclass($velocityCount)>
             <td>$r.archiveName</td>
             <td>$r.pathInArchive</td>
-            <td>$r.forUpdate</td>
-            <td>$r.forRemoval</td>
+            <td>#booltotext($r.forUpdate)</td>
+            <td>#booltotext($r.forRemoval)</td>
         </tr>
     #end
 </table>

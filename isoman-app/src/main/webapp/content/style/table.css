@@ -1,0 +1,34 @@
+table .ctab {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table.ctab th {
+    background-color: #009900;
+    /*  border: "1px solid black";*/
+}
+
+td, tr {
+}
+
+tr .ctabrow0 {
+    background-color: #eeffcc;
+}
+
+tr .ctabrow1 {
+}
+
+table .formtab {
+    width: 75%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table .formtab td {
+    padding: 5px;
+}
+
+table .formtab input, table .formtab select {
+    width: 75%;
+}

@@ -10,7 +10,14 @@ import java.util.List;
  * @author Michał Toporowski
  */
 public class MenuItems {
+    /**
+     * Główny element menu
+     */
     private static final MenuItem MENU_ROOT = new MenuItem();
+    /**
+     * Element login - dołączany dodatkowo
+     */
+    private static final MenuItem MENU_LOGIN_ITEM = new MenuItem("Zaloguj", "Login");
 
     static {
         MENU_ROOT.addSubItem(new MenuItem("Strona główna", "Index"));
@@ -32,12 +39,15 @@ public class MenuItems {
         MENU_ROOT.addSubItem(personsMenu);
 
         MENU_ROOT.addSubItem(new MenuItem("Aktualizacja", "update.ArchivesForUpdateIndex"));
-        MENU_ROOT.addSubItem(new MenuItem("Zaloguj", "Login"));
         MENU_ROOT.addSubItem(new MenuItem("Wyloguj", "Login", "security.authentication.Logout"));
     }
 
     public static MenuItem getMenuRoot() {
         return MENU_ROOT;
+    }
+
+    public static MenuItem getMenuLoginItem() {
+        return MENU_LOGIN_ITEM;
     }
 
     /**

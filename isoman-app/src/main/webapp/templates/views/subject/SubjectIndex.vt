@@ -3,11 +3,11 @@ $pageTool.appendTitleSuffix('Lista przedmiotów')
 
 <h3>Lista przedmiotów</h3>
 <p>Jednostka organizacyjna $unitname</p>
-<table>
+<table #tableclass()>
     <th>Kod</th>
     <th>Nazwa</th>
     #foreach($subject in $subjects)
-        <tr>
+        <tr #rowclass($velocityCount)>
             <td>$subject.kod</td>
             <td>$subject.nazwa</td>
         </tr>

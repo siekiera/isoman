@@ -1,7 +1,8 @@
 $viewEnclosureTool.override('layout.Page')
 $pageTool.appendTitleSuffix('Lista osób')
 
-<table>
+<h3>Lista osób</h3>
+<table #tableclass()>
     <th>ID</th>
     <th>Login</th>
     <th>Imię</th>
@@ -9,7 +10,7 @@ $pageTool.appendTitleSuffix('Lista osób')
     <th>PESEL</th>
     <th>email</th>
     #foreach($person in $persons)
-        <tr>
+        <tr #rowclass($velocityCount)>
             <td>$person.id</td>
             <td>$person.login</td>
             <td>$person.imie</td>

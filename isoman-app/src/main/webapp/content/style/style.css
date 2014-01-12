@@ -1,10 +1,22 @@
 body {
-    font-family: Helvetica;
-    background-color: #ddeeff;
+    font-family: Verdana;
+    background-color: #ffffff;
     text-align: center;
+    font-size: 10pt;
+}
+
+#maintbl {
+    margin: 0 auto;
+    width: 1000px;
+    max-width: 1000px;
+}
+
+.logininfo {
+    text-align: left;
 }
 
 #content {
+    border-top: 1px solid #000000;
     text-align: justify;
 }
 

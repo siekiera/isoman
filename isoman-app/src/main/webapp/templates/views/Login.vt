@@ -1,34 +1,30 @@
 $pageTool.setTitle('Login')##
 $viewEnclosureTool.override('layout.Page')##
-$pageTool.addStyleLink('style/login.css')##
 
 #set($loginLink = $link.view('Index').action('security.authentication.IsomanLogin'))
+<h3>Logowanie do systemu</h3>
 <form class="login-form" name="loginform" action="$loginLink" method="post">
-    <table cellpadding="0" cellspacing="0" border="0" height="120" class="box_line">
-    <tr>
-      <td colspan="2" class="login-header">System login</td>
-    </tr>
-    <tr>
-      <td align="left" valign="middle" class="text">Login</td>
-      <td align="left" valign="middle" class="text">
-        <input class="text" type="text" name="login" size="20" maxlength="12" autocomplete="off">
-      </td>
-    </tr>
-    <tr>
-      <td align="left" valign="middle" class="text">Password</td>
-      <td align="left" valign="middle" class="text">
-        <input class="text" type="password" name="password" size="20" maxlength="20" autocomplete="off">
-      </td>
-    </tr>
-    <tr>
-      <td align="center" valign="middle" colspan="3">
-        <font face="verdana,geneva,helvetica">
-          <input type="submit" value="$i18n.get('confirm')">
-        </font>
-      </td>
-    </tr>
+    <table #formtableclass()>
+        <tr>
+            <td align="left" valign="middle">Nazwa użytkownika</td>
+            <td align="left" valign="middle">
+                <input class="text" type="text" name="login" size="20" maxlength="12" autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <td align="left" valign="middle">Hasło</td>
+            <td align="left" valign="middle">
+                <input class="text" type="password" name="password" size="20" maxlength="20" autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Zaloguj">
+            </td>
+        </tr>
     </table>
-	<script lang="JavaScript">
-		document.loginform.login.focus();
-	</script>
+    <script lang="JavaScript">
+        document.loginform.login.focus();
+    </script>
 </form>

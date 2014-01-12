@@ -3,17 +3,24 @@
 ##
 ## Parametry: tableItems
 
-<table>
-    <th>Nazwa archiwum</th>
-    <th>Ścieżka w archiwum</th>
-    <th>Zmieniony</th>
-    <th>Usunięty</th>
-    #foreach($item in $tableItems)
-        <tr>
-            <td>$r.archiveName</td>
-            <td>$r.pathInArchive</td>
-            <td>$r.forUpdate</td>
-            <td>$r.forRemoval</td>
-        </tr>
+#macro(table)
+    #if($tableitems)
+    <table>
+        #foreach($header in $headers)
+            <th>$header</th>
+        #end
+        #foreach($tableitem in $tableitems)
+            #set ($ctg = $velocityCount % 2)
+            <tr class="ctabrow$ctg">
+                #foreach($field in $fields)
+                    <td>$tableitem.get($field)</td>
+                #end
+            </tr>
+        #end
+    </table>
+
+    #else
+        $nocontentmsg
     #end
-</table>
+#end
+

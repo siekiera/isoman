@@ -3,6 +3,7 @@ package pl.edu.pw.elka.mtoporow.isoman.modules.components;
 import org.objectledge.context.Context;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.security.PolicyCheckerTool;
+import org.objectledge.security.SecurityContext;
 import org.objectledge.security.WebPolicyCheckerToolFactory;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
@@ -33,10 +34,25 @@ public class Menu extends AbstractComponent {
     @Override
     public String build(Template template) throws BuildException, ProcessingException {
         TemplatingContext tc = TemplatingContext.getTemplatingContext(context);
-        MenuItems.MenuItem root = getFilteredItem(MenuItems.getMenuRoot());
+        MenuItems.MenuItem root = getMenu();
 
         tc.put("menu", root);
         return super.build(template);
+    }
+
+    /**
+     * Pobiera menu przefiltrowane dla uprawnień użytkownika
+     *
+     * @return menu
+     */
+    private MenuItems.MenuItem getMenu() {
+        MenuItems.MenuItem root = getFilteredItem(MenuItems.getMenuRoot());
+        //Dodaj element "Login", jeśli użytkownik niezalogowany
+        final SecurityContext securityContext = SecurityContext.getSecurityContext(context);
+        if (!securityContext.isUserAuthenticated()) {
+            root.addSubItem(MenuItems.getMenuLoginItem());
+        }
+        return root;
     }
 
     /**
@@ -45,7 +61,7 @@ public class Menu extends AbstractComponent {
      * @param sourceItem
      * @return
      */
-    public MenuItems.MenuItem getFilteredItem(MenuItems.MenuItem sourceItem) {
+    private MenuItems.MenuItem getFilteredItem(MenuItems.MenuItem sourceItem) {
         MenuItems.MenuItem newItem = null;
         if (checkMenuItem(sourceItem)) {
             newItem = new MenuItems.MenuItem(sourceItem.getName(), sourceItem.getView(), sourceItem.getAction());

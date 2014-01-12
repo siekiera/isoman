@@ -3,12 +3,12 @@ $pageTool.appendTitleSuffix('Lista podręczników')
 
 <h3>Lista podręczników</h3>
 #if($archives)
-<table>
+<table #tableclass()>
     <th>Nazwa</th>
     <th>Przedmiot</th>
     <th>Pobierz</th>
     #foreach($archive in $archives)
-        <tr>
+        <tr #rowclass($velocityCount)>
             <td>$archive.nazwa</td>
             <td>$archive.przedmiot.nazwa</td>
             <td><a href="#">Pobierz</a></td>
