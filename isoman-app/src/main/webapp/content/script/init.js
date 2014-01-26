@@ -27,8 +27,7 @@ jQuery(document).ready(function() {
         {
             jQuery(this).children("td").removeClass("ui-state-hover");
         }
-    );
-    jQuery(".ctab tr").click(function(){
+    ).click(function(){
 
         jQuery(this).children("td").toggleClass("ui-state-highlight");
     });
@@ -36,7 +35,12 @@ jQuery(document).ready(function() {
     $("input[type=submit], button").button();
     //linki wewnątrz tabelek też, ale z mniejszym marginesem
     $(".ctab a").button().find('.ui-button-text').css({'padding-top': '0', 'padding-bottom': '0'});
+
+    //inicjalizacja dialogów
+    infoDialog($(".action-result, .action-error-result"));
+
     //inicjalna wysokość tabelki
     $("#maintbl").css({"height": $(document).height() - 25 + "px"});
+
 
 });

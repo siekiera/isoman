@@ -21,6 +21,7 @@ $pageTool.addStyleLink('style/customize.css')
     <script type="text/javascript" src="$jslink.content('lib/jquery-ui-1.10.4.custom.js')"></script>
     <script type="text/javascript" src="$jslink.content('lib/jquery.ui.menubar.js')"></script>
     <script type="text/javascript" src="$jslink.content('script/init.js')"></script>
+    <script type="text/javascript" src="$jslink.content('script/jsTools.js')"></script>
     <title>$pageTool.title</title>
 
     #foreach($scriptLink in $pageTool.scriptLinks)

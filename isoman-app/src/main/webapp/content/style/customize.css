@@ -8,11 +8,18 @@
     vertical-align: middle;
 }
 
+/*poprawa kolorów w menu*/
 #menu li ul a {
     color: black;
 }
 
+/*tabelka na całą szerokość*/
 .ctab {
     width: 100%;
+}
+
+/*wywalenie krzyżyków z dialogów*/
+.ui-dialog-titlebar-close {
+    display: none;
 }
 
