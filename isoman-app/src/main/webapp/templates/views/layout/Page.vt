@@ -1,8 +1,10 @@
 $viewEnclosureTool.top()
 $pageTool.insertTitlePrefix('IsoMan - ')
 $pageTool.addStyleLink('style/style.css')
-$pageTool.addStyleLink('style/menu.css')
-$pageTool.addStyleLink('style/table.css')
+$pageTool.addStyleLink('style/base/jquery.ui.all.css')
+$pageTool.addStyleLink('style/cupertino/jquery-ui.css')
+$pageTool.addStyleLink('style/cupertino/jquery.ui.theme.css')
+$pageTool.addStyleLink('style/customize.css')
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -16,15 +18,19 @@ $pageTool.addStyleLink('style/table.css')
 ##    JQuery
     #set($jslink = $link.sessionless())
     <script type="text/javascript" src="$jslink.content('lib/jquery-2.0.3.js')"></script>
+    <script type="text/javascript" src="$jslink.content('lib/jquery-ui-1.10.4.custom.js')"></script>
+    <script type="text/javascript" src="$jslink.content('lib/jquery.ui.menubar.js')"></script>
+    <script type="text/javascript" src="$jslink.content('script/init.js')"></script>
     <title>$pageTool.title</title>
 
     #foreach($scriptLink in $pageTool.scriptLinks)
         <script type="text/javascript" src="$scriptLink.src"##
             #if($scriptLink.charset) charset="$scriptLink.charset"#end></script>
     #end
+
 </head>
 <body>
-<table id="maintbl">
+<table id="maintbl" class="ui-widget">
     <tr>
         <td>
             $component.embed('Menu')
@@ -39,6 +45,11 @@ $pageTool.addStyleLink('style/table.css')
         <td id="content">
             #result()
             $embeddedPlaceholder
+        </td>
+    </tr>
+    <tr>
+        <td id="footer">
+            Michał Toporowski, 2014
         </td>
     </tr>
 </table>

@@ -7,7 +7,6 @@ import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.HttpContext;
-import org.objectledge.web.mvc.MVCContext;
 import pl.edu.pw.elka.mtoporow.isoman.common.config.ConfigManager;
 import pl.edu.pw.elka.mtoporow.isoman.constants.ParameterConstants;
 import pl.edu.pw.elka.mtoporow.isoman.constants.security.Rights;
@@ -57,6 +56,7 @@ public class GetFile extends AbstractAction {
         File file = new File(rootFolder, filename);
         if (!file.exists()) {
             tc.put("errorResult", "Błąd: plik nie istnieje");
+            return;
         }
         //przekazujemy plik bezpośrednio do odpowiedzi servletu
         HttpServletResponse resp = httpContext.getResponse();

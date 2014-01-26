@@ -9,7 +9,7 @@
     #elseif($item.view)
         <a href="$link.view($item.view)">$item.name</a>
     #else
-        $item.name
+        <a>$item.name</a>
     #end
 #end
 

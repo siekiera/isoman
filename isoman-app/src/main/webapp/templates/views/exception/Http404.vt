@@ -1,4 +1,4 @@
-$viewEnclosureTool.override('error.Error')
+$viewEnclosureTool.override('layout.Page')
 $pageTool.appendTitleSuffix('Strona nie istnieje')
 
 Strona nie została odnaleziona, 404!

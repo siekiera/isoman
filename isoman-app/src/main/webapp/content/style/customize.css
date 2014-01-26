@@ -1,0 +1,18 @@
+/*
+* Dodatkowy zestaw CSS dla aplikacji webowej ISOMANA
+* Autor: Michał Toporowski
+*/
+
+#menu, #menu > ul {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#menu li ul a {
+    color: black;
+}
+
+.ctab {
+    width: 100%;
+}
+

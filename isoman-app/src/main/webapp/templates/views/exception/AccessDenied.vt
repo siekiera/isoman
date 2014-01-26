@@ -1,0 +1,8 @@
+$viewEnclosureTool.override('layout.Page')
+$pageTool.appendTitleSuffix('Brak dostępu')
+
+Brak uprawnień wymaganych do przeprowadzenia operacji!
+
+<p>
+    <a href="javascript: history.go(-1);">$i18n.get('Wróć')</a>
+</p>
