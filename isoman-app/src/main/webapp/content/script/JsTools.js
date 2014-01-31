@@ -5,6 +5,11 @@
  *
  */
 
+/**
+ * Tworzy dialog jQuery
+ *
+ * @param object DOM z treścią
+ */
 function infoDialog(object) {
     object.dialog({
         modal: true,

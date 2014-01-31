@@ -43,6 +43,14 @@ class="ctab"
 class="ctabrow$_cat"
 #end
 
+#macro(colwidths $percentWidths)
+<colgroup>
+    #foreach($percentWidth in $percentWidths)
+        <col span="1" style="width: $percentWidth%"/>
+    #end
+</colgroup>
+#end
+
 #macro(formtableclass)
 class="formtab"
 #end

@@ -1,7 +1,6 @@
 package pl.edu.pw.elka.mtoporow.isoman.domain.dao.impl;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.objectledge.context.Context;
 import pl.edu.pw.elka.mtoporow.isoman.common.util.CollectionTool;
@@ -21,20 +20,6 @@ public class OsobaDaoBean extends AbstractGenericUniqueDao<Osoba, Long> implemen
 
     public OsobaDaoBean(Context context, SessionFactory sessionFactory) {
         super(context, sessionFactory);
-    }
-
-    @Deprecated
-    public List<Osoba> getAllOsobas() {
-        String queryString = "SELECT u FROM Osoba u";
-        Query query = getSession().createQuery(queryString);
-        return query.list();
-    }
-
-    @Deprecated
-    public void deleteById(Long id) {
-        String queryString = "DELETE FROM Osoba u WHERE u.id = " + id;
-        Query query = getSession().createQuery(queryString);
-        query.executeUpdate();
     }
 
     @Override

@@ -40,6 +40,14 @@
             </service-class>
         </service>
 
+        <service name="Person">
+            <service-class class="pl.edu.pw.elka.mtoporow.isoman.ajax.PersonService" security-level="NONE">
+                <allow>
+                    <method name="filteredPersons"/>
+                </allow>
+            </service-class>
+        </service>
+
     </services>
 
 </ajax>

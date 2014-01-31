@@ -1,15 +1,66 @@
 $viewEnclosureTool.override('layout.Page')
 $pageTool.appendTitleSuffix('Lista osób')
+$pageTool.addScriptLink('script/AjaxTool.js')
+
+<script type="text/javascript">
+    function cell(value) {
+        return "<td>" + value + "</td>";
+    }
+
+    function update(data) {
+        if (data != null) {
+            var target = jQuery(".ctab").children("tbody");
+            //zerujemy
+            target.html("");
+            jQuery.each(data, function (index, value) {
+                target.append("<tr>" + cell(value.id) + cell(value.login) + cell(value.imie) + cell(value.nazwisko) + cell(value.pesel) + cell(value.email) + "</tr>");
+            });
+            //aktualizacja styli
+            applyContentTableStyle();
+        }
+    }
+
+    function requestUpdate() {
+        var value = jQuery("#searchform").find(":input[name='nazwisko']")[0].value;
+        postAjax("$link.view('AJAX')", 'Person', 'filteredPersons', {"searchParams": {"nazwisko": value}}, update);
+    }
+
+    jQuery(function() {
+        jQuery("#searchpane").accordion({
+            collapsible: true,
+            active: false
+        })
+    });
+</script>
 
 <h3>Lista osób</h3>
+<div id="searchpane">
+    <h3>Filtry</h3>
+    <div id="searchtab">
+        <form class="searchform" id="searchform">
+        ##    <h4>Wyszukiwanie:</h4>
+            <label>
+                Nazwisko: <input type="text" size="15" name="nazwisko" onkeyup="requestUpdate()"/>
+            </label>
+        </form>
+    </div>
+</div>
+
+
 <table #tableclass()>
-    <th>ID</th>
-    <th>Login</th>
-    <th>Imię</th>
-    <th>Nazwisko</th>
-    <th>PESEL</th>
-    <th>email</th>
-    #foreach($person in $persons)
+    #colwidths([5, 10, 25, 25, 15, 20])
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Login</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>PESEL</th>
+        <th>email</th>
+    </tr>
+    </thead>
+    <tbody>
+        #foreach($person in $persons)
         <tr #rowclass($velocityCount)>
             <td>$person.id</td>
             <td>$person.login</td>
@@ -20,5 +71,6 @@ $pageTool.appendTitleSuffix('Lista osób')
         ##            <td><a href="$link.view('person.Form').set('edit', $person.id)">Edytuj</a></td>
         ##            <td><a href="$link.action('person.Delete').set('delete', $person.id)">Usuń</a></td>
         </tr>
-    #end
+        #end
+    </tbody>
 </table>

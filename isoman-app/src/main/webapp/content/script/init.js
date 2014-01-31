@@ -8,39 +8,24 @@ jQuery(document).ready(function() {
     //menu
     jQuery("#menu").children("ul").menubar();
     //style dla tabelek
-    jQuery(".ctab th").each(function(){
-
-        jQuery(this).addClass("ui-state-default");
-
-    });
-    jQuery(".ctab td").each(function(){
-
-        jQuery(this).addClass("ui-widget-content");
-
-    });
-    jQuery(".ctab tr").hover(
-        function()
-        {
-            jQuery(this).children("td").addClass("ui-state-hover");
-        },
-        function()
-        {
-            jQuery(this).children("td").removeClass("ui-state-hover");
-        }
-    ).click(function(){
-
-        jQuery(this).children("td").toggleClass("ui-state-highlight");
-    });
+    applyContentTableStyle();
     //style dla przycisków
     $("input[type=submit], button").button();
-    //linki wewnątrz tabelek też, ale z mniejszym marginesem
-    $(".ctab a").button().find('.ui-button-text').css({'padding-top': '0', 'padding-bottom': '0'});
 
     //inicjalizacja dialogów
     infoDialog($(".action-result, .action-error-result"));
 
     //inicjalna wysokość tabelki
     $("#maintbl").css({"height": $(document).height() - 25 + "px"});
+
+    //wyśrodkowanie menu
+    function centerUl(ul) {
+        var lastChild = ul.children("li:last");
+        var realWidth = lastChild.offset().left + lastChild.width() - ul.offset().left;
+        var offset = (ul.innerWidth() - realWidth) / 2;
+        ul.css({"padding-left": offset + "px"});
+    }
+    centerUl($("#menu").children("ul"));
 
 
 });
