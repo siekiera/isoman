@@ -30,12 +30,52 @@ function applyTableStyle(table) {
         });
 
     //linki wewnątrz tabelek zamieniamy na przyciski, ale z mniejszym marginesem
-    table.find("a").button().find('.ui-button-text').css({'padding-top': '0', 'padding-bottom': '0'});
+    //zmieniamy tylko te linki, które nie są w li, objętym przez funkcję createMenuButton
+    table.find("a").not("li a").button().find('.ui-button-text').css({'padding-top': '0', 'padding-bottom': '0'});
 }
 
+/*
+ * Tworzy przycisk z rozwijanym menu
+ * Uwaga: niezbędna struktura:
+ * <tr><td>
+ * <div>
+ *     <button>Przycisk przekazany jako parametr</button>
+ * </div>
+ * <ul>
+ *     <li>Elementy menu</li>
+ *     ...
+ * </ul>
+ * </td></tr>
+ */
+function createMenuButton(button) {
+    jQuery(button).button({
+        text: false,
+        icons: {
+            primary: "ui-icon-triangle-1-e"
+        }
+    })
+        .click(function () {
+            var menu = jQuery(this).parent().next().css({"position": "absolute"}).show().position({
+                my: "left top",
+                at: "right top",
+                of: jQuery(this).parent().parent().parent() //względem tr
+            });
+            jQuery(document).one("click", function () {
+                menu.hide();
+            });
+            return false;
+        })
+        .parent()
+        .next()
+        .hide()
+        .menu();
+}
 /**
  * Aktualizuje styl dla tabeli .ctab
  */
 function applyContentTableStyle() {
     applyTableStyle($(".ctab"));
+    $(".moreBtn").each(function () {
+        createMenuButton(this);
+    })
 }

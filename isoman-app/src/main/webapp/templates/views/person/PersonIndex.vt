@@ -1,25 +1,43 @@
 $viewEnclosureTool.override('layout.Page')
 $pageTool.appendTitleSuffix('Lista osób')
 $pageTool.addScriptLink('script/AjaxTool.js')
+#set($editlink = $link.view('person.AddPerson'))
 
 <script type="text/javascript">
     function cell(value) {
         return "<td>" + value + "</td>";
     }
 
+    function moreCell(id) {
+        var link = '$editlink' + '?personId=' + id;
+        return '<div><button class="moreBtn"></button></div>'
+               + '<ul><li><a href="' + link + '">Zmień</a></li>'
+               + '<li><a href="#">Usuń</a></li></ul>';
+    }
+
+    /**
+     * Funkcja aktualizuje dane w tabelce
+     *
+     * @param data obiekt zawierający dane
+     */
     function update(data) {
         if (data != null) {
             var target = jQuery(".ctab").children("tbody");
             //zerujemy
             target.html("");
             jQuery.each(data, function (index, value) {
-                target.append("<tr>" + cell(value.id) + cell(value.login) + cell(value.imie) + cell(value.nazwisko) + cell(value.pesel) + cell(value.email) + "</tr>");
+                target.append("<tr>" + cell(value.id) + cell(value.login) + cell(value.imie) + cell(value.nazwisko)
+                        + cell(value.pesel) + cell(value.email)
+                        + cell(moreCell(value.id)) + "</tr>");
             });
             //aktualizacja styli
             applyContentTableStyle();
         }
     }
 
+    /**
+     * Funkcja wysyła żądanie o aktualizacje danych
+     */
     function requestUpdate() {
         var form = jQuery("#searchform");
         var login = form.find(":input[name='login']")[0].value;
@@ -33,29 +51,6 @@ $pageTool.addScriptLink('script/AjaxTool.js')
             collapsible: true,
             active: false
         });
-     /*   $(".moreBtn").each(function () {
-            this.button({
-                text: false,
-                icons: {
-                    primary: "ui-icon-triangle-1-s"
-                }
-            })
-                    .click(function () {
-                        var menu = $(this).next().show().position({
-                            my: "left top",
-                            at: "left bottom",
-                            of: this
-                        });
-                        $(document).one("click", function () {
-                            menu.hide();
-                        });
-                        return false;
-                    })
-                    .next()
-                    .hide()
-                    .menu();
-
-        });          */
     });
 </script>
 
@@ -96,12 +91,12 @@ $pageTool.addScriptLink('script/AjaxTool.js')
             <td>$person.pesel</td>
             <td>$person.email</td>
             <td>
-##                <button class="moreBtn"/>
-##                <ul>
-##                    <li>
-                        <a href="$link.view('person.AddPerson').set('personId', $person.id)">Zmień</a>##</li>
-##                    <li><a href="#">Usuń</a></li>
-##                </ul>
+                <div><button class="moreBtn"></button></div>
+                <ul>
+                    <li>
+                        <a href="$editlink.set('personId', $person.id)">Zmień</a></li>
+                    <li><a href="#">Usuń</a></li>
+                </ul>
             </td>
 
         ##            <td><a href="$link.action('person.Delete').set('delete', $person.id)">Usuń</a></td>
