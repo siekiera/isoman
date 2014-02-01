@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
     //style dla tabelek
     applyContentTableStyle();
     //style dla przycisków
-    $("input[type=submit], button").button();
+    $("input[type=submit], button, a.button").button();
 
     //inicjalizacja dialogów
     infoDialog($(".action-result, .action-error-result"));

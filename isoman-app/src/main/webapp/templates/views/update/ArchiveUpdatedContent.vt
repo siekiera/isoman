@@ -17,3 +17,5 @@ $pageTool.appendTitleSuffix('Lista zmodyfikowanych plików w archiwum')
         </tr>
     #end
 </table>
+<a class="button" href="$link.view('update.ArchivesForUpdateIndex')">Wstecz</a>
+<a class="button" href="$link.action('update.UpdateArchiveAction').set("archiveId", $archiwum.id)">Aktualizuj</a>
