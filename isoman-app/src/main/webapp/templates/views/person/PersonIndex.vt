@@ -21,8 +21,11 @@ $pageTool.addScriptLink('script/AjaxTool.js')
     }
 
     function requestUpdate() {
-        var value = jQuery("#searchform").find(":input[name='nazwisko']")[0].value;
-        postAjax("$link.view('AJAX')", 'Person', 'filteredPersons', {"searchParams": {"nazwisko": value}}, update);
+        var form = jQuery("#searchform");
+        var login = form.find(":input[name='login']")[0].value;
+        var imie = form.find(":input[name='imie']")[0].value;
+        var nazwisko = form.find(":input[name='nazwisko']")[0].value;
+        postAjax("$link.view('AJAX')", 'Person', 'filteredPersons', {"searchParams": {"login": login, "imie": imie, "nazwisko": nazwisko}}, update);
     }
 
     jQuery(function () {
@@ -62,10 +65,9 @@ $pageTool.addScriptLink('script/AjaxTool.js')
 
     <div id="searchtab">
         <form class="searchform" id="searchform">
-        ##    <h4>Wyszukiwanie:</h4>
-            <label>
-                Nazwisko: <input type="text" size="15" name="nazwisko" onkeyup="requestUpdate()"/>
-            </label>
+            <label>Login: <input type="text" size="15" name="login" onkeyup="requestUpdate()"/></label>
+            <label>Imię: <input type="text" size="15" name="imie" onkeyup="requestUpdate()"/></label>
+            <label>Nazwisko: <input type="text" size="15" name="nazwisko" onkeyup="requestUpdate()"/></label>
         </form>
     </div>
 </div>

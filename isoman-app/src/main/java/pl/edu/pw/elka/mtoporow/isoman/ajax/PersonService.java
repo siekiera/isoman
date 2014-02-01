@@ -39,6 +39,8 @@ public class PersonService {
     public List<GUIPersonData> filteredPersons(
             @AjaxParam(value="searchParams", keyTypes = {String.class}, types = {Object.class}) final Map<String,?> searchParams) {
         final Osoba example = new Osoba();
+        example.setLogin((String) searchParams.get("login"));
+        example.setImie((String) searchParams.get("imie"));
         example.setNazwisko((String) searchParams.get("nazwisko"));
         List<Osoba> results = osobaDao.getByExample(example);
         return rewritePersonData(results);
