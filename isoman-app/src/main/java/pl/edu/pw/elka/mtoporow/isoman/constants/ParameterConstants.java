@@ -12,6 +12,7 @@ public class ParameterConstants {
     public static final String VERSION_NR = "versionNr";
     public static final String SWITCH_VERSIONS = "switchVersions";
     public static final String SUBJECT_ID = "subjectId";
+    public static final String PERSON_ID = "personId";
     //sesja
     public static final String SESSION_PERSON_ID = "personId";
 }

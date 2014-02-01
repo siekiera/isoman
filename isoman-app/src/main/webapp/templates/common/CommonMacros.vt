@@ -61,4 +61,9 @@ class="formtab"
     #end
 #end
 
+##wstawia zawartość zmiennej, jeśli zdefiniowana
+#macro(get $var)#if($var)$var#end#end
+##wstawia zawartość zmiennej $txt, jeśli jest zdefiniowana $var
+#macro(ifdef $var $txt)#if($var)$txt#end#end
+
 

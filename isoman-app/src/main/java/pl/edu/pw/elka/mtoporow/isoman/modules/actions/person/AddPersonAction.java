@@ -6,6 +6,7 @@ import org.objectledge.context.Context;
 import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import pl.edu.pw.elka.mtoporow.isoman.constants.ParameterConstants;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.OsobaDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.dao.RolaDao;
 import pl.edu.pw.elka.mtoporow.isoman.domain.entity.Osoba;
@@ -43,7 +44,18 @@ public class AddPersonAction extends AbstractAction {
         final String password = requestParameters.get("password");
         final long roleId = requestParameters.getLong("role");
 
-        Osoba osoba = new Osoba();
+        Osoba osoba;
+
+        if (requestParameters.isDefined(ParameterConstants.PERSON_ID)) {
+            //tryb edycji
+            Long personId = requestParameters.getLong(ParameterConstants.PERSON_ID);
+            osoba = osobaDao.getById(personId);
+        } else {
+            //tryb tworzenia
+            osoba = new Osoba();
+            final String login = requestParameters.get("login");
+            osoba.setLogin(login);
+        }
 
         osoba.setImie(name);
         osoba.setNazwisko(surname);
@@ -57,5 +69,6 @@ public class AddPersonAction extends AbstractAction {
 //TODO::sprawdzić czy rola istnieje w Ledge'u??
 
         processSave(osobaDao, osoba);
+        getTemplatingContext(context).put("result", "Zapisano osobę");
     }
 }

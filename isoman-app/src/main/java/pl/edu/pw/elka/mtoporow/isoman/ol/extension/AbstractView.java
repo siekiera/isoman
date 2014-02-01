@@ -51,4 +51,16 @@ public abstract class AbstractView extends AbstractBuilder {
             templatingContext.put(key, c);
         }
     }
+
+    /**
+     * Wstawia obiekt do kontekstu, jeśli jest niepusty
+     *
+     * @param templatingContext
+     * @param object
+     */
+    protected void putIfNotNull(final TemplatingContext templatingContext, final String key, final Object object) {
+        if (object != null) {
+            templatingContext.put(key, object);
+        }
+    }
 }
